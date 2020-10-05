@@ -7,7 +7,7 @@
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="../../public/assets/img/avataaars.svg" alt="" />
+        <img class="masthead-avatar mb-5" src="/assets/img/avataaars.svg" alt="" />
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
         <!-- Icon Divider-->
@@ -39,7 +39,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../../public/assets/img/portfolio/cabin.png" alt="" />
+                    <img class="img-fluid" src="/assets/img/portfolio/cabin.png" alt="" />
                 </div>
             </div>
             <!-- Portfolio Item 2-->
@@ -48,7 +48,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../../public/assets/img/portfolio/cake.png" alt="" />
+                    <img class="img-fluid" src="/assets/img/portfolio/cake.png" alt="" />
                 </div>
             </div>
             <!-- Portfolio Item 3-->
@@ -57,7 +57,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../../public/assets/img/portfolio/circus.png" alt="" />
+                    <img class="img-fluid" src="/assets/img/portfolio/circus.png" alt="" />
                 </div>
             </div>
             <!-- Portfolio Item 4-->
@@ -66,7 +66,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../../public/assets/img/portfolio/game.png" alt="" />
+                    <img class="img-fluid" src="/assets/img/portfolio/game.png" alt="" />
                 </div>
             </div>
             <!-- Portfolio Item 5-->
@@ -75,7 +75,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../../public/assets/img/portfolio/safe.png" alt="" />
+                    <img class="img-fluid" src="/assets/img/portfolio/safe.png" alt="" />
                 </div>
             </div>
             <!-- Portfolio Item 6-->
@@ -84,7 +84,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid" src="../../public/assets/img/portfolio/submarine.png" alt="" />
+                    <img class="img-fluid" src="/assets/img/portfolio/submarine.png" alt="" />
                 </div>
             </div>
         </div>
@@ -229,7 +229,7 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="../../public/assets/img/portfolio/cabin.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/cabin.png" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-dismiss="modal">
@@ -263,7 +263,7 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="../../public/assets/img/portfolio/cake.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/cake.png" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-dismiss="modal">
@@ -297,7 +297,7 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="../../public/assets/img/portfolio/circus.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/circus.png" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-dismiss="modal">
@@ -331,7 +331,7 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="../../public/assets/img/portfolio/game.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/game.png" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-dismiss="modal">
@@ -365,7 +365,7 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="../../public/assets/img/portfolio/safe.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/safe.png" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-dismiss="modal">
@@ -399,7 +399,7 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="../../public/assets/img/portfolio/submarine.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/submarine.png" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                             <button class="btn btn-primary" data-dismiss="modal">
@@ -415,4 +415,4 @@
 </div>
 
 <?php $content = ob_get_clean(); ?>
-<?php require ('template.php'); ?>
+<?php require('layouts/default.php'); ?>
