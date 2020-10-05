@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -20,7 +20,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Murat CAN</a>
         <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
@@ -38,6 +38,45 @@
 </nav>
 
 <?= $content ?>
+
+<!-- Footer-->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Location</h4>
+                <p class="lead mb-0">
+                    2215 John Daniel Drive
+                    <br />
+                    Clark, MO 65243
+                </p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="text-uppercase mb-4">Around the Web</h4>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                <p class="lead mb-0">
+                    Freelance is a free to use, MIT licensed Bootstrap theme created by
+                    <a href="http://startbootstrap.com">Start Bootstrap</a>
+                    .
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<div class="copyright py-4 text-center text-white">
+    <div class="container">Page générée en <?= round(1000 * (microtime(true) - DEBUG_TIME))?>ms </div><br>
+    <div class="container"><small>Copyright © Your Website 2020</small></div>
+</div>
 
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
