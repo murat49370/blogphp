@@ -10,10 +10,11 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-$router = new Router(dirname(__DIR__) . '/views');
+$router = new Router(dirname(__DIR__) . '/src/app/controller');
 $router
-    ->get('/', '/frontend/index.php', 'home')
-    ->get('/blog', '/frontend/post/index.php', 'blog')
+    ->get('/', '/home.php', 'home')
+    ->get('/blog', '/blog.php', 'blog')
+    ->get('/post', '/post.php', 'post')
     ->get('/blog/category', '/frontend/category/show.php', 'category')
     ->run();
 
