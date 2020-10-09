@@ -71,8 +71,8 @@ class PostManager
         $this->pdoStatement = $this->pdo->query('SELECT * FROM post ORDER BY post_create');
         $posts = [];
 
-        while ($post = $this->pdoStatement->fetchObject('App\Entity\post')){
-            $posts = $post;
+        while ($post = $this->pdoStatement->fetchObject('App\Entity\Post')){
+            $posts[] = $post;
         }
         return $posts;
 

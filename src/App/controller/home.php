@@ -1,7 +1,8 @@
 <?php
 
-require(dirname(__DIR__) . '/src/App/model/manager/postManager.php');
 
-$req = getBillets();
+//require('../../../src/app/model/postManager.php');
 
-require('affichageAccueil.php');
+//$req = getBillets();
+
+require('../views/frontend/index.php');
