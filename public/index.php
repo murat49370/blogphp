@@ -18,8 +18,17 @@ $match['target'];*/
 
 $router = new AltoRouter();
 $router->setBasePath('');
-$router->map('GET', '/blog', 'App\Controller\postController#home', 'Index');
+$router->map('GET', '/', 'App\Controller\HomeController#home', 'home');
+$router->map('GET', '/blog', 'App\Controller\postController#home', 'blog_home');
 $router->map('GET', '/post/[*:slug]-[i:id]', 'App\Controller\postController#post', 'post');
+$router->map('GET', '/admin', 'App\Controller\AdminController#home', 'admin_home');
+$router->map('GET', '/admin/post', 'App\Controller\AdminController#listPost', 'admin_list_post');
+$router->map('GET', '/admin/post/edit/[i:id]', 'App\Controller\AdminController#editPost', 'admin_edit_post');
+$router->map('POST', '/admin/post/edit/[i:id]', 'App\Controller\AdminController#editPost', 'admin_edit_post_get');
+
+//$router->map('GET', '/admin/post/new', 'App\Controller\AdminController#newPost', 'admin_list_post');
+$router->map('POST', '/admin/post/delete/[i:id]', 'App\Controller\AdminController#deletePost', 'admin_delete_post');
+
 
 $match = $router->match();
 $params[] = $match['params'];

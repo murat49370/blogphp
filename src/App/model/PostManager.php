@@ -6,6 +6,7 @@ namespace App\model;
 
 use App\Model\Entity\Post;
 use App\Model\Entity\User;
+use Cassandra\Date;
 use PDO;
 
 class PostManager
@@ -49,10 +50,15 @@ class PostManager
         $q->execute();
     }
 
-    public function delete(Post $post)
+    public function delete(Post $post): void
     {
         // Execute requete de type delete
-        $this->_db->exec('DELECT FROM post WHERE id = ' . $post->getId());
+//        $query = $this->_db->prepare('DELETE FROM post WHERE id = ' . $post->getId());
+//        $ok = $query->execute();
+//        if ($ok === false){
+//            throw new \Exception("Impossible de supprimer l'enregistrement {$post->getId()}");
+//        }
+        $this->_db->exec('DELETE FROM post WHERE id = ' . $post->getId());
     }
 
     public function get($id)
@@ -81,16 +87,19 @@ class PostManager
         return $posts;
     }
 
-    public function update(post $post)
+    public function update(post $post): void
     {
         // Prépare une requete de type UPDATE
         // Assignation des valeurs de la requête
         // Execution de la requete
-        $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id');
+        $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id
+        WHERE id = :id LIMIT 1 ');
 
-        $q->bindValue(':post_create', $post->getCreateDate());
-        $q->bindValue(':post_modified', $post->getModifiedDate());
+        $q->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+        $q->bindValue(':post_create', $post->getCreateDate()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
         $q->bindValue(':post_title', $post->getTitle());
+        $q->bindValue(':post_slug', $post->getSlug());
         $q->bindValue(':post_short_content', $post->getShortContent());
         $q->bindValue(':post_content', $post->getContent());
         $q->bindValue(':post_status', $post->getStatus());

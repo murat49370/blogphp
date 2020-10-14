@@ -48,5 +48,6 @@ class postController
         $router = $this->router;
         require('../views/frontend/post/index.php');
     }
+    
 
 }
