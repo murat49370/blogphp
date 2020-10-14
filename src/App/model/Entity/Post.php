@@ -1,29 +1,53 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Model\Entity;
 
+
+use DateTime;
 
 class post
 {
-    private $id;
-    private $createDate;
-    private $modifiedDate;
-    private $title;
-    private $slug;
-    private $shortContent;
-    private $content;
-    private $status;
-    private $mainImage;
-    private $smallImage;
-    private $userId;
+    private $_id;
+    private $_createDate;
+    private $_modifiedDate;
+    private $_title;
+    private $_slug;
+    private $_shortContent;
+    private $_content;
+    private $_status;
+    private $_mainImage;
+    private $_smallImage;
+    private $_userId;
+
+    Public function __construct(array $donnees)
+    {
+        $this->hydrate($donnees);
+    }
+
+    public function hydrate(array $donnees)
+    {
+        if (isset($donnees['id'])){ $this->setId($donnees['id']); }
+        if (isset($donnees['post_create'])){ $this->setCreateDate($donnees['post_create']); }
+        if (isset($donnees['post_modified'])){ $this->setModifiedDate($donnees['post_modified']); }
+        if (isset($donnees['post_title'])){ $this->setTitle($donnees['post_title']); }
+        if (isset($donnees['post_slug'])){ $this->setSlug($donnees['post_slug']); }
+        if (isset($donnees['post_short_content'])){ $this->setShortContent($donnees['post_short_content']); }
+        if (isset($donnees['post_content'])){ $this->setContent($donnees['post_content']); }
+        if (isset($donnees['post_status'])){ $this->setStatus($donnees['post_status']); }
+        if (isset($donnees['post_main_image'])){ $this->setMainImage($donnees['post_main_image']); }
+        if (isset($donnees['post_small_image'])){ $this->setSmallImage($donnees['post_small_image']); }
+        if (isset($donnees['user_id'])){ $this->setUserId($donnees['user_id']); }
+    }
+
 
     /**
      * @return mixed
      */
-    public function getCreateDate()
+    public function getCreateDate(): DateTime
     {
-        return $this->createDate;
+        return new DateTime($this->_createDate);
+
     }
 
     /**
@@ -32,16 +56,16 @@ class post
      */
     public function setCreateDate($createDate)
     {
-        $this->createDate = $createDate;
+        $this->_createDate = $createDate;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getModifiedDate()
+    public function getModifiedDate(): DateTime
     {
-        return $this->modifiedDate;
+        return new DateTime($this->_modifiedDate);
     }
 
     /**
@@ -50,7 +74,7 @@ class post
      */
     public function setModifiedDate($modifiedDate)
     {
-        $this->modifiedDate = $modifiedDate;
+        $this->_modifiedDate = $modifiedDate;
         return $this;
     }
 
@@ -59,7 +83,7 @@ class post
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->_title;
     }
 
     /**
@@ -68,7 +92,7 @@ class post
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->_title = $title;
         return $this;
     }
 
@@ -77,7 +101,7 @@ class post
      */
     public function getSlug()
     {
-        return $this->slug;
+        return $this->_slug;
     }
 
     /**
@@ -86,7 +110,7 @@ class post
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->_slug = $slug;
         return $this;
     }
 
@@ -95,7 +119,7 @@ class post
      */
     public function getShortContent()
     {
-        return $this->shortContent;
+        return $this->_shortContent;
     }
 
     /**
@@ -104,7 +128,7 @@ class post
      */
     public function setShortContent($shortContent)
     {
-        $this->shortContent = $shortContent;
+        $this->_shortContent = $shortContent;
         return $this;
     }
 
@@ -113,7 +137,7 @@ class post
      */
     public function getContent()
     {
-        return $this->content;
+        return $this->_content;
     }
 
     /**
@@ -122,7 +146,7 @@ class post
      */
     public function setContent($content)
     {
-        $this->content = $content;
+        $this->_content = $content;
         return $this;
     }
 
@@ -131,7 +155,7 @@ class post
      */
     public function getStatus()
     {
-        return $this->status;
+        return $this->_status;
     }
 
     /**
@@ -140,7 +164,7 @@ class post
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        $this->_status = $status;
         return $this;
     }
 
@@ -149,7 +173,7 @@ class post
      */
     public function getMainImage()
     {
-        return $this->mainImage;
+        return $this->_mainImage;
     }
 
     /**
@@ -158,7 +182,7 @@ class post
      */
     public function setMainImage($mainImage)
     {
-        $this->mainImage = $mainImage;
+        $this->_mainImage = $mainImage;
         return $this;
     }
 
@@ -167,7 +191,7 @@ class post
      */
     public function getSmallImage()
     {
-        return $this->smallImage;
+        return $this->_smallImage;
     }
 
     /**
@@ -176,7 +200,7 @@ class post
      */
     public function setSmallImage($smallImage)
     {
-        $this->smallImage = $smallImage;
+        $this->_smallImage = $smallImage;
         return $this;
     }
 
@@ -185,7 +209,7 @@ class post
      */
     public function getUserId()
     {
-        return $this->userId;
+        return $this->_userId;
     }
 
     /**
@@ -194,7 +218,7 @@ class post
      */
     public function setUserId($userId)
     {
-        $this->userId = $userId;
+        $this->_userId = $userId;
         return $this;
     }
 
@@ -203,11 +227,23 @@ class post
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return post
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+        return $this;
     }
 
 
 
 
 
-}
+
+
+    }
