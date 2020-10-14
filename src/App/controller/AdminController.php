@@ -57,8 +57,14 @@ class AdminController
         if (!empty($_POST))
         {
             $post->setTitle($_POST['title']);
-//            $date = $post->getCreateDate();
-//            dd($date);
+            $post->setSlug($_POST['slug']);
+            $post->setShortContent($_POST['short_content']);
+            $post->setContent($_POST['content']);
+            $post->setMainImage($_POST['main_image']);
+            $post->setSmallImage($_POST['small_image']);
+            $post->setUserId($_POST['user_id']);
+            $post->setStatus($_POST['status']);
+
             $q->update($post);
             $success = true;
 

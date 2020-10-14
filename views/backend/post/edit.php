@@ -64,16 +64,14 @@
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="col">
-                    <label for="title">Author id :</label><br>
-                    <input type="text" class="form-control" name="small_image" value="<?= $post->getUserId() ?>"><br>
-                </div>
-                <div class="col">
-                    <label for="title">Post status : </label><br>
-                    <input type="text" class="form-control" name="small_image" value="<?= $post->getStatus() ?>"><br>
-                </div>
+            <div class="form-group">
+                <label for="title">Id Author : </label>
+                <input type="text" class="form-control" name="user_id" value="<?= $post->getUserId() ?>"><br>
+            </div><div class="form-group">
+                <label for="title">Status : </label>
+                <input type="text" class="form-control" name="status" value="<?= $post->getStatus() ?>"><br>
             </div>
+
 
 
 

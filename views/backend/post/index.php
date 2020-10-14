@@ -45,29 +45,6 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <div class="row">
-            <div class="container">
-                <div class="row">
-                    <?php
-                    foreach ($posts as $post)
-                    { ?>
-                        <div class="col-md-4">
-                            <div class="single-blog-item">
-                                <div class="blog-thumnail">
-                                    <a href=""><img src="<?php echo $post->getSmallImage();?>" alt="blog-img"></a>
-                                </div>
-                                <div class="blog-content">
-                                    <h4><a href="#"><?php echo $post->getTitle();?></a></h4>
-                                    <p><?php echo $post->getShortContent();?></p>
-                                    <a href="<?= $router->generate('post', ['id' => $post->getId(), 'slug' => $post->getSlug()]) ?>" class="more-btn">En savoir plus</a>
-                                </div>
-                                <span class="blog-date">Publié le <?php echo $post->getCreateDate()->format('d F Y');?></span>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </div>
 </section>
 
 
