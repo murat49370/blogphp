@@ -4,87 +4,119 @@
 namespace App\model;
 
 
-use App\Entity\Post;
-use App\Entity\User;
+use App\Model\Entity\Post;
+use App\Model\Entity\User;
+use Cassandra\Date;
 use PDO;
 
 class PostManager
 {
-    private $pdo;
-    private $pdoStatement;
+    /**
+     * @var PDO
+     */
+    private $_db;
 
-    function __construct()
+
+    public function __construct($db)
     {
-        $this->pdo = new \PDO('mysql:host=localhost;dbname:blog', 'root', '');
+        $this->setDb($db);
     }
 
-    public function create(Post $post, User $user)
+    public function getAuthorName(Post $post)
     {
-        $user = 2;
-        $this->pdoStatement = $this->pdo->prepare('INSERT INTO post VALUES (NULL, :createDate, :modifiedDate, :title, :slug, :shortContent, :content, :status, :mainImage, :smallImage, :userId)');
-        $this->pdoStatement->bindValue(':createDate', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':modifiedDate', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':slug', $post->getSlug(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':shortContent', $post->getShortContent(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':status', $post->getStatus(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':mainImage', $post->getMainImage(), PDO::PARAM_STR);
-        $this->pdoStatement->bindValue(':userId', $user, PDO::PARAM_INT);
+        $id = (int) $post->getId();
 
+        $authorName = $this->_db->query('SELECT user_pseudo FROM user WHERE id =' . $id);
 
-        $executeIsOk = $this->pdoStatement->execute();
-
-        if (!$executeIsOk){
-            return false;
-        }else{
-            $id = $this->pdo->lastInsertId();
-            $post = $this->read($id);
-
-            return true;
-        }
+        return $authorName;
     }
 
-    public function read($id)
+    public function add(Post $post)
     {
-        $this->pdoStatement = $this->pdo->prepare('SELECT * FROM post WHERE id = :id');
-        $this->pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
+        VALUE (:post_create, :post_modified, :post_title, :post_slug, :post_short_content, :post_content, :post_status, :post_main_image, :post_small_image, :user_id)');
 
-        $executeIsOk = $this->pdoStatement->execute();
-        if($executeIsOk){
-            $post = $this->pdoStatement->fetchObject('App\Entity\User');
+        $q->bindValue(':post_create', $post->getCreateDate());
+        $q->bindValue(':post_modified', $post->getModifiedDate());
+        $q->bindValue(':post_title', $post->getTitle());
+        $q->bindValue(':post_slug', $post->getSlug());
+        $q->bindValue(':post_short_content', $post->getShortContent());
+        $q->bindValue(':post_content', $post->getContent());
+        $q->bindValue(':post_status', 'valide');
+        $q->bindValue(':post_main_image', $post->getMainImage());
+        $q->bindValue(':post_small_image', $post->getSmallImage());
+        $q->bindValue(':user_id', 1, PDO::PARAM_INT);
 
-            if($post === false){
-                return null;
-            }else{
-                return $post;
-            }
-        }else{
-            return false;
-        }
-
+        $q->execute();
     }
 
-    public function readAll()
+    public function delete(Post $post): void
     {
-        // retourne un tableau d'objet
-        $this->pdoStatement = $this->pdo->query('SELECT * FROM post ORDER BY post_create');
+        // Execute requete de type delete
+//        $query = $this->_db->prepare('DELETE FROM post WHERE id = ' . $post->getId());
+//        $ok = $query->execute();
+//        if ($ok === false){
+//            throw new \Exception("Impossible de supprimer l'enregistrement {$post->getId()}");
+//        }
+        $this->_db->exec('DELETE FROM post WHERE id = ' . $post->getId());
+    }
+
+    public function get($id)
+    {
+       // Execute une requete de type SELECT avec un WHERE et retour un objet Post
+        $id = (int) $id;
+
+        $q = $this->_db->query('SELECT * FROM post WHERE id =' . $id);
+        $donnees = $q->fetch(PDO::FETCH_ASSOC);
+
+        return new Post($donnees);
+    }
+
+    public function getList()
+    {
+        // Retourne la liste de tpous les postes
         $posts = [];
 
-        while ($post = $this->pdoStatement->fetchObject('App\Entity\Post')){
-            $posts[] = $post;
+        $q = $this->_db->query('SELECT * FROM post ORDER BY post_create DESC');
+
+        while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $posts[] = new Post($donnes);
         }
+
         return $posts;
-
     }
 
-    public function update(Post $post)
+    public function update(post $post): void
     {
+        // Prépare une requete de type UPDATE
+        // Assignation des valeurs de la requête
+        // Execution de la requete
+        $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id
+        WHERE id = :id LIMIT 1 ');
+
+        $q->bindValue(':id', $post->getId(), PDO::PARAM_INT);
+        $q->bindValue(':post_create', $post->getCreateDate()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
+        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        $q->bindValue(':post_title', $post->getTitle());
+        $q->bindValue(':post_slug', $post->getSlug());
+        $q->bindValue(':post_short_content', $post->getShortContent());
+        $q->bindValue(':post_content', $post->getContent());
+        $q->bindValue(':post_status', $post->getStatus());
+        $q->bindValue(':post_main_image', $post->getMainImage());
+        $q->bindValue(':post_small_image', $post->getSmallImage());
+        $q->bindValue(':user_id', 1, PDO::PARAM_INT);
+
+        $q->execute();
 
     }
 
-    public function delete(Post $post)
+
+    public function setDb($db)
     {
-
+        $this->_db = $db;
     }
+
+
+
 }
