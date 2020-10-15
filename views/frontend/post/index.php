@@ -8,8 +8,20 @@
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Heading-->
-        <h1 class="text-center"><?= $post->getTitle() ?></h1>
-        <p>Par Admin | Dans Morbi leo risus | Le <?php echo $post->getCreateDate()->format('d F Y');?></p>
+        <h1 class="text-center"><?= htmlentities($post->getTitle()) ?></h1>
+        <p>Par Admin |Dans Morbi leo risus | Le <?php echo $post->getCreateDate()->format('d F Y');?></p>
+        <p>Categories :
+        <?php
+        //dd($categories);
+        foreach ($categories as $k => $category): ?>
+            <?php if($k > 0): ?>
+                ,
+            <?php endif;?>
+
+            <a href="<?= $router->generate('category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" class="text-light"> <?= $category->getTitle() ?></a>
+
+        <?php endforeach; ?>
+        </p>
     </div>
 </header>
 
@@ -20,18 +32,26 @@
                 <div class="image-block">
                     <img src="<?= $post->getMainImage() ?>"  alt="Main image" />
                 </div>
-                <p><?= $post->getContent() ?></p>
+                <p><?= nl2br(htmlentities($post->getContent())) ?></p>
             </div>
 
 <!-- Side Barre-->
             <div class="col-lg-3  col-md-3 col-sm-12">
                 <div class="well">
+
                     <h2>Catégories liste</h2>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="#">Morbi leo risus</a></li>
-                        <li class="list-group-item"><a href="#">Dapibus ac facilisis in</a></li>
-                        <li class="list-group-item"><a href="#">Porta ac consectetur ac</a></li>
-                        <li class="list-group-item"><a href="#">Vestibulum at eros</a></li>
+
+                        <?php
+
+                        foreach ($categoriesListing as $category)
+                        { ?>
+                            <?php $url = $router->generate('category', ['id' => $category->getId(), 'slug' => $category->getSlug()]);?>
+
+                            <li class="list-group-item"><a href="<?= $url ?>"><?= $category->getTitle() ?></a></li>
+
+                        <?php } ?>
+
                     </ul>
                 </div>
             </div>

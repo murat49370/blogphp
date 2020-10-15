@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\model;
 
-
+use App\Model\Entity\Category;
 use App\Model\Entity\Post;
-use App\Model\Entity\User;
-use Cassandra\Date;
+use Exception;
 use PDO;
 
 class PostManager
@@ -68,6 +66,10 @@ class PostManager
 
         $q = $this->_db->query('SELECT * FROM post WHERE id =' . $id);
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
+        if ($donnees === false)
+        {
+            throw new Exception('L\'article demander n\'exite pas pour cette ID');
+        }
 
         return new Post($donnees);
     }
@@ -114,6 +116,30 @@ class PostManager
     public function count(): int
     {
         return (int)$this->_db->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
+    }
+
+    public function getPostCategory(Post $post)
+    {
+        $query = $this->_db->prepare('
+        SELECT c.id, c.category_slug, c.category_title 
+        FROM post_category pc 
+        JOIN category c ON pc.category_id = c.id
+        WHERE pc.post_id = :id');
+        $query->execute(['id' => $post->getId()]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
+        /** @var Category[] */
+        $categories = [];
+
+        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
+        {
+            $categories[] = new Category($donnees);
+        }
+
+        return $categories;
+        //dd($categories);
+
+
+
     }
 
 

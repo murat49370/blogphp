@@ -30,7 +30,7 @@
                 <a href="<?= $router->generate('blog_home')?>?page=<?= $currentPage - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
             <?php endif; ?>
             <?php if ($currentPage < $pages): ?>
-                <a href="<?= $router->generate('blog_home')?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary">Page suivante &raquo;</a>
+                <a href="<?= $router->generate('blog_home')?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
             <?php endif; ?>
         </div>
 

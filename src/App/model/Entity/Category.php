@@ -1,21 +1,34 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Model\Entity;
 
 
 class Category
 {
-    private $id;
-    private $title;
-    private $slug;
+    private $_id;
+    private $_title;
+    private $_slug;
+
+    Public function __construct(array $donnees)
+    {
+        $this->hydrate($donnees);
+    }
+
+    public function hydrate(array $donnees)
+    {
+        if (isset($donnees['id'])){ $this->setId($donnees['id']); }
+        if (isset($donnees['category_title'])){ $this->setTitle($donnees['category_title']); }
+        if (isset($donnees['category_slug'])){ $this->setSlug($donnees['category_slug']); }
+    }
+
 
     /**
-     * @return mixed
+     * @return ?string
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->_title;
     }
 
     /**
@@ -24,16 +37,16 @@ class Category
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->_title = $title;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return ?string
      */
     public function getSlug()
     {
-        return $this->slug;
+        return $this->_slug;
     }
 
     /**
@@ -42,17 +55,28 @@ class Category
      */
     public function setSlug($slug)
     {
-        $this->slug = $slug;
+        $this->_slug = $slug;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return ?int
      */
     public function getId()
     {
-        return $this->id;
+        return $this->_id;
     }
+
+    /**
+     * @param mixed $id
+     * @return Category
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+        return $this;
+    }
+
 
 
 }

@@ -34,6 +34,10 @@ $router->map('GET', '/admin/post', 'App\Controller\AdminController#listPost', 'a
 $router->map('GET', '/admin/post/edit/[i:id]', 'App\Controller\AdminController#editPost', 'admin_edit_post');
 $router->map('POST', '/admin/post/edit/[i:id]', 'App\Controller\AdminController#editPost', 'admin_edit_post_get');
 $router->map('GET', '/admin/post/new', 'App\Controller\AdminController#newPost', 'admin_new_post');
+$router->map('GET', '/blog/category/[*:slug]-[i:id]', 'App\Controller\CategoryController#show', 'category');
+$router->map('GET', '/blog/category', 'App\Controller\CategoryController#home', 'category_home');
+
+
 
 //$router->map('GET', '/admin/post/new', 'App\Controller\AdminController#newPost', 'admin_list_post');
 $router->map('POST', '/admin/post/delete/[i:id]', 'App\Controller\AdminController#deletePost', 'admin_delete_post');
