@@ -72,12 +72,12 @@ class PostManager
         return new Post($donnees);
     }
 
-    public function getList()
+    public function getList(?int $perPage, ?int $offset)
     {
         // Retourne la liste de tpous les postes
         $posts = [];
 
-        $q = $this->_db->query('SELECT * FROM post ORDER BY post_create DESC');
+        $q = $this->_db->query("SELECT * FROM post ORDER BY post_create DESC LIMIT $perPage OFFSET $offset");
 
         while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
         {
@@ -109,6 +109,11 @@ class PostManager
 
         $q->execute();
 
+    }
+
+    public function count(): int
+    {
+        return (int)$this->_db->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
     }
 
 

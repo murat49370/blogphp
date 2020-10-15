@@ -4,6 +4,7 @@
 
 <!-- Masthead-->
 
+
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Heading-->
@@ -22,6 +23,17 @@
 <!-- Posts Section-->
 <section class="page-section posts" id="posts">
     <div class="container">
+        <!-- Pagination-->
+        <div class="d-flex justify-content-between my-4">
+
+            <?php if ($currentPage > 1): ?>
+                <a href="<?= $router->generate('blog_home')?>?page=<?= $currentPage - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
+            <?php endif; ?>
+            <?php if ($currentPage < $pages): ?>
+                <a href="<?= $router->generate('blog_home')?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary">Page suivante &raquo;</a>
+            <?php endif; ?>
+        </div>
+
         <!-- Posts Section Heading-->
         <h2 class="page-section-heading text-center text-secondary mb-0">Les derniers articles du Blog</h2>
         <br>

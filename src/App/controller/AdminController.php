@@ -4,8 +4,11 @@
 namespace App\Controller;
 
 use AltoRouter;
+use App\Connection;
 use App\Model\Entity\post;
 use App\model\PostManager;
+use App\URL;
+use Exception;
 use PDO;
 
 
@@ -21,7 +24,7 @@ class AdminController
     public function __construct(AltoRouter $router, ?array $params = [])
     {
         $this->router = $router;
-        $this->pdo = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
+        $this->pdo = Connection::get_pdo();
 
         if (isset($params['id']))
         {
@@ -39,7 +42,18 @@ class AdminController
     public function listPost()
     {
         $q = new PostManager($this->pdo);
-        $posts = $q->getList();
+
+        $countPost = $q->count();
+        $currentPage = URL::getPositiveInt('page', 1);
+        $perPage = 12;
+        $pages = ceil($countPost / $perPage);
+        if ($currentPage > $pages)
+        {
+            throw new Exception('Cette page n\'existe pas');
+        }
+        $offset = $perPage * ($currentPage - 1);
+
+        $posts = $q->getList($perPage, $offset);
         $router = $this->router;
 
         require('../views/backend/post/index.php');
@@ -76,8 +90,22 @@ class AdminController
     public function newPost()
     {
         $q = new PostManager($this->pdo);
-        $posts = $q->getList();
         $router = $this->router;
+
+        $success = false;
+        if (!empty($_POST))
+        {
+            $post->setTitle($_POST['title']);
+            $post->setSlug($_POST['slug']);
+            $post->setShortContent($_POST['short_content']);
+            $post->setContent($_POST['content']);
+            $post->setMainImage($_POST['main_image']);
+            $post->setSmallImage($_POST['small_image']);
+            $post->setUserId($_POST['user_id']);
+            $post->setStatus($_POST['status']);
+        }
+            $q->add($post);
+            $success = true;
 
         require('../views/backend/post/new.php');
     }

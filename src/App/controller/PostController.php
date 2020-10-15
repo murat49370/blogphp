@@ -5,7 +5,10 @@ namespace App\Controller;
 
 
 use AltoRouter;
+use App\Connection;
 use App\model\PostManager;
+use App\URL;
+use Exception;
 use PDO;
 
 
@@ -19,7 +22,7 @@ class postController
     public function __construct(AltoRouter $router, ?array $params = [])
     {
         $this->router = $router;
-        $this->pdo = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
+        $this->pdo = Connection::get_pdo();
 
         if ($params)
         {
@@ -32,8 +35,24 @@ class postController
     public function home()
     {
         $q = new PostManager($this->pdo);
-        $posts = $q->getList();
+
+        //pagination
+        $countPost = $q->count();
+        $currentPage = URL::getPositiveInt('page', 1);
+       // dd($currentPage);
+        $perPage = 12;
+        $pages = ceil($countPost / $perPage);
+        if ($currentPage > $pages)
+        {
+            throw new Exception('Cette page n\'existe pas');
+        }
+        $offset = $perPage * ($currentPage - 1);
+
+
+        $posts = $q->getList($perPage, $offset);
         $router = $this->router;
+
+
         require('../views/frontend/blog/index.php');
 
     }
