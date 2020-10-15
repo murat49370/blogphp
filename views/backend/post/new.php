@@ -1,5 +1,5 @@
 
-<?php $title= 'Post Manager'; ?>
+<?php $title= 'Création d\'un article'; ?>
 
 <?php ob_start(); ?>
 
@@ -11,13 +11,18 @@
     <h1>Modification d'un post</h1>
 </header>
 <div class="container">
+    <?php if ($success):  ?>
+        <div class="alert alert-success">
+            L'article a bien été crée !
+        </div>
+    <?php endif ?>
 
 
     <!-- Posts Section-->
     <section class="page-section posts" id="posts">
 
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Modification du post id N° <?= $post->getId() ?></h2>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Création d'article </h2>
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -38,40 +43,37 @@
                 <label for="title">Contenue :</label><br>
                 <textarea class="form-control" name="content" id="content" rows="20" ></textarea>
             </div>
-<!--            <div class="row">-->
-<!--                <div class="col">-->
-<!--                    <label for="title">Main image URL :</label><br>-->
-<!--                    <input type="text" class="form-control" name="main_image" value="--><?//= $post->getMainImage() ?><!--"><br>-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    <label for="title">Apercu de l'image : </label><br>-->
-<!--                    <img src="--><?//= $post->getMainImage() ?><!--" alt="Main image"><br>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <br>-->
-<!--            <div class="row">-->
-<!--                <div class="col">-->
-<!--                    <label for="title">Small image URL :</label><br>-->
-<!--                    <input type="text" class="form-control" name="small_image" value="--><?//= $post->getSmallImage() ?><!--"><br>-->
-<!--                </div>-->
-<!--                <div class="col">-->
-<!--                    <label for="title">Apercu de l'image : </label><br>-->
-<!--                    <img src="--><?//= $post->getSmallImage() ?><!--" alt="Small image"><br>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <br>-->
-<!--            <div class="form-group">-->
-<!--                <label for="title">Id Author : </label>-->
-<!--                <input type="text" class="form-control" name="user_id" value="--><?//= $post->getUserId() ?><!--"><br>-->
-<!--            </div><div class="form-group">-->
-<!--                <label for="title">Status : </label>-->
-<!--                <input type="text" class="form-control" name="status" value="--><?//= $post->getStatus() ?><!--"><br>-->
-<!--            </div>-->
+            <div class="row">
+                <div class="col">
+                    <label for="title">Main image URL :</label><br>
+                    <input type="text" class="form-control" name="main_image" value=""><br>
+                </div>
+                <div class="col">
+                    <label for="title">Apercu de l'image : </label><br>
+                    <img src="" alt="Main image"><br>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="title">Small image URL :</label><br>
+                    <input type="text" class="form-control" name="small_image" value=""><br>
+                </div>
+                <div class="col">
+                    <label for="title">Apercu de l'image : </label><br>
+                    <img src="" alt="Small image"><br>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="title">Id Author : </label>
+                <input type="text" class="form-control" name="user_id" value=""><br>
+            </div><div class="form-group">
+                <label for="title">Status : </label>
+                <input type="text" class="form-control" name="status" value=""><br>
+            </div>
 
-
-
-
-            <button class="btn-primary">Modifier</button>
+            <button class="btn-primary">Crée l'article</button>
 
         </form>
 

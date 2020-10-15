@@ -8,7 +8,7 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Liste des posts et actions</h1>
+    <h1>Delete une category</h1>
 
 </header>
 <!-- Posts Section-->
@@ -27,24 +27,24 @@
         <!-- Posts Grid Items-->
         <table class="table">
             <thead>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Actions</th>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Actions</th>
             </thead>
             <tbody>
-                <?php foreach ($posts as $post): ?>
+            <?php foreach ($posts as $post): ?>
                 <tr>
                     <td># <?= $post->getid() ?></td>
                     <td><?= $post->getTitle() ?></td>
                     <td>
                         <a href="<?= $router->generate('admin_edit_post', ['id' => $post->getId()]) ?>" class="btn btn-primary">Editer</a>
                         <form action="<?= $router->generate('admin_delete_post', ['id' => $post->getId()]) ?>" method="post"
-                        onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
+                              onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
                             <button type="submit" class="btn btn-danger">Supprimé</button>
                         </form>
                     </td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
 </section>

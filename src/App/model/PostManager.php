@@ -34,16 +34,16 @@ class PostManager
         $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
         VALUE (:post_create, :post_modified, :post_title, :post_slug, :post_short_content, :post_content, :post_status, :post_main_image, :post_small_image, :user_id)');
 
-        $q->bindValue(':post_create', $post->getCreateDate());
-        $q->bindValue(':post_modified', $post->getModifiedDate());
+        $q->bindValue(':post_create', date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
         $q->bindValue(':post_title', $post->getTitle());
         $q->bindValue(':post_slug', $post->getSlug());
         $q->bindValue(':post_short_content', $post->getShortContent());
         $q->bindValue(':post_content', $post->getContent());
-        $q->bindValue(':post_status', 'valide');
+        $q->bindValue(':post_status', $post->getStatus());
         $q->bindValue(':post_main_image', $post->getMainImage());
         $q->bindValue(':post_small_image', $post->getSmallImage());
-        $q->bindValue(':user_id', 1, PDO::PARAM_INT);
+        $q->bindValue(':user_id', $post->getUserId(), PDO::PARAM_INT);
 
         $q->execute();
     }

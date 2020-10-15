@@ -8,7 +8,7 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Liste des posts et actions</h1>
+    <h1>Liste des Categories</h1>
 
 </header>
 <!-- Posts Section-->
@@ -20,31 +20,31 @@
             </div>
         <?php endif ?>
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Posts Manager</h2>
-        <a href="<?= $router->generate('admin_new_post') ?>" class="btn btn-primary" style="display:inline">Ajouter un nouveau post</a>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Categories Manager</h2>
+        <a href="#" class="btn btn-primary" style="display:inline">Ajouter une nouvelle</a>
         <br>
         <br>
         <!-- Posts Grid Items-->
         <table class="table">
             <thead>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Actions</th>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Actions</th>
             </thead>
             <tbody>
-                <?php foreach ($posts as $post): ?>
+            <?php foreach ($categories as $category): ?>
                 <tr>
-                    <td># <?= $post->getid() ?></td>
-                    <td><?= $post->getTitle() ?></td>
+                    <td># <?= $category->getid() ?></td>
+                    <td><?= $category->getTitle() ?></td>
                     <td>
-                        <a href="<?= $router->generate('admin_edit_post', ['id' => $post->getId()]) ?>" class="btn btn-primary">Editer</a>
-                        <form action="<?= $router->generate('admin_delete_post', ['id' => $post->getId()]) ?>" method="post"
-                        onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
+                        <a href="<?= $router->generate('admin_edit_category', ['id' => $category->getId()]) ?>" class="btn btn-primary">Editer</a>
+                        <form action="<?= $router->generate('admin_delete_category', ['id' => $category->getId()]) ?>" method="post"
+                              onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
                             <button type="submit" class="btn btn-danger">Supprimé</button>
                         </form>
                     </td>
                 </tr>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
             </tbody>
         </table>
 </section>
