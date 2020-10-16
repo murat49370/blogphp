@@ -112,7 +112,7 @@ class Comment
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
     public function getCreateDate(): DateTime
     {

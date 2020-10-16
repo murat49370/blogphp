@@ -29,7 +29,9 @@ $router->setBasePath('');
 // Frontend
 $router->map('GET', '/', 'App\Controller\HomeController#home', 'home');
 $router->map('GET', '/blog', 'App\Controller\postController#home', 'blog_home');
-$router->map('GET', '/post/[*:slug]-[i:id]', 'App\Controller\postController#post', 'post');
+$router->map('GET|POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController#post', 'post');
+//$router->map('POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController#newComment', 'new_comment');
+
 $router->map('GET', '/blog/category/[*:slug]-[i:id]', 'App\Controller\CategoryController#show', 'category');
 $router->map('GET', '/blog/category', 'App\Controller\CategoryController#home', 'category_home');
 // Admin Home
@@ -42,9 +44,10 @@ $router->map('POST', '/admin/post/delete/[i:id]', 'App\Controller\Admin\PostCont
 
 // Categories Admin
 $router->map('GET', '/admin/category', 'App\Controller\Admin\CategoryController#listCategory', 'admin_list_category');
-$router->map('GET|POST', '/admin/category/edit/[i:id]', 'App\Controller\Admin\CategoryController#editCategory', 'admin_edit_category');
-$router->map('GET|POST', '/admin/category/new', 'App\Controller\Admin\CategoryController#newCategory', 'admin_new_category');//$router->map('POST', '/admin/category/new', 'App\Controller\AdminController#newCategory', 'admin_new_category_save');
-$router->map('POST', '/admin/category/delete/[i:id]', 'App\Controller\Admin\CategoryController#deleteCategory', 'admin_delete_category');
+$router->map('GET|POST', '/admin/category/edit/[*:slug]-[i:id]', 'App\Controller\Admin\CategoryController#editCategory', 'admin_edit_category');
+$router->map('GET|POST', '/admin/category/new', 'App\Controller\Admin\CategoryController#newCategory', 'admin_new_category');
+//$router->map('POST', '/admin/category/new', 'App\Controller\AdminController#newCategory', 'admin_new_category_save');
+$router->map('POST', '/admin/category/delete/[*:slug]-[i:id]', 'App\Controller\Admin\CategoryController#deleteCategory', 'admin_delete_category');
 
 // Comment Admin
 $router->map('GET', '/admin/comment', 'App\Controller\Admin\CommentController#listComment', 'admin_list_comment');

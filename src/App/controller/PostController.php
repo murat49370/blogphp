@@ -7,6 +7,9 @@ namespace App\Controller;
 use AltoRouter;
 use App\Connection;
 use App\model\CategoryManager;
+use App\Model\CommentManager;
+use App\Model\Entity\Comment;
+use App\Model\Entity\Post;
 use App\model\PostManager;
 use App\URL;
 use Exception;
@@ -77,14 +80,67 @@ class postController
 
         // Je recupere les categorie lier a l'article, retourn un tableaux d'objet
         $categories = $q->getPostCategory($post);
-        //dd($categories);
 
         $c = new CategoryManager($this->pdo);
         $categoriesListing = $c->getList();
 
+        //Recuper Commentaire
+        $donnees = new CommentManager($this->pdo);
+        $comments = $donnees->getValideListByPost($post->getId());
+
+        $a = new CommentManager($this->pdo);
+
+        $commetOk = false;
+        if (!empty($_POST))
+        {
+            $comment = [];
+            $comment['comment_author_email'] = $_POST['email'];
+            $comment['comment_author_name'] = $_POST['author_name'];
+            $comment['comment_content'] = $_POST['content'];
+            $comment['post_id'] = $_POST['post_id'];
+
+            $newComment = new Comment($comment);
+
+            $a->add($newComment);
+
+            $commetOk = true;
+
+            header('Location: ' . $router->generate('post', ['id' => $id, 'slug' => $slug ]) . '?publish_comment=1');
+
+        }
 
 
         require('../views/frontend/post/index.php');
+    }
+
+    public function newComment()
+    {
+        $id = $this->id;
+        $slug = $this->slug;
+
+        $q = new CommentManager($this->pdo);
+        $router = $this->router;
+
+        $commetOk = false;
+        if (!empty($_POST))
+        {
+            $comment = [];
+            $comment['comment_author_email'] = $_POST['email'];
+            $comment['comment_author_name'] = $_POST['author_name'];
+            $comment['comment_content'] = $_POST['content'];
+            $comment['post_id'] = $_POST['post_id'];
+
+            $newComment = new Comment($comment);
+
+            $q->add($newComment);
+
+            $commetOk = true;
+
+            header('Location: ' . $router->generate('post', ['id' => $id, 'slug' => $slug ]) . '?publish_commet=1');
+
+        }
+
+        require('../views/backend/post/index.php');
     }
     
 

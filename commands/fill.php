@@ -41,7 +41,6 @@ for ($i = 0; $i < 25; $i ++)
     {
         die('erreur : ' . $e->getMessage());
     }
-
 }
 
 $pdo->exec('INSERT INTO post_category SET post_id=1, category_id=1');
@@ -59,7 +58,7 @@ for ($i = 0; $i < 25; $i ++)
         comment_author_email='{$faker->email}',
         comment_content='{$faker->paragraphs(rand(1, 2), true)}',
         comment_create='{$faker->date} {$faker->time}',
-        comment_status='waiting',
+        comment_status='publish',
         post_id=$randId
         ");
     }

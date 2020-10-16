@@ -21,7 +21,7 @@
         <?php endif ?>
         <!-- Posts Section Heading-->
         <h2 class="page-section-heading text-center text-secondary mb-0">Categories Manager</h2>
-        <a href="#" class="btn btn-primary" style="display:inline">Ajouter une nouvelle</a>
+        <a href="<?= $router->generate('admin_new_category') ?>" class="btn btn-primary" style="display:inline">Ajouter une category</a>
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -37,8 +37,8 @@
                     <td># <?= $category->getid() ?></td>
                     <td><?= $category->getTitle() ?></td>
                     <td>
-                        <a href="<?= $router->generate('admin_edit_category', ['id' => $category->getId()]) ?>" class="btn btn-primary">Editer</a>
-                        <form action="<?= $router->generate('admin_delete_category', ['id' => $category->getId()]) ?>" method="post"
+                        <a href="<?= $router->generate('admin_edit_category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" class="btn btn-primary">Editer</a>
+                        <form action="<?= $router->generate('admin_delete_category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" method="post"
                               onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
                             <button type="submit" class="btn btn-danger">Supprimé</button>
                         </form>

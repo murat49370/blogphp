@@ -22,30 +22,22 @@ class CategoryManager
     }
 
 
-//    public function add(Post $post)
-//    {
-//        $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
-//        VALUE (:post_create, :post_modified, :post_title, :post_slug, :post_short_content, :post_content, :post_status, :post_main_image, :post_small_image, :user_id)');
-//
-//        $q->bindValue(':post_create', $post->getCreateDate());
-//        $q->bindValue(':post_modified', $post->getModifiedDate());
-//        $q->bindValue(':post_title', $post->getTitle());
-//        $q->bindValue(':post_slug', $post->getSlug());
-//        $q->bindValue(':post_short_content', $post->getShortContent());
-//        $q->bindValue(':post_content', $post->getContent());
-//        $q->bindValue(':post_status', 'valide');
-//        $q->bindValue(':post_main_image', $post->getMainImage());
-//        $q->bindValue(':post_small_image', $post->getSmallImage());
-//        $q->bindValue(':user_id', 1, PDO::PARAM_INT);
-//
-//        $q->execute();
-//    }
-//
-//    public function delete(Post $post): void
-//    {
-//        $this->_db->exec('DELETE FROM post WHERE id = ' . $post->getId());
-//    }
-//
+    public function add(Category $category)
+    {
+        $q = $this->_db->prepare('INSERT INTO category(category_title, category_slug)
+        VALUE (:category_title, :category_slug)');
+
+        $q->bindValue(':category_title', $category->getTitle());
+        $q->bindValue(':category_slug', $category->getSlug());
+
+        $q->execute();
+    }
+
+    public function delete(Category $category): void
+    {
+        $this->_db->exec('DELETE FROM category WHERE id = ' . $category->getId());
+    }
+
     public function get($id)
     {
         // Execute une requete de type SELECT avec un WHERE et retour un objet Post
@@ -93,27 +85,19 @@ class CategoryManager
         return $posts;
     }
 
-//    public function update(post $post): void
-//    {
-//        $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id
-//        WHERE id = :id LIMIT 1 ');
-//
-//        $q->bindValue(':id', $post->getId(), PDO::PARAM_INT);
-//        $q->bindValue(':post_create', $post->getCreateDate()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
-//        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-//        $q->bindValue(':post_title', $post->getTitle());
-//        $q->bindValue(':post_slug', $post->getSlug());
-//        $q->bindValue(':post_short_content', $post->getShortContent());
-//        $q->bindValue(':post_content', $post->getContent());
-//        $q->bindValue(':post_status', $post->getStatus());
-//        $q->bindValue(':post_main_image', $post->getMainImage());
-//        $q->bindValue(':post_small_image', $post->getSmallImage());
-//        $q->bindValue(':user_id', 1, PDO::PARAM_INT);
-//
-//        $q->execute();
-//
-//    }
-//
+    public function update(Category $category): void
+    {
+        $q = $this->_db->prepare('UPDATE category SET category_title = :category_title, category_slug = :category_slug 
+        WHERE id = :id LIMIT 1 ');
+
+        $q->bindValue(':id', $category->getId(), PDO::PARAM_INT);
+        $q->bindValue(':category_title', $category->getTitle(), PDO::PARAM_STR);
+        $q->bindValue(':category_slug', $category->getSlug(), PDO::PARAM_STR);
+
+
+        $q->execute();
+
+    }
 
 
     public function setDb($db)
