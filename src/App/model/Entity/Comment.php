@@ -1,25 +1,68 @@
 <?php
 
 
-namespace App\Entity;
+namespace App\Model\Entity;
 
+
+use DateTime;
 
 class Comment
 {
-    private $id;
-    private $authorName;
-    private $authorEmail;
-    private $content;
-    private $createDate;
-    private $status;
-    private $postId;
+    private $_id;
+    private $_authorName;
+    private $_authorEmail;
+    private $_content;
+    private $_createDate;
+    private $_status;
+    private $_postId;
+
+    Public function __construct(array $donnees)
+    {
+        $this->hydrate($donnees);
+    }
+
+    public function hydrate(array $donnees)
+    {
+        if (isset($donnees['id'])){ $this->setId($donnees['id']); }
+        if (isset($donnees['comment_author_name'])){ $this->setAuthorName($donnees['comment_author_name']); }
+        if (isset($donnees['comment_author_email'])){ $this->setAuthorEmail($donnees['comment_author_email']); }
+        if (isset($donnees['comment_content'])){ $this->setContent($donnees['comment_content']); }
+        if (isset($donnees['comment_create'])){ $this->setCreateDate($donnees['comment_create']); }
+        if (isset($donnees['comment_status'])){ $this->setStatus($donnees['comment_status']); }
+        if (isset($donnees['post_id'])){ $this->setPostId($donnees['post_id']); }
+    }
+
+
+//    public function getCreateDate(): DateTime
+//    {
+//        return new DateTime($this->_createDate);
+//    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return Comment
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+        return $this;
+    }
 
     /**
      * @return mixed
      */
     public function getAuthorName()
     {
-        return $this->authorName;
+        return $this->_authorName;
     }
 
     /**
@@ -28,7 +71,7 @@ class Comment
      */
     public function setAuthorName($authorName)
     {
-        $this->authorName = $authorName;
+        $this->_authorName = $authorName;
         return $this;
     }
 
@@ -37,7 +80,7 @@ class Comment
      */
     public function getAuthorEmail()
     {
-        return $this->authorEmail;
+        return $this->_authorEmail;
     }
 
     /**
@@ -46,7 +89,7 @@ class Comment
      */
     public function setAuthorEmail($authorEmail)
     {
-        $this->authorEmail = $authorEmail;
+        $this->_authorEmail = $authorEmail;
         return $this;
     }
 
@@ -55,7 +98,7 @@ class Comment
      */
     public function getContent()
     {
-        return $this->content;
+        return $this->_content;
     }
 
     /**
@@ -64,16 +107,16 @@ class Comment
      */
     public function setContent($content)
     {
-        $this->content = $content;
+        $this->_content = $content;
         return $this;
     }
 
     /**
      * @return mixed
      */
-    public function getCreateDate()
+    public function getCreateDate(): DateTime
     {
-        return $this->createDate;
+        return new DateTime($this->_createDate);
     }
 
     /**
@@ -82,7 +125,7 @@ class Comment
      */
     public function setCreateDate($createDate)
     {
-        $this->createDate = $createDate;
+        $this->_createDate = $createDate;
         return $this;
     }
 
@@ -91,7 +134,7 @@ class Comment
      */
     public function getStatus()
     {
-        return $this->status;
+        return $this->_status;
     }
 
     /**
@@ -100,7 +143,7 @@ class Comment
      */
     public function setStatus($status)
     {
-        $this->status = $status;
+        $this->_status = $status;
         return $this;
     }
 
@@ -109,7 +152,7 @@ class Comment
      */
     public function getPostId()
     {
-        return $this->postId;
+        return $this->_postId;
     }
 
     /**
@@ -118,17 +161,14 @@ class Comment
      */
     public function setPostId($postId)
     {
-        $this->postId = $postId;
+        $this->_postId = $postId;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
+
+
+
 
 
 }

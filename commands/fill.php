@@ -59,7 +59,7 @@ for ($i = 0; $i < 25; $i ++)
         comment_author_email='{$faker->email}',
         comment_content='{$faker->paragraphs(rand(1, 2), true)}',
         comment_create='{$faker->date} {$faker->time}',
-        comment_status='valide',
+        comment_status='waiting',
         post_id=$randId
         ");
     }
