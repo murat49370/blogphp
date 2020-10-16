@@ -1,12 +1,12 @@
 <?php
 
+use App\Connection;
+
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 $faker = Faker\Factory::create('fr_FR');
 
-$pdo = NEW PDO('mysql:host=localhost;dbname=blog','root', '', [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$pdo = Connection::get_pdo();
 
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
 $pdo->exec('TRUNCATE TABLE post_category');
@@ -59,7 +59,7 @@ for ($i = 0; $i < 25; $i ++)
         comment_author_email='{$faker->email}',
         comment_content='{$faker->paragraphs(rand(1, 2), true)}',
         comment_create='{$faker->date} {$faker->time}',
-        comment_status='valide',
+        comment_status='waiting',
         post_id=$randId
         ");
     }

@@ -61,7 +61,7 @@ class post
     }
 
     /**
-     * @return mixed
+     * @return DateTime
      */
     public function getModifiedDate(): DateTime
     {
@@ -242,8 +242,4 @@ class post
 
 
 
-
-
-
-
-    }
+}
