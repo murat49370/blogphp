@@ -9,55 +9,143 @@
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Heading-->
         <h1 class="text-center"><?= htmlentities($post->getTitle()) ?></h1>
-        <p>Par Admin |Dans Morbi leo risus | Le <?php echo $post->getCreateDate()->format('d F Y');?></p>
-        <p>Categories :
-        <?php
-        //dd($categories);
-        foreach ($categories as $k => $category): ?>
-            <?php if($k > 0): ?>
-                ,
-            <?php endif;?>
-
-            <a href="<?= $router->generate('category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" class="text-light"> <?= $category->getTitle() ?></a>
-
-        <?php endforeach; ?>
         </p>
     </div>
 </header>
+<!-- Page Content -->
+<div class="container">
 
-<section class="post-content-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-12">
-                <div class="image-block">
-                    <img src="<?= $post->getMainImage() ?>"  alt="Main image" />
+
+    <div class="row">
+
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <?php if (isset($_GET['publish_comment'])):  ?>
+                <div class="alert alert-success">
+                    Le commentaire a bien été ajouté
                 </div>
-                <p><?= nl2br(htmlentities($post->getContent())) ?></p>
+            <?php endif ?>
+
+            <!-- Title -->
+            <h1 class="mt-4"><?= htmlentities($post->getTitle()) ?></h1>
+
+            <!-- Author -->
+            <p class="lead">
+                Par
+                <a href="#">Admin</a>
+                <!-- Post Categories -->
+                Dans :
+                <?php
+                //dd($categories);
+                foreach ($categories as $k => $category): ?>
+                    <?php if($k > 0): ?>
+                        ,
+                    <?php endif;?>
+
+                    <a href="<?= $router->generate('category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" > <?= $category->getTitle() ?></a>
+
+                <?php endforeach; ?>
+            </p>
+
+            <hr>
+
+            <!-- Date/Time -->
+            <p><?php echo $post->getCreateDate()->format('d F Y');?></p>
+
+            <hr>
+
+            <!-- Preview Image -->
+            <img class="img-fluid rounded" src="<?= $post->getMainImage() ?>" alt="">
+
+            <hr>
+
+            <!-- Post Content -->
+            <p><?= nl2br(htmlentities($post->getContent())) ?></p>
+
+            <hr>
+
+
+            <!-- Comments Form -->
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form action="" method="post">
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Votre nom :</label>
+                            <input type="text" class="form-control" id="author_name" name="author_name" ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Votre message :</label>
+                            <textarea class="form-control" rows="3" name="content" id="content"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" type="text" class="form-control" value="<?= $post->getId() ?>" id="post_id" name="post_id" ">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyé</button>
+                    </form>
+                </div>
             </div>
 
-<!-- Side Barre-->
-            <div class="col-lg-3  col-md-3 col-sm-12">
-                <div class="well">
+            <!-- Single Comment -->
+            <?php foreach ($comments as $comment) { ?>
+            <div class="media mb-4">
+                <img class="w-25 p-3 rounded-circle" src="https://www.agem-bordeaux.fr/images/sampledata/icons/avatar-big.png" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0"><?= $comment->getAuthorName() ?></h5>
+                    <p>Publié le <?= $comment->getCreateDate()->format('d F Y') ?></p>
+                    <?= nl2br(htmlentities($comment->getContent())) ?>
 
-                    <h2>Catégories liste</h2>
-                    <ul class="list-group">
+                </div>
+            </div>
+            <?php } ?>
+        </div>
 
-                        <?php
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
 
-                        foreach ($categoriesListing as $category)
-                        { ?>
-                            <?php $url = $router->generate('category', ['id' => $category->getId(), 'slug' => $category->getSlug()]);?>
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Liste des categories</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12 justify-content-center">
+                            <ul class="list-unstyled mb-0">
+                                <?php
 
-                            <li class="list-group-item"><a href="<?= $url ?>"><?= $category->getTitle() ?></a></li>
+                                foreach ($categoriesListing as $category)
+                                { ?>
+                                    <?php $url = $router->generate('category', ['id' => $category->getId(), 'slug' => $category->getSlug()]);?>
 
-                        <?php } ?>
+                                    <li class="list-group"><a href="<?= $url ?>"><?= $category->getTitle() ?></a></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    </ul>
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Exemple Widget</h5>
+                <div class="card-body">
+                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
                 </div>
             </div>
 
         </div>
-    </div> <!-- /container -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
 
 
 

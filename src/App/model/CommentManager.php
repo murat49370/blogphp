@@ -33,24 +33,20 @@ class CommentManager
 //        return $authorName;
 //    }
 
-//    public function add(Comment $comment)
-//    {
-//        $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
-//        VALUE (:post_create, :post_modified, :post_title, :post_slug, :post_short_content, :post_content, :post_status, :post_main_image, :post_small_image, :user_id)');
-//
-//        $q->bindValue(':post_create', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-//        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-//        $q->bindValue(':post_title', $post->getTitle());
-//        $q->bindValue(':post_slug', $post->getSlug());
-//        $q->bindValue(':post_short_content', $post->getShortContent());
-//        $q->bindValue(':post_content', $post->getContent());
-//        $q->bindValue(':post_status', $post->getStatus());
-//        $q->bindValue(':post_main_image', $post->getMainImage());
-//        $q->bindValue(':post_small_image', $post->getSmallImage());
-//        $q->bindValue(':user_id', $post->getUserId(), PDO::PARAM_INT);
-//
-//        $q->execute();
-//    }
+    public function add(Comment $comment)
+    {
+        $q = $this->_db->prepare('INSERT INTO comment(comment_author_name, comment_author_email, comment_content, comment_create, comment_status, post_id)
+        VALUE (:comment_author_name, :comment_author_email, :comment_content, :comment_create, :comment_status, :post_id)');
+
+        $q->bindValue(':comment_author_name', $comment->getAuthorName());
+        $q->bindValue(':comment_author_email', $comment->getAuthorEmail());
+        $q->bindValue(':comment_content', $comment->getContent());
+        $q->bindValue(':comment_create', date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        $q->bindValue(':comment_status', 'waiting');
+        $q->bindValue(':post_id', $comment->getPostId(), PDO::PARAM_INT);
+
+        $q->execute();
+    }
 
     public function delete(Comment $comment): void
     {
@@ -77,6 +73,46 @@ class CommentManager
         $comments = [];
 
         $q = $this->_db->query("SELECT * FROM comment ORDER BY comment_create DESC LIMIT $perPage OFFSET $offset");
+
+        while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $comments[] = new Comment($donnes);
+        }
+        return $comments;
+    }
+
+    public function getListValide(?int $perPage, ?int $offset)
+    {
+        $comments = [];
+
+        $q = $this->_db->query("SELECT * FROM comment WHERE comment_status = 'publish' ORDER BY comment_create DESC LIMIT $perPage OFFSET $offset");
+
+        while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $comments[] = new Comment($donnes);
+        }
+        return $comments;
+    }
+
+    public function getListByPost(int $postId)
+    {
+        $comments = [];
+
+
+        $q = $this->_db->query("SELECT * FROM comment WHERE post_id = $postId ORDER BY comment_create DESC");
+
+        while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $comments[] = new Comment($donnes);
+        }
+        return $comments;
+    }
+
+    public function getValideListByPost(int $postId)
+    {
+        $comments = [];
+
+        $q = $this->_db->query("SELECT * FROM comment WHERE post_id = $postId AND comment_status = 'publish' ORDER BY comment_create DESC");
 
         while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
         {

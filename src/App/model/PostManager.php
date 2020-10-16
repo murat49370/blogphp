@@ -91,9 +91,6 @@ class PostManager
 
     public function update(post $post): void
     {
-        // Prépare une requete de type UPDATE
-        // Assignation des valeurs de la requête
-        // Execution de la requete
         $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id
         WHERE id = :id LIMIT 1 ');
 

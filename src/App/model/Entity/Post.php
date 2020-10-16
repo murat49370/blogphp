@@ -6,7 +6,7 @@ namespace App\Model\Entity;
 
 use DateTime;
 
-class post
+class Post
 {
     private $_id;
     private $_createDate;
