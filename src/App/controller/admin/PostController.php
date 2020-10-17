@@ -62,6 +62,7 @@ class PostController
         $router = $this->router;
 
         $success = false;
+        //$categories = 0;
         if (!empty($_POST))
         {
             $post->setTitle($_POST['title']);
@@ -73,10 +74,23 @@ class PostController
             $post->setUserId($_POST['user_id']);
             $post->setStatus($_POST['status']);
 
-            $q->update($post);
+            //dd($_POST);
+            $q->update($post, $_POST['categories']);
             $success = true;
 
         }
+        $categories = new CategoryManager($this->pdo);
+        $options = $categories->getListFormated();
+
+        $categoriesPost = $q->getCategoryPost($post);
+        $ids = [];
+        foreach ($categoriesPost as $category)
+        {
+           $ids[] = $category->getId();
+        }
+        $idsCategoriesPost = $ids;
+
+
 
         require('../views/backend/post/edit.php');
     }
@@ -101,11 +115,26 @@ class PostController
             $post['user_id'] = $_POST['user_id'];
             $newPost = new Post($post);
 
-            $q->add($newPost);
+
+
+            $q->add($newPost, $_POST['categories']);
+
 
             $success = true;
 
         }
+        $post = new Post([]);
+
+        $categories = new CategoryManager($this->pdo);
+        $options = $categories->getListFormated();
+
+        $categoriesPost = $q->getCategoryPost($post);
+        $ids = [];
+        foreach ($categoriesPost as $category)
+        {
+            $ids[] = $category->getId();
+        }
+        $idsCategoriesPost = $ids;
 
         require('../views/backend/post/new.php');
     }

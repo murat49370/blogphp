@@ -8,14 +8,15 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Modification d'un post</h1>
+    <h1>Création d'un article</h1>
 </header>
 <div class="container">
-    <?php if ($success):  ?>
-        <div class="alert alert-success">
-            L'article a bien été crée !
-        </div>
-    <?php endif ?>
+
+    <?php if (isset($_GET['success_new_post']))
+    {
+        header('Location: ' . $router->generate('admin_list_post') . '?success_new_post=1');
+    }
+        ?>
 
 
     <!-- Posts Section-->
@@ -26,7 +27,7 @@
         <br>
         <br>
         <!-- Posts Grid Items-->
-        <form action="" method="post">
+        <form action="?success_new_post=1" method="post">
             <div class="form-group">
                 <label for="title">Titre : </label>
                 <input type="text" class="form-control" name="title" value=""><br>
@@ -68,10 +69,34 @@
             <div class="form-group">
                 <label for="title">Id Author : </label>
                 <input type="text" class="form-control" name="user_id" value=""><br>
-            </div><div class="form-group">
-                <label for="title">Status : </label>
-                <input type="text" class="form-control" name="status" value=""><br>
             </div>
+            <div class="form-group">
+                <label for="title">Status : </label>
+                <select name="status" id="status">
+                    <option value="publish">publish</option>
+                    <option value="draft">draft</option>
+                </select>
+            </div>
+            <?php
+
+
+            $optionsHTML = [];
+            foreach($options as $k => $v)
+            {
+                $selected = in_array($k, $idsCategoriesPost) ? " selected" : "";
+                $optionHTML[] = "<option value=\"$k\"$selected>$v</option>option>";
+            }
+            $optionsHTML = implode('', $optionHTML);
+
+            ?>
+
+            <div class="form-group">
+                <label for="category">categories : </label>
+                <select name="categories[]" id="category" required multiple><?= $optionsHTML ?></select>
+
+
+            </div>
+
 
             <button class="btn-primary">Crée l'article</button>
 

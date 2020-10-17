@@ -25,7 +25,7 @@
         <br>
         <br>
         <!-- Posts Grid Items-->
-        <form action="" method="post">
+        <form action="?modif" method="post">
             <div class="form-group">
                 <label for="title">Titre : </label>
                 <input type="text" class="form-control" name="title" value="<?= $post->getTitle() ?>"><br>
@@ -67,9 +67,32 @@
             <div class="form-group">
                 <label for="title">Id Author : </label>
                 <input type="text" class="form-control" name="user_id" value="<?= $post->getUserId() ?>"><br>
-            </div><div class="form-group">
+            </div>
+            <div class="form-group">
                 <label for="title">Status : </label>
-                <input type="text" class="form-control" name="status" value="<?= $post->getStatus() ?>"><br>
+                <select name="status" id="status">
+                    <option value="publish">publish</option>
+                    <option value="draft">draft</option>
+                </select>
+            </div>
+            <?php
+
+
+            $optionsHTML = [];
+            foreach($options as $k => $v)
+            {
+                $selected = in_array($k, $idsCategoriesPost) ? " selected" : "";
+                $optionHTML[] = "<option value=\"$k\"$selected>$v</option>option>";
+            }
+            $optionsHTML = implode('', $optionHTML);
+
+            ?>
+
+            <div class="form-group">
+                <label for="category">categories : </label>
+                <select name="categories[]" id="category" required multiple><?= $optionsHTML ?></select>
+
+
             </div>
 
 
