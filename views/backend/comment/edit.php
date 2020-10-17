@@ -45,25 +45,16 @@
                 <textarea class="form-control" name="content" id="content" rows="5" ><?= $comment->getContent() ?> </textarea><br>
             </div>
 
-            <div class="form-check">
-                <label for="title">Changer le status du commentaire :</label><br>
-                <input class="form-check-input" type="checkbox" name="publish" id="publish" value="publish" checked>
-                <label class="form-check-label" for="exampleRadios1">
-                Publié
-                </label>
+
+            <div class="form-group">
+                <label for="title">Changer le status du commentaire :</label>
+                <select name="comment_status" id="comment_status">
+                    <option value="publish">Publier</option>
+                    <option value="waiting">En attente de validation</option>
+                    <option value="refused">Refusé</option>
+                </select>
             </div>
-            <div class="form-check disabled">
-                <input class="form-check-input" type="checkbox" name="waiting" id="waiting" value="waiting" >
-                <label class="form-check-label" for="exampleRadios1">
-                En attente de validation
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <input class="form-check-input" type="checkbox" name="refused" id="refused" value="refused" >
-                <label class="form-check-label" for="exampleRadios1">
-                Refusé
-                </label>
-            </div>
+
 
 
             <button class="btn-primary">Validé les modifications</button>

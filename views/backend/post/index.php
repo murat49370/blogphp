@@ -19,6 +19,23 @@
                 L'enregistrement a bien été supprimé.
             </div>
         <?php endif ?>
+        <?php if (isset($_GET['success_new_post'])): ?>
+            <div class="alert alert-success">
+                L'article a bien été Crée.
+            </div>
+        <?php endif ?>
+
+        <!-- Pagination-->
+        <div class="d-flex justify-content-between my-4">
+
+            <?php if ($currentPage > 1): ?>
+                <a href="<?= $router->generate('admin_list_post')?>?page=<?= $currentPage - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
+            <?php endif; ?>
+            <?php if ($currentPage < $pages): ?>
+                <a href="<?= $router->generate('admin_list_post')?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
+            <?php endif; ?>
+        </div>
+
         <!-- Posts Section Heading-->
         <h2 class="page-section-heading text-center text-secondary mb-0">Posts Manager</h2>
         <a href="<?= $router->generate('admin_new_post') ?>" class="btn btn-primary" style="display:inline">Ajouter un nouveau post</a>
@@ -28,6 +45,7 @@
         <table class="table">
             <thead>
                 <th>Id</th>
+                <th>Status</th>
                 <th>Titre</th>
                 <th>Actions</th>
             </thead>
@@ -35,6 +53,11 @@
                 <?php foreach ($posts as $post): ?>
                 <tr>
                     <td># <?= $post->getid() ?></td>
+                    <td class="
+                    <?php
+                    if ($post->getStatus() === 'publish'){echo 'btn-primary';}
+                    if ($post->getStatus() === 'draft'){echo 'btn-secondary';}
+                    ?>"><?= $post->getStatus()?></td>
                     <td><?= $post->getTitle() ?></td>
                     <td>
                         <a href="<?= $router->generate('admin_edit_post', ['id' => $post->getId()]) ?>" class="btn btn-primary">Editer</a>

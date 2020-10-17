@@ -24,7 +24,7 @@
 
             <?php if (isset($_GET['publish_comment'])):  ?>
                 <div class="alert alert-success">
-                    Le commentaire a bien été ajouté
+                    Le commentaire a bien été enregistré, il sera publié aprés sa validation.
                 </div>
             <?php endif ?>
 

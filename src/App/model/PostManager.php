@@ -29,7 +29,7 @@ class PostManager
         return $authorName;
     }
 
-    public function add(Post $post)
+    public function add(Post $post, array $categories)
     {
         $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
         VALUE (:post_create, :post_modified, :post_title, :post_slug, :post_short_content, :post_content, :post_status, :post_main_image, :post_small_image, :user_id)');
@@ -44,18 +44,19 @@ class PostManager
         $q->bindValue(':post_main_image', $post->getMainImage());
         $q->bindValue(':post_small_image', $post->getSmallImage());
         $q->bindValue(':user_id', $post->getUserId(), PDO::PARAM_INT);
-
         $q->execute();
+        $postId = $this->_db->lastInsertId();
+
+        $query = $this->_db->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
+        foreach ($categories as $category)
+        {
+            $query->execute([$postId, $category]);
+        }
+
     }
 
     public function delete(Post $post): void
     {
-        // Execute requete de type delete
-//        $query = $this->_db->prepare('DELETE FROM post WHERE id = ' . $post->getId());
-//        $ok = $query->execute();
-//        if ($ok === false){
-//            throw new \Exception("Impossible de supprimer l'enregistrement {$post->getId()}");
-//        }
         $this->_db->exec('DELETE FROM post WHERE id = ' . $post->getId());
     }
 
@@ -89,11 +90,11 @@ class PostManager
         return $posts;
     }
 
-    public function update(post $post): void
+    public function update(post $post, array $categories): void
     {
+        $this->_db->beginTransaction();
         $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id
         WHERE id = :id LIMIT 1 ');
-
         $q->bindValue(':id', $post->getId(), PDO::PARAM_INT);
         $q->bindValue(':post_create', $post->getCreateDate()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
         $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
@@ -105,8 +106,19 @@ class PostManager
         $q->bindValue(':post_main_image', $post->getMainImage());
         $q->bindValue(':post_small_image', $post->getSmallImage());
         $q->bindValue(':user_id', 1, PDO::PARAM_INT);
-
         $q->execute();
+
+        //MISE A JOUR POST_CATEGORY 
+        $this->_db->exec("DELETE FROM post_category WHERE post_id = " . $post->getId());
+
+        $query = $this->_db->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
+        foreach ($categories as $category)
+        {
+            $query->execute([$post->getId(), $category]);
+        }
+
+        $this->_db->commit();
+
 
     }
 
@@ -135,8 +147,26 @@ class PostManager
         return $categories;
         //dd($categories);
 
+    }
 
+    public function getCategoryPost(Post $post)
+    {
+        $query = $this->_db->prepare('
+        SELECT * 
+        FROM post_category pc 
+        JOIN category c ON pc.category_id = c.id
+        WHERE pc.post_id = :id');
+        $query->execute(['id' => $post->getId()]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
+        /** @var Category[] */
+        $categories = [];
 
+        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
+        {
+            $categories[] = new Category($donnees);
+        }
+
+        return $categories;
     }
 
 

@@ -64,8 +64,6 @@ class CommentController
         $comment = $q->get($id);
         $router = $this->router;
 
-
-
         $success = false;
         if (!empty($_POST))
         {
@@ -74,9 +72,7 @@ class CommentController
             $comment->setAuthorEmail($_POST['author_email']);
             $comment->setContent($_POST['content']);
             $comment->setPostId($_POST['post_id']);
-            if(isset($_POST['publish'])) { $comment->setStatus($_POST['publish']);}
-            if(isset($_POST['waiting'])) { $comment->setStatus($_POST['waiting']);}
-            if(isset($_POST['refused'])) { $comment->setStatus($_POST['refused']);}
+            $comment->setStatus($_POST['comment_status']);
 
 
 
