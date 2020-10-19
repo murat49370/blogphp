@@ -4,6 +4,7 @@
 namespace App\Controller\Admin;
 
 use AltoRouter;
+use App\Auth;
 use App\Connection;
 use App\model\CategoryManager;
 use App\Model\Entity\Category;
@@ -13,7 +14,7 @@ use App\URL;
 use Exception;
 use PDO;
 
-
+Auth::check();
 
 
 class HomeController
@@ -34,10 +35,13 @@ class HomeController
         }
 
 
+
     }
 
     function home()
+
     {
+        $router = $this->router;
         require('../views/backend/index.php');
     }
 

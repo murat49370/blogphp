@@ -5,11 +5,14 @@ namespace App\Controller\Admin;
 
 
 use AltoRouter;
+use App\Auth;
 use App\Connection;
 use App\model\CategoryManager;
 use App\Model\Entity\Category;
 use App\Model\Entity\Post;
 use App\model\PostManager;
+
+Auth::check();
 
 class CategoryController
 {

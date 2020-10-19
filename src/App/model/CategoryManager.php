@@ -76,25 +76,25 @@ class CategoryManager
         return $results;
     }
 
-//    public function getCategoryPost(Category $category)
-//    {
-//        $query = $this->_db->prepare('
-//        SELECT *
-//        FROM post_category pc
-//        JOIN post p ON pc.post_id = p.id
-//        WHERE pc.category_id = :id');
-//        $query->execute(['id' => $category->getId()]);
-//        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
-//        /** @var Post[] */
-//        $posts = [];
-//
-//        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
-//        {
-//            $posts[] = new Post($donnees);
-//        }
-//
-//        return $posts;
-//    }
+    public function getCategoryPost(Category $category)
+    {
+        $query = $this->_db->prepare('
+        SELECT *
+        FROM post_category pc
+        JOIN post p ON pc.post_id = p.id
+        WHERE pc.category_id = :id');
+        $query->execute(['id' => $category->getId()]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
+        /** @var Post[] */
+        $posts = [];
+
+        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
+        {
+            $posts[] = new Post($donnees);
+        }
+
+        return $posts;
+    }
 
     public function update(Category $category): void
     {

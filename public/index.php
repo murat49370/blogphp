@@ -30,10 +30,16 @@ $router->setBasePath('');
 $router->map('GET', '/', 'App\Controller\HomeController#home', 'home');
 $router->map('GET', '/blog', 'App\Controller\postController#home', 'blog_home');
 $router->map('GET|POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController#post', 'post');
-//$router->map('POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController#newComment', 'new_comment');
+$router->map('GET|POST', '/login', 'App\Controller\authController#login', 'login');
+$router->map('POST', '/logout', 'App\Controller\authController#logout', 'logout');
+//$router->map('GET', '/404', 'App\Controller\HomeController#notFound', '404');
+
+
+
 
 $router->map('GET', '/blog/category/[*:slug]-[i:id]', 'App\Controller\CategoryController#show', 'category');
 $router->map('GET', '/blog/category', 'App\Controller\CategoryController#home', 'category_home');
+
 // Admin Home
 $router->map('GET', '/admin', 'App\Controller\Admin\HomeController#home', 'admin_home');
 // Post Admin
@@ -59,18 +65,16 @@ $router->map('POST', '/admin/comment/update_status/[i:id]-[*:status]', 'App\Cont
 
 
 
-
-
-//$router->map('GET', '/admin/post/new', 'App\Controller\AdminController#newPost', 'admin_list_post');
-
-
-
 $match = $router->match();
-$params[] = $match['params'];
+
+if (!empty($match['params']))
+{
+    $params[] = $match['params'];
+}
 
 
 if ($match === false) {
-    echo "// here you can handle 404 \n";
+    require '../views/404.php';
 } else {
     list($controller, $action) = explode('#', $match['target']);
     $controller = new $controller($router, $match['params']);

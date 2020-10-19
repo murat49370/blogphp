@@ -5,12 +5,15 @@ namespace App\Controller\Admin;
 
 
 use AltoRouter;
+use App\Auth;
 use App\Connection;
 use App\model\CategoryManager;
 use App\Model\Entity\post;
 use App\model\PostManager;
 use App\URL;
 use Exception;
+
+Auth::check();
 
 class PostController
 {

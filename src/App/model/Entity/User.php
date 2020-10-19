@@ -16,7 +16,7 @@ class User
     private $_role;
 
 
-    Public function __construct(array $donnees)
+    Public function __construct($donnees)
     {
         $this->hydrate($donnees);
     }
@@ -29,8 +29,8 @@ class User
         if (isset($donnees['user_first_name'])){ $this->setFirstName($donnees['user_first_name']); }
         if (isset($donnees['user_last_name'])){ $this->setLastName($donnees['user_last_name']); }
         if (isset($donnees['user_pseudo'])){ $this->setPseudo($donnees['user_pseudo']); }
-        if (isset($donnees['user_registered '])){ $this->setRegistredDate($donnees['user_registered']); }
-        if (isset($donnees['user_role '])){ $this->setRole($donnees['user_role']); }
+        if (isset($donnees['user_registered'])){ $this->setRegistredDate($donnees['user_registered']); }
+        if (isset($donnees['user_role'])){ $this->setRole($donnees['user_role']); }
 
     }
 
