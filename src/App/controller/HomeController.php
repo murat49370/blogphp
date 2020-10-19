@@ -30,7 +30,14 @@ class HomeController
 
     function home()
     {
+        $router = $this->router;
+
 
         require('../views/frontend/index.php');
+    }
+
+    function notFound()
+    {
+        require('../views/404.php');
     }
 }
