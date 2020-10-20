@@ -6,17 +6,16 @@
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
-        <h1 class="masthead-heading text-uppercase mb-0">Admin du site</h1>
+        <h1 class="masthead-heading text-uppercase mb-0">Administration du site</h1>
     </div>
 </header>
 <!-- Portfolio Section-->
 <section class="page-section admin" >
     <div class="container">
-
-        <h2 class="page-section-heading text-center  text-secondary mb-0">Tableaux de bord</h2>
-
+        <h2 class="page-section-heading text-center  text-secondary mb-0">Bienvenue <?= $user->getFirstName()?> <?= $user->getLastName()?></h2>
     </div>
 </section>
+
 
 
 <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use AltoRouter;
+use App\Model\Entity\User;
 use PDO;
 
 

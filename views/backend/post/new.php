@@ -16,7 +16,11 @@
     {
         header('Location: ' . $router->generate('admin_list_post') . '?success_new_post=1');
     }
-        ?>
+    ?>
+
+    <?php  if (!empty($errors)) : ?>
+    <div class="alert alert-danger">L'article n'a pas pue être modifié, merci de corriger vos erreurs.</div>
+    <?php endif; ?>
 
 
     <!-- Posts Section-->
@@ -30,7 +34,10 @@
         <form action="?success_new_post=1" method="post">
             <div class="form-group">
                 <label for="title">Titre : </label>
-                <input type="text" class="form-control" name="title" value=""><br>
+                <input type="text" class="form-control <?= isset($errors['title']) ? 'is-invalid' : '' ?>" name="title" value=""><br>
+                <?php if(isset($errors['title'])) : ?>
+                <div class="invalid-feedback">toto</div>
+                <?php endif; ?>
             </div>
             <div class="form-group">
                 <label for="title">Slug : </label>

@@ -31,7 +31,6 @@ class User
         if (isset($donnees['user_pseudo'])){ $this->setPseudo($donnees['user_pseudo']); }
         if (isset($donnees['user_registered'])){ $this->setRegistredDate($donnees['user_registered']); }
         if (isset($donnees['user_role'])){ $this->setRole($donnees['user_role']); }
-
     }
 
     /**

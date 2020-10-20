@@ -32,6 +32,8 @@ $router->map('GET', '/blog', 'App\Controller\postController#home', 'blog_home');
 $router->map('GET|POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController#post', 'post');
 $router->map('GET|POST', '/login', 'App\Controller\authController#login', 'login');
 $router->map('POST', '/logout', 'App\Controller\authController#logout', 'logout');
+$router->map('GET|POST', '/registration', 'App\Controller\UserController#userRegistred', 'registration');
+
 //$router->map('GET', '/404', 'App\Controller\HomeController#notFound', '404');
 
 
@@ -42,6 +44,14 @@ $router->map('GET', '/blog/category', 'App\Controller\CategoryController#home', 
 
 // Admin Home
 $router->map('GET', '/admin', 'App\Controller\Admin\HomeController#home', 'admin_home');
+
+// User Admin
+$router->map('GET', '/admin/user', 'App\Controller\Admin\UserController#listUser', 'admin_list_user');
+$router->map('GET|POST', '/admin/user/edit/[i:id]', 'App\Controller\Admin\UserController#editUser', 'admin_edit_user');
+$router->map('GET|POST', '/admin/user/new', 'App\Controller\Admin\UserController#newUser', 'admin_new_user');
+$router->map('POST', '/admin/user/delete/[i:id]', 'App\Controller\Admin\UserController#deleteUser', 'admin_delete_user');
+
+
 // Post Admin
 $router->map('GET', '/admin/post', 'App\Controller\Admin\PostController#listPost', 'admin_list_post');
 $router->map('GET|POST', '/admin/post/edit/[i:id]', 'App\Controller\Admin\PostController#editPost', 'admin_edit_post');

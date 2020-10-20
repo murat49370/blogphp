@@ -40,154 +40,89 @@ class UserManager
         return $user;
     }
 
-//    public function getAuthorName(Post $post)
-//    {
-//        $id = (int) $post->getId();
-//
-//        $authorName = $this->_db->query('SELECT user_pseudo FROM user WHERE id =' . $id);
-//
-//        return $authorName;
-//    }
-//
-//    public function add(Post $post, array $categories)
-//    {
-//        $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
-//        VALUE (:post_create, :post_modified, :post_title, :post_slug, :post_short_content, :post_content, :post_status, :post_main_image, :post_small_image, :user_id)');
-//
-//        $q->bindValue(':post_create', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-//        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-//        $q->bindValue(':post_title', $post->getTitle());
-//        $q->bindValue(':post_slug', $post->getSlug());
-//        $q->bindValue(':post_short_content', $post->getShortContent());
-//        $q->bindValue(':post_content', $post->getContent());
-//        $q->bindValue(':post_status', $post->getStatus());
-//        $q->bindValue(':post_main_image', $post->getMainImage());
-//        $q->bindValue(':post_small_image', $post->getSmallImage());
-//        $q->bindValue(':user_id', $post->getUserId(), PDO::PARAM_INT);
-//        $q->execute();
-//        $postId = $this->_db->lastInsertId();
-//
-//        $query = $this->_db->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
-//        foreach ($categories as $category)
-//        {
-//            $query->execute([$postId, $category]);
-//        }
-//
-//    }
-//
-//    public function delete(Post $post): void
-//    {
-//        $this->_db->exec('DELETE FROM post WHERE id = ' . $post->getId());
-//    }
-//
-//    public function get($id)
-//    {
-//       // Execute une requete de type SELECT avec un WHERE et retour un objet Post
-//        $id = (int) $id;
-//
-//        $q = $this->_db->query('SELECT * FROM post WHERE id =' . $id);
-//        $donnees = $q->fetch(PDO::FETCH_ASSOC);
-//        if ($donnees === false)
-//        {
-//            throw new Exception('L\'article demander n\'exite pas pour cette ID');
-//        }
-//
-//        return new Post($donnees);
-//    }
-//
-//    public function getList(?int $perPage, ?int $offset)
-//    {
-//        // Retourne la liste de tpous les postes
-//        $posts = [];
-//
-//        $q = $this->_db->query("SELECT * FROM post ORDER BY post_create DESC LIMIT $perPage OFFSET $offset");
-//
-//        while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
-//        {
-//            $posts[] = new Post($donnes);
-//        }
-//
-//        return $posts;
-//    }
-//
-//    public function update(post $post, array $categories): void
-//    {
-//        $this->_db->beginTransaction();
-//        $q = $this->_db->prepare('UPDATE post SET post_create = :post_create, post_modified = :post_modified, post_title = :post_title, post_slug = :post_slug, post_short_content = :post_short_content, post_content = :post_content, post_status = :post_status, post_main_image = :post_main_image, post_small_image = :post_small_image, user_id = :user_id
-//        WHERE id = :id LIMIT 1 ');
-//        $q->bindValue(':id', $post->getId(), PDO::PARAM_INT);
-//        $q->bindValue(':post_create', $post->getCreateDate()->format('Y-m-d H:i:s'), PDO::PARAM_STR);
-//        $q->bindValue(':post_modified', date("Y-m-d H:i:s"), PDO::PARAM_STR);
-//        $q->bindValue(':post_title', $post->getTitle());
-//        $q->bindValue(':post_slug', $post->getSlug());
-//        $q->bindValue(':post_short_content', $post->getShortContent());
-//        $q->bindValue(':post_content', $post->getContent());
-//        $q->bindValue(':post_status', $post->getStatus());
-//        $q->bindValue(':post_main_image', $post->getMainImage());
-//        $q->bindValue(':post_small_image', $post->getSmallImage());
-//        $q->bindValue(':user_id', 1, PDO::PARAM_INT);
-//        $q->execute();
-//
-//        //MISE A JOUR POST_CATEGORY
-//        $this->_db->exec("DELETE FROM post_category WHERE post_id = " . $post->getId());
-//
-//        $query = $this->_db->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
-//        foreach ($categories as $category)
-//        {
-//            $query->execute([$post->getId(), $category]);
-//        }
-//
-//        $this->_db->commit();
-//
-//
-//    }
-//
-//    public function count(): int
-//    {
-//        return (int)$this->_db->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
-//    }
-//
-//    public function getPostCategory(Post $post)
-//    {
-//        $query = $this->_db->prepare('
-//        SELECT c.id, c.category_slug, c.category_title
-//        FROM post_category pc
-//        JOIN category c ON pc.category_id = c.id
-//        WHERE pc.post_id = :id');
-//        $query->execute(['id' => $post->getId()]);
-//        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
-//        /** @var Category[] */
-//        $categories = [];
-//
-//        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
-//        {
-//            $categories[] = new Category($donnees);
-//        }
-//
-//        return $categories;
-//        //dd($categories);
-//
-//    }
-//
-//    public function getCategoryPost(Post $post)
-//    {
-//        $query = $this->_db->prepare('
-//        SELECT *
-//        FROM post_category pc
-//        JOIN category c ON pc.category_id = c.id
-//        WHERE pc.post_id = :id');
-//        $query->execute(['id' => $post->getId()]);
-//        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
-//        /** @var Category[] */
-//        $categories = [];
-//
-//        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
-//        {
-//            $categories[] = new Category($donnees);
-//        }
-//
-//        return $categories;
-//    }
+    public function getAuthorPseudo($id)
+    {
+        $q = $this->_db->query('SELECT user_pseudo FROM user WHERE id =' . $id);
+        $donnee = $q->fetch();
+        $user = new User($donnee);
+        $authorName = $user->getPseudo();
+
+        return $authorName;
+    }
+
+    public function add(User $user)
+    {
+        $q = $this->_db->prepare('INSERT INTO user(user_email, user_password, user_first_name, user_last_name, user_pseudo, user_registered, user_role)
+        VALUE (:user_email, :user_password, :user_first_name, :user_last_name, :user_pseudo, :user_registered, :user_role)');
+
+        //$q->bindValue(':id', $user->getId(), PDO::PARAM_INT);
+        $q->bindValue(':user_email', $user->getEmail());
+        $q->bindValue(':user_password', password_hash('{$user->getPassword()}', PASSWORD_BCRYPT));
+        $q->bindValue(':user_first_name', $user->getFirstName());
+        $q->bindValue(':user_last_name', $user->getLastName());
+        $q->bindValue(':user_pseudo', $user->getPseudo());
+        $q->bindValue(':user_registered', date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        $q->bindValue(':user_role', $user->getRole());
+        $q->execute();
+
+    }
+
+    public function delete(User $user): void
+    {
+        $this->_db->exec('DELETE FROM user WHERE id = ' . $user->getId());
+    }
+
+    public function get($id)
+    {
+       // Execute une requete de type SELECT avec un WHERE et retour un objet User
+        $id = (int) $id;
+
+        $q = $this->_db->query('SELECT * FROM user WHERE id =' . $id);
+        $donnees = $q->fetch(PDO::FETCH_ASSOC);
+        if ($donnees === false)
+        {
+            throw new Exception('L\'utilisateur demander n\'exite pas pour cette ID');
+        }
+
+        return new User($donnees);
+    }
+
+    public function getList()
+    {
+        // Retourne la liste de tpous les postes
+        $users = [];
+
+        $q = $this->_db->query("SELECT * FROM user ORDER BY user_registered DESC");
+
+        while ($donnes = $q->fetch(PDO::FETCH_ASSOC))
+        {
+            $users[] = new User($donnes);
+        }
+
+        return $users;
+    }
+
+    public function update(user $user): void
+    {
+
+        $this->_db->beginTransaction();
+        $q = $this->_db->prepare('UPDATE user SET user_email = :user_email, user_password = :user_password, user_first_name = :user_first_name, user_last_name = :user_last_name, user_pseudo = :user_pseudo, user_registered = :user_registered, user_role = :user_role 
+        WHERE id = :id LIMIT 1 ');
+        $q->bindValue(':id', $user->getId(), PDO::PARAM_INT);
+        $q->bindValue(':user_email', $user->getEmail());
+        $q->bindValue(':user_password', password_hash('{$user->getPassword()}', PASSWORD_BCRYPT));
+        $q->bindValue(':user_first_name', $user->getFirstName());
+        $q->bindValue(':user_last_name', $user->getLastName());
+        $q->bindValue(':user_pseudo', $user->getPseudo());
+        $q->bindValue(':user_registered', date("Y-m-d H:i:s"), PDO::PARAM_STR);
+        $q->bindValue(':user_role', $user->getRole());
+        $q->execute();
+
+
+        $this->_db->commit();
+
+
+    }
 
 
     public function setDb($db)
