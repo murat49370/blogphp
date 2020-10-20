@@ -18,6 +18,11 @@
                 Vous avez bien été déconnecté.
             </div>
         <?php endif; ?>
+        <?php if(isset($_GET['success_new_registration'])) :?>
+            <div class="alert alert-success">
+                Votre inscription a bien été pris en compte, un administrateur va vérifier votre inscription avant sa validation. Vous serrez informer par email.
+            </div>
+        <?php endif; ?>
 
         <h2 class="page-section-heading text-center  text-secondary mb-0">Se connecter</h2>
 
@@ -36,6 +41,9 @@
             </div>
             <button type="submit" class="btn btn-primary">Connexion</button>
         </form>
+        <br>
+        <p>Vous souhaiter vous inscrire?</p>
+        <a href="<?=$router->generate('registration') ?>"> >>> Inscription</a>
 
     </div>
 </section>

@@ -1,5 +1,5 @@
 
-<?php $title= 'Post Manager'; ?>
+<?php $title= 'User Manager'; ?>
 
 <?php ob_start(); ?>
 
@@ -8,7 +8,7 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Liste des posts et actions</h1>
+    <h1>Liste des utilisateurs</h1>
 
 </header>
 <!-- Posts Section-->
@@ -19,26 +19,16 @@
                 L'enregistrement a bien été supprimé.
             </div>
         <?php endif ?>
-        <?php if (isset($_GET['success_new_post'])): ?>
+        <?php if (isset($_GET['success_new_user'])): ?>
             <div class="alert alert-success">
-                L'article a bien été Crée.
+                L'utilisateur a bien été crée.
             </div>
         <?php endif ?>
 
-        <!-- Pagination-->
-        <div class="d-flex justify-content-between my-4">
-
-            <?php if ($currentPage > 1): ?>
-                <a href="<?= $router->generate('admin_list_post')?>?page=<?= $currentPage - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
-            <?php endif; ?>
-            <?php if ($currentPage < $pages): ?>
-                <a href="<?= $router->generate('admin_list_post')?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
-            <?php endif; ?>
-        </div>
 
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Posts Manager</h2>
-        <a href="<?= $router->generate('admin_new_post') ?>" class="btn btn-primary" style="display:inline">Ajouter un nouveau post</a>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Users Manager</h2>
+        <a href="<?= $router->generate('admin_new_user') ?>" class="btn btn-primary" style="display:inline">Ajouter un utilisateur</a>
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -46,21 +36,25 @@
             <thead>
                 <th>Id</th>
                 <th>Status</th>
-                <th>Titre</th>
+                <th>Pseudo</th>
+                <th>Nom et prénom</th>
                 <th>Actions</th>
             </thead>
             <tbody>
-                <?php foreach ($posts as $post): ?>
+                <?php foreach ($users as $user): ?>
                 <tr>
-                    <td># <?= $post->getid() ?></td>
+                    <td># <?= $user->getid() ?></td>
                     <td class="
                     <?php
-                    echo $post->getStatus() === 'publish' ? 'btn-primary' : 'btn-secondary';
-                    ?>"><?= $post->getStatus()?></td>
-                    <td><?= $post->getTitle() ?></td>
+                    if ($user->getRole() === 'admin'){echo 'btn-primary';}
+                    if ($user->getRole() === 'waiting'){echo 'btn-secondary';}
+                    ?>"><?= $user->getRole()?></td>
+                    <td><?= $user->getPseudo() ?></td>
+                    <td><?= $user->getFirstName() . ' ' . $user->getLastName() ?></td>
+
                     <td>
-                        <a href="<?= $router->generate('admin_edit_post', ['id' => $post->getId()]) ?>" class="btn btn-primary">Editer</a>
-                        <form action="<?= $router->generate('admin_delete_post', ['id' => $post->getId()]) ?>" method="post"
+                        <a href="<?= $router->generate('admin_edit_user', ['id' => $user->getId()]) ?>" class="btn btn-primary">Editer</a>
+                        <form action="<?= $router->generate('admin_delete_user', ['id' => $user->getId()]) ?>" method="post"
                         onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
                             <button type="submit" class="btn btn-danger">Supprimé</button>
                         </form>
