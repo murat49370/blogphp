@@ -14,14 +14,10 @@
 </header>
 <!-- Page Content -->
 <div class="container">
-
-
     <div class="row">
-
-
         <!-- Post Content Column -->
-        <div class="col-lg-8">
 
+        <div class="col-lg-8">
             <?php if (isset($_GET['publish_comment'])):  ?>
                 <div class="alert alert-success">
                     Le commentaire a bien été enregistré, il sera publié aprés sa validation.
@@ -36,7 +32,7 @@
                 Par
                 <a href="#">Admin</a>
                 <!-- Post Categories -->
-                Dans :
+                dans :
                 <?php
                 //dd($categories);
                 foreach ($categories as $k => $category): ?>
@@ -132,12 +128,12 @@
             </div>
 
             <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">Exemple Widget</h5>
-                <div class="card-body">
-                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                </div>
-            </div>
+<!--            <div class="card my-4">-->
+<!--                <h5 class="card-header">Exemple Widget</h5>-->
+<!--                <div class="card-body">-->
+<!--                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!-->
+<!--                </div>-->
+<!--            </div>-->
 
         </div>
 

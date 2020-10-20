@@ -47,7 +47,6 @@ class Post
     public function getCreateDate(): DateTime
     {
         return new DateTime($this->_createDate);
-
     }
 
     /**
