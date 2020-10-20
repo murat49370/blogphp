@@ -12,6 +12,7 @@ use App\Model\Entity\post;
 use App\model\PostManager;
 use App\URL;
 use Exception;
+use App\Validator;
 
 Auth::check();
 
@@ -32,7 +33,6 @@ class PostController
         {
             $this->id = (int)$params['id'];
         }
-
 
     }
 
@@ -68,20 +68,33 @@ class PostController
         //$categories = 0;
         if (!empty($_POST))
         {
-            $post->setTitle($_POST['title']);
-            $post->setSlug($_POST['slug']);
-            $post->setShortContent($_POST['short_content']);
-            $post->setContent($_POST['content']);
-            $post->setMainImage($_POST['main_image']);
-            $post->setSmallImage($_POST['small_image']);
-            $post->setUserId($_POST['user_id']);
-            $post->setStatus($_POST['status']);
+            Validator::lang('fr');
+            $v = new Validator($_POST);
+            $v->rule('required', ['title', 'slug', 'short_content', 'content', 'main_image', 'small_image', 'user_id', 'status']);
+            $v->rule('lengthBetween', ['title', 'short_content'], 3, 250);
+            $v->rule('lengthBetween', 'slug', 3, 100);
+            $v->rule('lengthBetween', 'content', 3, 1000);
 
-            //dd($_POST);
-            $q->update($post, $_POST['categories']);
-            $success = true;
+
+            if($v->validate())
+            {
+                $post->setTitle($_POST['title']);
+                $post->setSlug($_POST['slug']);
+                $post->setShortContent($_POST['short_content']);
+                $post->setContent($_POST['content']);
+                $post->setMainImage($_POST['main_image']);
+                $post->setSmallImage($_POST['small_image']);
+                $post->setUserId($_POST['user_id']);
+                $post->setStatus($_POST['status']);
+
+                $q->update($post, $_POST['categories']);
+                $success = true;
+            }else{
+                $errors = $v->errors();
+            }
 
         }
+
         $categories = new CategoryManager($this->pdo);
         $options = $categories->getListFormated();
 
@@ -95,6 +108,8 @@ class PostController
 
 
 
+
+
         require('../views/backend/post/edit.php');
     }
 
@@ -102,28 +117,37 @@ class PostController
     {
         $q = new PostManager($this->pdo);
         $router = $this->router;
+        $errors = [];
 
         $success = false;
         if (!empty($_POST))
         {
+            if(empty($_POST['title']))
+            {
+                $errors['title'][] = 'Le champs titre ne dois pas être vide';
+            }
+            if(mb_strlen($_POST['title']) <= 3)
+            {
+                $errors['title'][] = 'Le champs titre dois comtenir plus de 3 caractères';
+            }
 
-            $post = [];
-            $post['post_title'] = $_POST['title'];
-            $post['post_slug'] = $_POST['slug'];
-            $post['post_short_content'] = $_POST['short_content'];
-            $post['post_content'] = $_POST['content'];
-            $post['post_status'] = $_POST['status'];
-            $post['post_main_image'] = $_POST['main_image'];
-            $post['post_small_image'] = $_POST['small_image'];
-            $post['user_id'] = $_POST['user_id'];
-            $newPost = new Post($post);
+            if(empty($errors))
+            {
+                $post = [];
+                $post['post_title'] = $_POST['title'];
+                $post['post_slug'] = $_POST['slug'];
+                $post['post_short_content'] = $_POST['short_content'];
+                $post['post_content'] = $_POST['content'];
+                $post['post_status'] = $_POST['status'];
+                $post['post_main_image'] = $_POST['main_image'];
+                $post['post_small_image'] = $_POST['small_image'];
+                $post['user_id'] = $_POST['user_id'];
+                $newPost = new Post($post);
 
+                $q->add($newPost, $_POST['categories']);
+                $success = true;
+            }
 
-
-            $q->add($newPost, $_POST['categories']);
-
-
-            $success = true;
 
         }
         $post = new Post([]);

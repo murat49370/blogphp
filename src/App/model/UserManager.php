@@ -40,15 +40,16 @@ class UserManager
         return $user;
     }
 
-//    public function getAuthorName(Post $post)
-//    {
-//        $id = (int) $post->getId();
-//
-//        $authorName = $this->_db->query('SELECT user_pseudo FROM user WHERE id =' . $id);
-//
-//        return $authorName;
-//    }
-//
+    public function getAuthorPseudo($id)
+    {
+        $q = $this->_db->query('SELECT user_pseudo FROM user WHERE id =' . $id);
+        $donnee = $q->fetch();
+        $user = new User($donnee);
+        $authorName = $user->getPseudo();
+
+        return $authorName;
+    }
+
     public function add(User $user)
     {
         $q = $this->_db->prepare('INSERT INTO user(user_email, user_password, user_first_name, user_last_name, user_pseudo, user_registered, user_role)
@@ -73,7 +74,7 @@ class UserManager
 
     public function get($id)
     {
-       // Execute une requete de type SELECT avec un WHERE et retour un objet Post
+       // Execute une requete de type SELECT avec un WHERE et retour un objet User
         $id = (int) $id;
 
         $q = $this->_db->query('SELECT * FROM user WHERE id =' . $id);
