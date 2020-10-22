@@ -39,7 +39,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid border border" src="/assets/img/portfolio/ouest-anjou.jpg" alt="" />
+                    <img class="img-fluid border" src="/assets/img/portfolio/ouest-anjou.jpg" alt="" />
                 </div>
             </div>
             <!-- Portfolio Item 2-->
@@ -84,7 +84,7 @@
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                     </div>
-                    <img class="img-fluid border" src="/assets/img/portfolio/submarine.png" alt="" />
+                    <img class="img-fluid border" src="/assets/img/portfolio/expressFood.jpg" alt="" />
                 </div>
             </div>
         </div>
@@ -191,7 +191,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Log Cabin</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal1Label">Anjou Ouest</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -199,12 +199,18 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/ouest-anjou.jpg" alt="" />
+                            <img class="img-fluid border rounded mb-5" src="/assets/img/portfolio/ouest-anjou.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-5">
+                                Création d'un site Internet pour le pôle de santé Anjou Ouest. Pour ce projet, j'ai utilisé WordPress et créer un tempête avec les couleurs du logo existant.<br>
+                                <br>
+                                <strong>Technologie utilisée : </strong> WordPress.<br />
+                                <strong>Prestations :</strong> création du site Internet, hébergement et optimisation du référencement naturel.<br>
+                                <strong>Voir le site :</strong> <a href="https://sante-ouest-anjou.com">Pôle santé</a>
+                            </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Fermer la fenêtre
                             </button>
                         </div>
                     </div>
@@ -225,7 +231,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal2Label">Tasty Cake</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal2Label">L'institut</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -235,10 +241,16 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/l-institut.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-5">
+                                Création d'un site Internet pour "l'Institut", institut de beauté à Angers. Suite à une création d'activité, je me suis chargé de la création du leur site internet et prestation de conseil en communication.<br>
+                                <br>
+                                <strong>Technologie utilisée : </strong> WordPress.<br />
+                                <strong>Prestations :</strong> création du site Internet, hébergement et optimisation du référencement naturel.<br>
+                                <strong>Voir le site :</strong> <a href="https://institut-angers.fr">Institut de beauté à  Angers</a>
+                            </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Fermer la fenêtre
                             </button>
                         </div>
                     </div>
@@ -259,7 +271,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal3Label">Circus Tent</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal3Label">Festival des films</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -269,10 +281,15 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/festival.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-5">
+                                Projet réalisé dans le cadre de ma formation développeur PHP. Pour ce projet, j'ai analysé les besoins d'une association pour son projet de festival et j'ai réalisé une maquette en HTML. J'ai également réalisé un cahier des charges qui résument les besoins avec une proposition commerciale.<br>
+                                <br>
+                                <strong>Technologie utilisée : </strong> WordPress.<br />
+                                <strong>Réalisations :</strong> analyse des besoins, création d'une maquette en HTML, rédiger les spécifications détaillées du projet.<br>
+                            </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Fermer la fenêtre
                             </button>
                         </div>
                     </div>
@@ -293,7 +310,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal4Label">Controller</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal4Label">Chalet et caviar</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -303,10 +320,14 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/Chalet-caviar.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-5">
+                                Projet réalisé dans le cadre de ma formation développeur PHP. Pour ce projet, j'ai choisi, personnaliser et intégrer un thème WordPress. J'ai également produit une documentation d'utilisation du site WordPress.<br>
+                                <br>
+                                <strong>Réalisations :</strong> personnaliser et installer un thème WordPress, création d'une documentation pour les utilisateurs, proposition d'une solution technique.<br>
+                            </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Fermer la fenêtre
                             </button>
                         </div>
                     </div>
@@ -327,7 +348,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal5Label">Locked Safe</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal5Label">Blog PHP</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -337,10 +358,14 @@
                             <!-- Portfolio Modal - Image-->
                             <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/murat-can.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-5">
+                                Pour ce projet, j'ai créé un blog PHP en démarrant de zéro. J'ai codé en PHP toutes la partie administration, pour administrer facilement le site Internet. J'ai également réalisé tous les diagrammes UML. <br>
+                                <br>
+                                <strong>Pour ce projet, j'ai utilisé :</strong> UML, PHP,  MYSQL, GitHub
+                            </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Fermer la fenêtre
                             </button>
                         </div>
                     </div>
@@ -361,7 +386,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <!-- Portfolio Modal - Title-->
-                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal6Label">Submarine</h2>
+                            <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0" id="portfolioModal6Label">ExpressFood</h2>
                             <!-- Icon Divider-->
                             <div class="divider-custom">
                                 <div class="divider-custom-line"></div>
@@ -369,12 +394,18 @@
                                 <div class="divider-custom-line"></div>
                             </div>
                             <!-- Portfolio Modal - Image-->
-                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/submarine.png" alt="" />
+                            <img class="img-fluid rounded mb-5" src="/assets/img/portfolio/expressFood.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
-                            <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                            <p class="mb-5">
+                                Projet réalisé dans le cadre de ma formation développeur PHP. Pour ce projet, j'ai dû concevoir la solution technique pour une application de restauration en ligne.<br>
+                                <br>
+                                <strong>Technologie utilisée : </strong> WordPress.<br />
+                                <strong>Réalisations :</strong> concevoir l'architecture technique, réalisé des schémas URL, implémenter le schéma de données dans la base.<br>
+                                <strong>Pour ce projet, j'ai utilisé :</strong> UML, MYSQL.
+                            </p>
                             <button class="btn btn-primary" data-dismiss="modal">
                                 <i class="fas fa-times fa-fw"></i>
-                                Close Window
+                                Fermer la fenêtre
                             </button>
                         </div>
                     </div>
