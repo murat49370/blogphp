@@ -36,19 +36,26 @@ class HomeController
             $this->id = (int)$params['id'];
         }
 
-
-
     }
 
     function home()
 
     {
         $router = $this->router;
+        $user = new User([]);
 
-        $id = (int) $_SESSION['auth'];
 
-        $u = new UserManager($this->pdo);
-        $user = $u->get($id);
+        if (!empty($_SESSION['auth']))
+        {
+            $id = (int)$_SESSION['auth'];
+            $u = new UserManager($this->pdo);
+            $user = $u->get($id);
+        }
+
+
+        //dd($_SESSION['auth']);
+
+
 
         require('../views/backend/index.php');
     }

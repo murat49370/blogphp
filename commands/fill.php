@@ -16,7 +16,7 @@ $pdo->exec('TRUNCATE TABLE comment');
 $pdo->exec('TRUNCATE TABLE user');
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 
-$password = password_hash('admin', PASSWORD_BCRYPT);
+$password = password_hash('admin', PASSWORD_DEFAULT);
 $pdo->exec("INSERT INTO user VALUES (NULL, 'murat@boostclic.org', '{$password}', 'Can', 'Murat', 'Toto', '{$faker->date} {$faker->time}', 'admin')");
 $pdo->exec("INSERT INTO user VALUES (NULL, 'louis@gmail.org', '{$password}', 'Louis', 'Michel', 'Michou', '{$faker->date} {$faker->time}', 'waiting')");
 $pdo->exec("INSERT INTO category VALUES (NULL, 'defaut', 'defaut')");
@@ -34,8 +34,8 @@ for ($i = 0; $i < 25; $i ++)
         post_short_content='{$faker->paragraph(1)}',
         post_content='{$faker->paragraphs(rand(3, 6), true)}',
         post_status='publish',
-        post_main_image='http://placekitten.com/600/200',
-        post_small_image='http://placekitten.com/250/250',
+        post_main_image='https://placeimg.com/600/200/animals',
+        post_small_image='https://placeimg.com/380/230/animals',
         user_id=1");
     }
     catch (Exception $e)

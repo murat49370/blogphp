@@ -19,6 +19,7 @@ class Auth
         if (!isset($_SESSION['auth']))
         {
             header('Location: /login?forbidden=1');
+            //throw new Exception('erreur auth');
 
         }
     }

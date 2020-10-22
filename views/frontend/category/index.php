@@ -8,14 +8,12 @@
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
         <h2 class="page-section-heading text-center text-secondary mb-0">Liste des categories</h2>
-
     </div>
 </header>
 <!-- Posts Section-->
 <section class="page-section posts" id="posts">
     <div class="container">
         <!-- Posts Section Heading-->
-
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -39,6 +37,8 @@
             </div>
         </div>
 </section>
+
+
 
 
 

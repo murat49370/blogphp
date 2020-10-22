@@ -27,7 +27,7 @@
         <br>
         <br>
         <!-- Posts Grid Items-->
-        <form action="?success_new_user=1" method="post">
+        <form action="" method="post">
             <div class="form-group">
                 <label for="title">Email : </label>
                 <input type="text" class="form-control" name="email" required value=""><br>
@@ -63,12 +63,6 @@
 </div>
 </section>
 
-
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-</div>
 
 
 <?php $content = ob_get_clean(); ?>

@@ -31,12 +31,9 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#portfolio">Portfolio</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#about">About</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#about">Qui suis-je</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#contact">Contact</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/blog">Blog</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin">Admin</a></li>
-
-
             </ul>
         </div>
     </div>
@@ -44,34 +41,37 @@
 
 <?= $content ?>
 
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+<div class="scroll-to-top d-lg-none position-fixed">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
+</div>
+
 <!-- Footer-->
 <footer class="footer text-center">
     <div class="container">
         <div class="row">
             <!-- Footer Location-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Location</h4>
+                <h4 class="text-uppercase mb-4">Me située</h4>
                 <p class="lead mb-0">
-                    2215 John Daniel Drive
+                    Murat CAN
                     <br />
-                    Clark, MO 65243
+                    49170 St Germain des prés
                 </p>
             </div>
             <!-- Footer Social Icons-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Around the Web</h4>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
+                <h4 class="text-uppercase mb-4">Réseaux Sociaux</h4>
+                <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/murat49370"><i class="fab fa-fw fa-github"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/murat-can/"><i class="fab fa-fw fa-linkedin-in"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
             </div>
             <!-- Footer About Text-->
             <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                <h4 class="text-uppercase mb-4">Contactez-moi</h4>
                 <p class="lead mb-0">
-                    Freelance is a free to use, MIT licensed Bootstrap theme created by
-                    <a href="http://startbootstrap.com">Start Bootstrap</a>
-                    .
+                    Par Email : <a href="mailto:contact@muratcan.fr">Formulaire de contact</a><br>
+                    Téléphone : <a href="tel:+33667520693">06.67.52.06.93</a><br>
                 </p>
             </div>
         </div>
@@ -82,8 +82,13 @@
     <?php if (defined('DEBUG_TIME')): ?>
     <div class="container">Page générée en <?= round(1000 * (microtime(true) - DEBUG_TIME))?>ms </div><br>
     <?php endif; ?>
-    <div class="container"><small>Copyright © Your Website 2020</small></div>
+    <div class="container"><small>Copyright © Murat CAN 2020</small> -
+        <a href="/admin">Administration</a>
+    </div>
 </div>
+
+
+
 
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

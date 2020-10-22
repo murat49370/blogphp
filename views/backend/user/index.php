@@ -1,37 +1,39 @@
 
-<?php $title= 'User Manager'; ?>
+<?php $title= 'Administration utilisateur'; ?>
 
 <?php ob_start(); ?>
 
 
-
-<!-- Masthead-->
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Liste des utilisateurs</h1>
-
 </header>
-<!-- Posts Section-->
+
 <section class="page-section posts" id="posts">
     <div class="container">
-        <?php if (isset($_GET['delete'])): ?>
-            <div class="alert alert-success">
-                L'enregistrement a bien été supprimé.
-            </div>
-        <?php endif ?>
-        <?php if (isset($_GET['success_new_user'])): ?>
-            <div class="alert alert-success">
-                L'utilisateur a bien été crée.
-            </div>
-        <?php endif ?>
-
-
-        <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Users Manager</h2>
+        <?php
+        if(!empty($_SESSION["flash"]['passmodif'] ))
+        {
+            $message = $_SESSION["flash"]['passmodif'];
+            $_SESSION["flash"]['passmodif'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION["flash"]['newUser'] ))
+        {
+            $message = $_SESSION["flash"]['newUser'];
+            $_SESSION["flash"]['newUser'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION["flash"]['deleteUser'] ))
+        {
+            $message = $_SESSION["flash"]['deleteUser'];
+            $_SESSION["flash"]['deleteUser'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        ?>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Utilisateurs inscrits</h2>
         <a href="<?= $router->generate('admin_new_user') ?>" class="btn btn-primary" style="display:inline">Ajouter un utilisateur</a>
         <br>
         <br>
-        <!-- Posts Grid Items-->
         <table class="table">
             <thead>
                 <th>Id</th>
@@ -44,15 +46,11 @@
                 <?php foreach ($users as $user): ?>
                 <tr>
                     <td># <?= $user->getid() ?></td>
-                    <td class="
-                    <?php
-                    if ($user->getRole() === 'admin'){echo 'btn-primary';}
-                    if ($user->getRole() === 'waiting'){echo 'btn-secondary';}
-                    ?>"><?= $user->getRole()?></td>
+                    <td class="<?php echo $user->getRole() === 'admin' ? 'btn-primary' : 'btn-warning'; ?>"><?= $user->getRole()?></td>
                     <td><?= $user->getPseudo() ?></td>
                     <td><?= $user->getFirstName() . ' ' . $user->getLastName() ?></td>
-
                     <td>
+                        <a href="<?= $router->generate('admin_edit_user_password', ['id' => $user->getId()]) ?>" class="btn btn-secondary">Changer mot de passe</a>
                         <a href="<?= $router->generate('admin_edit_user', ['id' => $user->getId()]) ?>" class="btn btn-primary">Editer</a>
                         <form action="<?= $router->generate('admin_delete_user', ['id' => $user->getId()]) ?>" method="post"
                         onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
@@ -64,14 +62,6 @@
             </tbody>
         </table>
 </section>
-
-
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-</div>
-
 
 <?php $content = ob_get_clean(); ?>
 <?php require('../views/backend/layouts/default.php'); ?>

@@ -55,7 +55,7 @@
                     <td># <?= $post->getid() ?></td>
                     <td class="
                     <?php
-                    echo $post->getStatus() === 'publish' ? 'btn-primary' : 'btn-secondary';
+                    echo $post->getStatus() === 'publish' ? 'btn-primary' : 'btn-warning';
                     ?>"><?= $post->getStatus()?></td>
                     <td><?= $post->getTitle() ?></td>
                     <td>

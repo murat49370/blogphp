@@ -48,6 +48,7 @@
             <th>Status</th>
             <th>Titre</th>
             <th>Actions</th>
+
             </thead>
             <tbody>
             <?php foreach ($comments as $comment): ?>
@@ -57,21 +58,23 @@
                     <td class="
                     <?php
                     if ($comment->getStatus() === 'publish'){echo 'btn btn-primary';}
-                    if ($comment->getStatus() === 'waiting'){echo 'btn btn-danger';}
+                    if ($comment->getStatus() === 'waiting'){echo 'btn btn-warning';}
                     ?>
                     "><?= $comment->getStatus()?></td>
                     <td><?= $comment->getContent() ?></td>
-                    <td>
+                    <td class="table-inline">
+
+                        <form action="<?= $router->generate('admin_update_status_comment', ['id' => $comment->getId(), 'status' => 'publish']) ?>" method="post"
+                              onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
+                            <button type="submit" class="btn btn-secondary">Validé</button>
+                        </form>
+                        <pre> </pre>
                         <a href="<?= $router->generate('admin_edit_comment', ['id' => $comment->getId()]) ?>" class="btn btn-primary">Editer</a>
+                        <pre> </pre>
                         <form action="<?= $router->generate('admin_delete_comment', ['id' => $comment->getId()]) ?>" method="post"
                               onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
                             <button type="submit" class="btn btn-danger">Supprimé</button>
                         </form>
-                        <form action="<?= $router->generate('admin_update_status_comment', ['id' => $comment->getId(), 'status' => 'publish']) ?>" method="post"
-                                     onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
-                            <button type="submit" class="btn btn-danger">Validé</button>
-                        </form>
-
                     </td>
                 </tr>
             <?php endforeach; ?>

@@ -54,7 +54,6 @@ class AuthController
             } catch (Exception $e) {
                 //$errors['passwords'] = 'Email ou mots de passe incorrect';
                 throw new Exception('Email ou mots de passe incorrect');
-
             }
         }
 

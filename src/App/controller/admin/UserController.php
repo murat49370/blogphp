@@ -57,8 +57,7 @@ class UserController
         $user = $q->get($id);
         $router = $this->router;
 
-        $success = false;
-        //$categories = 0;
+
         if (!empty($_POST))
         {
             $user->setEmail($_POST['email']);
@@ -69,12 +68,61 @@ class UserController
             $user->setRole($_POST['role']);
 
             $q->update($user);
-            $success = true;
+            $_SESSION['flash']['editeUser'] = "L'utilisateur a bien été modifié";
+            header('Location: ' . $router->generate('admin_list_user'));
 
         }
 
         require('../views/backend/user/edit.php');
     }
+
+    public function editUserPassword()
+    {
+        $id = $this->id;
+
+        $q = new UserManager($this->pdo);
+        $user = $q->get($id);
+        $router = $this->router;
+        $errors = [];
+
+
+        if (!empty($_POST))
+        {
+            if(empty($_POST['new_password']))
+            {
+                $errors['new_password'][] = 'Le champs ne dois pas être vide';
+            }
+            if(mb_strlen($_POST['new_password']) <= 3)
+            {
+                $errors['new_password'][] = 'Le champs dois comtenir plus de 3 caractères';
+            }
+            if (empty($errors))
+            {
+                if (password_verify($_POST['old_password'], $user->getPassword()) === true)
+                {
+                    if ($_POST['new_password'] === $_POST['new_password_rep'])
+                    {
+                        $user->setPassword($_POST['new_password']);
+                        $q->update($user);
+                        $_SESSION['flash']['passmodif'] = "Le mot de passe a été modifié.";
+                        header('Location: ' . $router->generate('admin_list_user'));
+                    }else{
+                        throw new Exception('Le nouveau mots de passe ne correspond pas');
+                    }
+
+                }else{
+                    throw new Exception('L\'ancien mot de passe n\'est pas correct');
+                }
+            }
+        }
+
+
+
+
+        require('../views/backend/user/password_edit.php');
+    }
+
+
 
     public function newUser()
     {
@@ -96,7 +144,8 @@ class UserController
 
             $q->add($newUser);
 
-            $success = true;
+            $_SESSION['flash']['newUser'] = "L'utilisateur a bien été crée";
+            header('Location: ' . $router->generate('admin_list_user'));
         }
 
 
@@ -112,7 +161,8 @@ class UserController
         $user = $q->get($id);
 
         $q->delete($user);
-        header('Location: ' . $router->generate('admin_list_user') . '?delete=1');
+        $_SESSION['flash']['deleteUser'] = "L'utilisateur a bien été crée";
+        header('Location: ' . $router->generate('admin_list_user'));
 
     }
 
