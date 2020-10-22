@@ -16,7 +16,7 @@ $pdo->exec('TRUNCATE TABLE comment');
 $pdo->exec('TRUNCATE TABLE user');
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 
-$password = password_hash('admin', PASSWORD_BCRYPT);
+$password = password_hash('admin', PASSWORD_DEFAULT);
 $pdo->exec("INSERT INTO user VALUES (NULL, 'murat@boostclic.org', '{$password}', 'Can', 'Murat', 'Toto', '{$faker->date} {$faker->time}', 'admin')");
 $pdo->exec("INSERT INTO user VALUES (NULL, 'louis@gmail.org', '{$password}', 'Louis', 'Michel', 'Michou', '{$faker->date} {$faker->time}', 'waiting')");
 $pdo->exec("INSERT INTO category VALUES (NULL, 'defaut', 'defaut')");

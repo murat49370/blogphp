@@ -19,7 +19,7 @@
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<body id="page-top">
+<body class="h-100" id="page-top">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
@@ -66,12 +66,16 @@
 </div>
 
 <!-- Copyright Section-->
-<div class="copyright py-4 text-center text-white">
+
+
+<footer class="footer text-center aur">
     <?php if (defined('DEBUG_TIME')): ?>
         <div class="container">Page générée en <?= round(1000 * (microtime(true) - DEBUG_TIME))?>ms </div><br>
     <?php endif; ?>
     <div class="container"><small>Copyright © Your Website 2020</small></div>
-</div>
+</footer>
+
+
 
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

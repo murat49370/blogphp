@@ -27,7 +27,7 @@
         <br>
         <br>
         <!-- Posts Grid Items-->
-        <form action="?success_new_user=1" method="post">
+        <form action="" method="post">
             <div class="form-group">
                 <label for="title">Email : </label>
                 <input type="text" class="form-control" name="email" required value=""><br>

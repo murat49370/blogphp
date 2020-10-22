@@ -3,7 +3,7 @@
 
 require '../vendor/autoload.php';
 
-define('DEBUG_TIME', microtime(true));
+//define('DEBUG_TIME', microtime(true));
 
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -48,6 +48,7 @@ $router->map('GET', '/admin', 'App\Controller\Admin\HomeController#home', 'admin
 // User Admin
 $router->map('GET', '/admin/user', 'App\Controller\Admin\UserController#listUser', 'admin_list_user');
 $router->map('GET|POST', '/admin/user/edit/[i:id]', 'App\Controller\Admin\UserController#editUser', 'admin_edit_user');
+$router->map('GET|POST', '/admin/user/edit/password/[i:id]', 'App\Controller\Admin\UserController#editUserPassword', 'admin_edit_user_password');
 $router->map('GET|POST', '/admin/user/new', 'App\Controller\Admin\UserController#newUser', 'admin_new_user');
 $router->map('POST', '/admin/user/delete/[i:id]', 'App\Controller\Admin\UserController#deleteUser', 'admin_delete_user');
 

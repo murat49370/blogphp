@@ -108,9 +108,12 @@ class UserManager
         $this->_db->beginTransaction();
         $q = $this->_db->prepare('UPDATE user SET user_email = :user_email, user_password = :user_password, user_first_name = :user_first_name, user_last_name = :user_last_name, user_pseudo = :user_pseudo, user_registered = :user_registered, user_role = :user_role 
         WHERE id = :id LIMIT 1 ');
+
+        $password = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+
         $q->bindValue(':id', $user->getId(), PDO::PARAM_INT);
         $q->bindValue(':user_email', $user->getEmail());
-        $q->bindValue(':user_password', password_hash('{$user->getPassword()}', PASSWORD_BCRYPT));
+        $q->bindValue(':user_password', $password);
         $q->bindValue(':user_first_name', $user->getFirstName());
         $q->bindValue(':user_last_name', $user->getLastName());
         $q->bindValue(':user_pseudo', $user->getPseudo());

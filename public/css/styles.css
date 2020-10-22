@@ -71,6 +71,10 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+  //margin: 0;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -1688,6 +1692,9 @@ pre code {
   margin-bottom: 1rem;
   color: #212529;
 }
+.table-inline {
+  display: flex;
+}
 .table th,
 .table td {
   padding: 0.75rem;
@@ -1701,6 +1708,7 @@ pre code {
 .table tbody + tbody {
   border-top: 0.25rem solid #dee2e6;
 }
+
 
 .table-sm th,
 .table-sm td {
@@ -9960,6 +9968,7 @@ h3 {
   }
   body {
     min-width: 992px !important;
+
   }
 
   .container {

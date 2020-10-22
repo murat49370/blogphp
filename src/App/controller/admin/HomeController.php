@@ -53,7 +53,7 @@ class HomeController
         }
 
 
-
+        //dd($_SESSION['auth']);
 
 
 
