@@ -1,5 +1,5 @@
 
-<?php $title= 'Post Manager'; ?>
+<?php $title= 'List des commentaires'; ?>
 
 <?php ob_start(); ?>
 
@@ -8,24 +8,34 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Liste des Categories</h1>
+    <h1>Administration des commentaires</h1>
 
 </header>
 <!-- Posts Section-->
 <section class="page-section posts" id="posts">
     <div class="container">
-        <?php if (isset($_GET['delete'])): ?>
-            <div class="alert alert-success">
-                L'enregistrement a bien été supprimé.
-            </div>
-        <?php endif ?>
-        <?php if (isset($_GET['status'])): ?>
-            <div class="alert alert-success">
-                Le commentaire a bien été validé'.
-            </div>
-        <?php endif ?>
+        <?php
+        if(!empty($_SESSION['flash']['success_edit_comment'] ))
+        {
+            $message = $_SESSION["flash"]['success_edit_comment'];
+            $_SESSION['flash']['success_edit_comment'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION['flash']['success_delete_comment'] ))
+        {
+            $message = $_SESSION['flash']['success_delete_comment'];
+            $_SESSION['flash']['success_delete_comment'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION['flash']['success_update_comment_status'] ))
+        {
+            $message = $_SESSION['flash']['success_update_comment_status'];
+            $_SESSION['flash']['success_update_comment_status'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        ?>
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Comments Manager</h2>
+        <h2 class="page-section-heading text-center text-secondary mb-0">List des commentaires</h2>
 
         <br>
         <br>
@@ -37,11 +47,7 @@
             <?php if ($currentPage < $pages): ?>
                 <a href="<?= $router->generate('admin_list_comment')?>?page=<?= $currentPage + 1 ?>" class="btn btn-primary ml-auto">Page suivante &raquo;</a>
             <?php endif; ?>
-
         </div>
-
-        <!-- Posts Grid Items-->
-
         <table class="table">
             <thead>
             <th>Id</th>
@@ -57,8 +63,7 @@
 
                     <td class="
                     <?php
-                    if ($comment->getStatus() === 'publish'){echo 'btn btn-primary';}
-                    if ($comment->getStatus() === 'waiting'){echo 'btn btn-warning';}
+                    echo $comment->getStatus() === 'publish' ? 'btn-primary' : 'btn-warning';
                     ?>
                     "><?= $comment->getStatus()?></td>
                     <td><?= $comment->getContent() ?></td>
@@ -81,13 +86,6 @@
             </tbody>
         </table>
 </section>
-
-
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-</div>
 
 
 <?php $content = ob_get_clean(); ?>

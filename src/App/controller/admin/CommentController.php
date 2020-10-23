@@ -12,6 +12,7 @@ use App\Model\CommentManager;
 use App\Model\Entity\post;
 use App\model\PostManager;
 use App\URL;
+use App\Validator;
 use Exception;
 
 Auth::check();
@@ -67,54 +68,33 @@ class CommentController
         $comment = $q->get($id);
         $router = $this->router;
 
-        $success = false;
         if (!empty($_POST))
         {
+            Validator::lang('fr');
+            $v = new Validator($_POST);
+            $v->rule('required', ['post_id', 'author_name', 'author_email', 'content']);
+            $v->rule('lengthBetween', ['title', 'slug'], 3, 250);
 
-            $comment->setAuthorName($_POST['author_name']);
-            $comment->setAuthorEmail($_POST['author_email']);
-            $comment->setContent($_POST['content']);
-            $comment->setPostId($_POST['post_id']);
-            $comment->setStatus($_POST['comment_status']);
+            if($v->validate())
+            {
+                $comment->setAuthorName($_POST['author_name']);
+                $comment->setAuthorEmail($_POST['author_email']);
+                $comment->setContent($_POST['content']);
+                $comment->setPostId($_POST['post_id']);
+                $comment->setStatus($_POST['comment_status']);
+                $q->update($comment);
 
-
-
-            $q->update($comment);
-            $success = true;
-
+                $_SESSION['flash']['success_edit_comment'] = "Le commentaire a bien été modifié.";
+                header('Location: ' . $router->generate('admin_list_comment'));
+            }else{
+                $errors = $v->errors();
+            }
         }
+
 
         require('../views/backend/comment/edit.php');
     }
 
-    public function newComment()
-    {
-        $q = new PostManager($this->pdo);
-        $router = $this->router;
-
-        $success = false;
-        if (!empty($_POST))
-        {
-
-            $post = [];
-            $post['post_title'] = $_POST['title'];
-            $post['post_slug'] = $_POST['slug'];
-            $post['post_short_content'] = $_POST['short_content'];
-            $post['post_content'] = $_POST['content'];
-            $post['post_status'] = $_POST['status'];
-            $post['post_main_image'] = $_POST['main_image'];
-            $post['post_small_image'] = $_POST['small_image'];
-            $post['user_id'] = $_POST['user_id'];
-            $newPost = new Post($post);
-
-            $q->add($newPost);
-
-            $success = true;
-
-        }
-
-        require('../views/backend/comment/new.php');
-    }
 
     public function deleteComment()
     {
@@ -125,7 +105,9 @@ class CommentController
         $comment = $q->get($id);
 
         $q->delete($comment);
-        header('Location: ' . $router->generate('admin_list_comment') . '?delete=1');
+
+        $_SESSION['flash']['success_delete_comment'] = "Le commentaire a bien été supprimé.";
+        header('Location: ' . $router->generate('admin_list_comment'));
     }
 
     public function updateStatus()
@@ -138,7 +120,8 @@ class CommentController
         $comment = $q->get($id);
 
         $q->updateStatus($status, $id);
-        header('Location: ' . $router->generate('admin_list_comment') . '?status=' . $status);
+        $_SESSION['flash']['success_update_comment_status'] = "Le status du commentaire a bien changer.";
+        header('Location: ' . $router->generate('admin_list_comment'));
     }
 
 }
