@@ -9,8 +9,6 @@
     <br>
     <div class="container">
 
-
-
         <?php
         if(!empty($_SESSION['flash']['success_logout']))
         {

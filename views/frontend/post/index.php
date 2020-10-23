@@ -1,3 +1,5 @@
+toto
+
 <?php $title= $post->getTitle(); ?>
 
 <?php ob_start(); ?>
