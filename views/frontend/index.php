@@ -202,7 +202,7 @@
                             <img class="img-fluid border rounded mb-5" src="/assets/img/portfolio/ouest-anjou.jpg" alt="" />
                             <!-- Portfolio Modal - Text-->
                             <p class="mb-5">
-                                Création d'un site Internet pour le pôle de santé Anjou Ouest. Pour ce projet, j'ai utilisé WordPress et créer un tempête avec les couleurs du logo existant.<br>
+                                Création d'un site Internet pour le pôle de santé Anjou Ouest. Pour ce projet, j'ai utilisé WordPress et créer un template avec les couleurs du logo existant.<br>
                                 <br>
                                 <strong>Technologie utilisée : </strong> WordPress.<br />
                                 <strong>Prestations :</strong> création du site Internet, hébergement et optimisation du référencement naturel.<br>

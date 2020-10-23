@@ -8,20 +8,35 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Liste des Categories</h1>
+    <h1>Administration des Categories</h1>
 
 </header>
 <!-- Posts Section-->
 <section class="page-section posts" id="posts">
     <div class="container">
-        <?php if (isset($_GET['delete'])): ?>
-            <div class="alert alert-success">
-                L'enregistrement a bien été supprimé.
-            </div>
-        <?php endif ?>
+        <?php
+        if(!empty($_SESSION['flash']['success_new_category'] ))
+        {
+            $message = $_SESSION["flash"]['success_new_category'];
+            $_SESSION['flash']['success_new_category'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION['flash']['success_edit_category'] ))
+        {
+            $message = $_SESSION['flash']['success_edit_category'];
+            $_SESSION['flash']['success_edit_category'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION['flash']['success_delete_category'] ))
+        {
+            $message = $_SESSION['flash']['success_delete_category'];
+            $_SESSION['flash']['success_delete_category'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        ?>
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Categories Manager</h2>
-        <a href="<?= $router->generate('admin_new_category') ?>" class="btn btn-primary" style="display:inline">Ajouter une category</a>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Liste des catégories</h2>
+        <a href="<?= $router->generate('admin_new_category') ?>" class="btn btn-primary" style="display:inline">Ajouter une categories</a>
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -40,7 +55,7 @@
                         <a href="<?= $router->generate('admin_edit_category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" class="btn btn-primary">Editer</a>
                         <form action="<?= $router->generate('admin_delete_category', ['id' => $category->getId(), 'slug' => $category->getSlug()]) ?>" method="post"
                               onsubmit="return confirm('Voulez vous effectué cette action?')" style="display:inline">
-                            <button type="submit" class="btn btn-danger">Supprimé</button>
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
                     </td>
                 </tr>

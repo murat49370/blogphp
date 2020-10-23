@@ -1,22 +1,14 @@
 
-<?php $title= 'Post Manager'; ?>
+<?php $title= 'Edition d\'un article'; ?>
 
 <?php ob_start(); ?>
 
 
 
-<!-- Masthead-->
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Modification d'un post</h1>
 </header>
 <div class="container">
-    <?php if ($success):  ?>
-        <div class="alert alert-success">
-            L'article a bien été modifié
-        </div>
-    <?php endif ?>
-
     <?php if (!empty($errors)):  ?>
         <div class="alert alert-danger">
             L'article n'a pas pu être modifié merci de corriger vos erreurs
@@ -26,7 +18,6 @@
 <!-- Posts Section-->
 <section class="page-section posts" id="posts">
 
-        <!-- Posts Section Heading-->
         <h2 class="page-section-heading text-center text-secondary mb-0">Modification du post id N° <?= $post->getId() ?></h2>
         <br>
         <br>
@@ -90,13 +81,6 @@
             </div>
             <br>
             <div class="form-group">
-                <label for="title">Id Author : </label>
-                <input type="text" class="form-control <?= isset($errors['user_id']) ? 'is-invalid' : '' ?>" name="user_id" value="<?= $post->getUserId() ?>">
-                <?php if (isset($errors['user_id'])) : ?>
-                    <div class="invalid-feedback"><?= implode('<br>', $errors['user_id']) ?></div>
-                <?php endif; ?>
-            </div>
-            <div class="form-group">
                 <label for="title">Status : </label>
                 <select name="status" id="status">
                     <option value="publish">publish</option>
@@ -127,13 +111,6 @@
 
 </div>
 </section>
-
-
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-</div>
 
 
 <?php $content = ob_get_clean(); ?>

@@ -70,7 +70,7 @@
             <div class="col-lg-4">
                 <h4 class="text-uppercase mb-4">Contactez-moi</h4>
                 <p class="lead mb-0">
-                    Par Email : <a href="mailto:contact@muratcan.fr">Formulaire de contact</a><br>
+                    Par Email : <a href="mailto:contact@muratcan.fr">contact@muratcan.fr</a><br>
                     Téléphone : <a href="tel:+33667520693">06.67.52.06.93</a><br>
                 </p>
             </div>
@@ -83,7 +83,7 @@
     <div class="container">Page générée en <?= round(1000 * (microtime(true) - DEBUG_TIME))?>ms </div><br>
     <?php endif; ?>
     <div class="container"><small>Copyright © Murat CAN 2020</small> -
-        <a href="/admin">Administration</a>
+        <a href="/admin">Admin</a>
     </div>
 </div>
 

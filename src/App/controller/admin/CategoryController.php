@@ -11,6 +11,7 @@ use App\model\CategoryManager;
 use App\Model\Entity\Category;
 use App\Model\Entity\Post;
 use App\model\PostManager;
+use App\Validator;
 
 Auth::check();
 
@@ -31,7 +32,6 @@ class CategoryController
             $this->id = (int)$params['id'];
             $this->slug = $params['slug'];
         }
-
     }
 
     public function listCategory()
@@ -40,7 +40,6 @@ class CategoryController
 
         $categories = $q->getList();
         $router = $this->router;
-
 
         require('../views/backend/category/index.php');
     }
@@ -53,17 +52,26 @@ class CategoryController
         $category = $q->get($id);
         $router = $this->router;
 
-        $success = false;
         if (!empty($_POST))
         {
-            $category->setTitle($_POST['title']);
-            $category->setSlug($_POST['slug']);
+            Validator::lang('fr');
+            $v = new Validator($_POST);
+            $v->rule('required', ['title', 'slug']);
+            $v->rule('lengthBetween', ['title', 'slug'], 3, 250);
 
+            if($v->validate())
+            {
+                $category->setTitle($_POST['title']);
+                $category->setSlug($_POST['slug']);
 
-            $q->update($category);
-            $success = true;
-
+                $q->update($category);
+                $_SESSION['flash']['success_edit_category'] = "La catégorie a bien été modifié.";
+                header('Location: ' . $router->generate('admin_list_category'));
+            }else{
+                $errors = $v->errors();
+            }
         }
+
 
         require('../views/backend/category/edit.php');
     }
@@ -73,20 +81,29 @@ class CategoryController
         $q = new CategoryManager($this->pdo);
         $router = $this->router;
 
-        $success = false;
         if (!empty($_POST))
         {
-            $category = [];
-            $category['category_title'] = $_POST['title'];
-            $category['category_slug'] = $_POST['slug'];
+            Validator::lang('fr');
+            $v = new Validator($_POST);
+            $v->rule('required', ['title', 'slug']);
+            $v->rule('lengthBetween', ['title', 'slug'], 3, 250);
 
-            $newCategory = new Category($category);
+            if($v->validate())
+            {
+                $category = [];
+                $category['category_title'] = $_POST['title'];
+                $category['category_slug'] = $_POST['slug'];
 
-            $q->add($newCategory);
+                $newCategory = new Category($category);
 
-            $success = true;
-
+                $q->add($newCategory);
+                $_SESSION['flash']['success_new_category'] = "La catégorie a bien été crée.";
+                header('Location: ' . $router->generate('admin_list_category'));
+            }else{
+                $errors = $v->errors();
+            }
         }
+
 
         require('../views/backend/category/new.php');
     }
@@ -100,7 +117,8 @@ class CategoryController
         $category = $q->get($id);
 
         $q->delete($category);
-        header('Location: ' . $router->generate('admin_list_category') . '?delete=1');
+        $_SESSION['flash']['success_delete_category'] = "La catégorie a bien été supprimé.";
+        header('Location: ' . $router->generate('admin_list_category'));
 
     }
 }

@@ -31,7 +31,7 @@ class AuthController
 
         if (!empty($_POST))
         {
-            $user->setEmail($_POST['email']);
+            $user->setEmail(htmlspecialchars($_POST['email']));
             if (empty($_POST['email']) || empty($_POST['password']))
             {
                 //$errors['passwords'] = 'Email ou mots de passe incorrect';
@@ -40,20 +40,24 @@ class AuthController
             $table = new UserManager($this->pdo);
 
             try {
-                $u = $table->findByEmail($_POST['email']);
+                $u = $table->findByEmail(htmlspecialchars($_POST['email']));
                 $u->getPassword();
-                if (password_verify($_POST['password'], $u->getPassword()) === true)
+                if (password_verify(htmlspecialchars($_POST['password']), $u->getPassword()) === true)
                 {
                     session_start();
                     $_SESSION['auth'] = $u->getId();
                     header('Location: ' . $router->generate('admin_home'));
                     exit();
                     }else{
-                        throw new Exception('Email ou mots de passe incorrect');
+                        //throw new Exception('Email ou mots de passe incorrect');
+                        $_SESSION['flash']['email_passe_incorrect'] = 'Email ou mots de passe incorrect.';
+//
+//                        header('Location: ' . $router->generate('login'));
                     }
             } catch (Exception $e) {
-                //$errors['passwords'] = 'Email ou mots de passe incorrect';
-                throw new Exception('Email ou mots de passe incorrect');
+                $_SESSION['flash']['email_passe_incorrect'] = "Email ou mots de passe incorrect.";
+
+              //  throw new Exception('Email ou mots de passe incorrect');
             }
         }
 
@@ -65,20 +69,15 @@ class AuthController
         $router = $this->router;
         session_start();
         session_destroy();
-        header('Location: ' . $router->generate('login') . '?logout=1');
 
+        $_SESSION['flash']['success_logout'] = "Vous avez bien été déconnecté.";
+
+
+        require('../views/frontend/login.php');
     }
 
 }
 
-
-
-//                if (password_verify($_POST['password'], $u->getPassword()) === true)
-//                {
-//                header('Location: ' . $router->generate('admin_home'));
-//                }else{
-//                    throw new Exception('Email ou mots de passe incorrect');
-//                }
 
 
 

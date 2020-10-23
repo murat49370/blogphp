@@ -144,7 +144,7 @@ class UserController
 
             $q->add($newUser);
 
-            $_SESSION['flash']['newUser'] = "L'utilisateur a bien été crée";
+            $_SESSION['flash']['success_new_user'] = "L'utilisateur a bien été crée";
             header('Location: ' . $router->generate('admin_list_user'));
         }
 

@@ -33,7 +33,6 @@ class PostController
         {
             $this->id = (int)$params['id'];
         }
-
     }
 
     public function listPost()
@@ -64,17 +63,15 @@ class PostController
         $post = $q->get($id);
         $router = $this->router;
 
-        $success = false;
-        //$categories = 0;
+
         if (!empty($_POST))
         {
             Validator::lang('fr');
             $v = new Validator($_POST);
-            $v->rule('required', ['title', 'slug', 'short_content', 'content', 'main_image', 'small_image', 'user_id', 'status']);
+            $v->rule('required', ['title', 'slug', 'short_content', 'content', 'main_image', 'small_image', 'status']);
             $v->rule('lengthBetween', ['title', 'short_content'], 3, 250);
             $v->rule('lengthBetween', 'slug', 3, 100);
             $v->rule('lengthBetween', 'content', 3, 1000);
-
 
             if($v->validate())
             {
@@ -84,15 +81,15 @@ class PostController
                 $post->setContent($_POST['content']);
                 $post->setMainImage($_POST['main_image']);
                 $post->setSmallImage($_POST['small_image']);
-                $post->setUserId($_POST['user_id']);
+                $post->setUserId($_SESSION['auth']);
                 $post->setStatus($_POST['status']);
 
                 $q->update($post, $_POST['categories']);
-                $success = true;
+                $_SESSION['flash']['success_edit_post'] = "L'article a bien été modifié.";
+                header('Location: ' . $router->generate('admin_list_post'));
             }else{
                 $errors = $v->errors();
             }
-
         }
 
         $categories = new CategoryManager($this->pdo);
@@ -106,10 +103,6 @@ class PostController
         }
         $idsCategoriesPost = $ids;
 
-
-
-
-
         require('../views/backend/post/edit.php');
     }
 
@@ -119,19 +112,16 @@ class PostController
         $router = $this->router;
         $errors = [];
 
-        $success = false;
         if (!empty($_POST))
         {
-            if(empty($_POST['title']))
-            {
-                $errors['title'][] = 'Le champs titre ne dois pas être vide';
-            }
-            if(mb_strlen($_POST['title']) <= 3)
-            {
-                $errors['title'][] = 'Le champs titre dois comtenir plus de 3 caractères';
-            }
+            Validator::lang('fr');
+            $v = new Validator($_POST);
+            $v->rule('required', ['title', 'slug', 'short_content', 'content', 'main_image', 'small_image', 'status']);
+            $v->rule('lengthBetween', ['title', 'short_content'], 3, 250);
+            $v->rule('lengthBetween', 'slug', 3, 100);
+            $v->rule('lengthBetween', 'content', 3, 10000);
 
-            if(empty($errors))
+            if($v->validate())
             {
                 $post = [];
                 $post['post_title'] = $_POST['title'];
@@ -141,15 +131,19 @@ class PostController
                 $post['post_status'] = $_POST['status'];
                 $post['post_main_image'] = $_POST['main_image'];
                 $post['post_small_image'] = $_POST['small_image'];
-                $post['user_id'] = $_POST['user_id'];
+                $post['user_id'] = $_SESSION['auth'];
                 $newPost = new Post($post);
 
                 $q->add($newPost, $_POST['categories']);
-                $success = true;
+                $_SESSION['flash']['success_new_post'] = "L'article a bien été crée.";
+                header('Location: ' . $router->generate('admin_list_post'));
+
+            }else{
+                $errors = $v->errors();
             }
 
-
         }
+
         $post = new Post([]);
 
         $categories = new CategoryManager($this->pdo);
@@ -175,10 +169,9 @@ class PostController
         $post = $q->get($id);
 
         $q->delete($post);
-        header('Location: ' . $router->generate('admin_list_post') . '?delete=1');
+        $_SESSION['flash']['deletePostOk'] = "L'article a bien été supprimé.";
+        header('Location: ' . $router->generate('admin_list_post'));
 
     }
-
-
 
 }

@@ -34,7 +34,6 @@ class UserController
             $this->id = (int)$params['id'];
         }
 
-
     }
 
     public function userRegistred()
@@ -42,7 +41,6 @@ class UserController
         $q = new UserManager($this->pdo);
         $router = $this->router;
 
-        $success = false;
         if (!empty($_POST))
         {
             $user = [];
@@ -54,13 +52,10 @@ class UserController
             $user['user_role'] = 'waiting';
 
             $newUser = new User($user);
-
             $q->add($newUser);
+            $_SESSION['flash']['success_new_user'] = "Votre inscription a été pris en compte. Votre inscription est en attente de validation par un administrateur.";
 
-            $success = true;
         }
-
-
         require('../views/frontend/user/new.php');
     }
 

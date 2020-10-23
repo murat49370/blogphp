@@ -11,26 +11,25 @@
     <h1>Inscription utilisateur</h1>
 </header>
 <div class="container">
-    <?php
-    // dd($_GET);
-    if (isset($_GET['success_new_registration']))
-    {
-        header('Location: ' . $router->generate('login') . '?success_new_registration=1');
-    }
-    ?>
-
-
 
 
     <!-- Posts Section-->
     <section class="page-section posts" id="posts">
+        <?php
+        if(!empty($_SESSION["flash"]['success_new_user']))
+        {
+            $message = $_SESSION["flash"]['success_new_user'];
+            $_SESSION['flash']['success_new_user'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        ?>
 
         <!-- Posts Section Heading-->
         <h2 class="page-section-heading text-center text-secondary mb-0">Inscription utilisateur </h2>
         <br>
         <br>
         <!-- Posts Grid Items-->
-        <form action="?success_new_registration=1" method="post">
+        <form action="" method="post">
             <div class="form-group">
                 <label for="title">Email : </label>
                 <input type="text" class="form-control" name="email" required value=""><br>

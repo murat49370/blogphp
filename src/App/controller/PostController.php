@@ -12,6 +12,7 @@ use App\Model\Entity\Comment;
 use App\Model\Entity\Post;
 use App\model\PostManager;
 use App\URL;
+use App\Validator;
 use Exception;
 use PDO;
 
@@ -43,7 +44,6 @@ class postController
         //pagination
         $countPost = $q->count();
         $currentPage = URL::getPositiveInt('page', 1);
-       // dd($currentPage);
         $perPage = 12;
         $pages = ceil($countPost / $perPage);
         if ($currentPage > $pages)
@@ -52,14 +52,12 @@ class postController
         }
         $offset = $perPage * ($currentPage - 1);
 
-
         $posts = $q->getList($perPage, $offset);
         $router = $this->router;
 
-
         require('../views/frontend/blog/index.php');
-
     }
+
 
     public function post()
     {
@@ -90,58 +88,32 @@ class postController
 
         $a = new CommentManager($this->pdo);
 
-        $commetOk = false;
         if (!empty($_POST))
         {
-            $comment = [];
-            $comment['comment_author_email'] = $_POST['email'];
-            $comment['comment_author_name'] = $_POST['author_name'];
-            $comment['comment_content'] = $_POST['content'];
-            $comment['post_id'] = $_POST['post_id'];
+            Validator::lang('fr');
+            $v = new Validator($_POST);
+            $v->rule('required', ['email', 'author_name', 'content']);
+            $v->rule('lengthBetween', ['email', 'author_name', 'content'], 3, 250);
 
-            $newComment = new Comment($comment);
-
-            $a->add($newComment);
-
-            $commetOk = true;
-
-            header('Location: ' . $router->generate('post', ['id' => $id, 'slug' => $slug ]) . '?publish_comment=1');
-
+            if($v->validate())
+            {
+                $comment = [];
+                $comment['comment_author_email'] = htmlspecialchars($_POST['email']);
+                $comment['comment_author_name'] = htmlspecialchars($_POST['author_name']);
+                $comment['comment_content'] = htmlspecialchars($_POST['content']);
+                $comment['post_id'] = $_POST['post_id'];
+                $newComment = new Comment($comment);
+                $a->add($newComment);
+                $_SESSION['flash']['commentOk'] = "Le commentaire a bien été enregistré, il sera publié aprés sa validation";
+            }else{
+                $errors = $v->errors();
+            }
         }
 
 
         require('../views/frontend/post/index.php');
     }
 
-    public function newComment()
-    {
-        $id = $this->id;
-        $slug = $this->slug;
-
-        $q = new CommentManager($this->pdo);
-        $router = $this->router;
-
-        $commetOk = false;
-        if (!empty($_POST))
-        {
-            $comment = [];
-            $comment['comment_author_email'] = $_POST['email'];
-            $comment['comment_author_name'] = $_POST['author_name'];
-            $comment['comment_content'] = $_POST['content'];
-            $comment['post_id'] = $_POST['post_id'];
-
-            $newComment = new Comment($comment);
-
-            $q->add($newComment);
-
-            $commetOk = true;
-
-            header('Location: ' . $router->generate('post', ['id' => $id, 'slug' => $slug ]) . '?publish_commet=1');
-
-        }
-
-        require('../views/backend/post/index.php');
-    }
     
 
 }

@@ -8,19 +8,34 @@
     <br>
     <br>
     <div class="container">
+
+
+
+        <?php
+        if(!empty($_SESSION['flash']['success_logout']))
+        {
+            $message = $_SESSION["flash"]['success_logout'];
+            $_SESSION['flash']['success_logout'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION["flash"]['success_new_user']))
+        {
+            $message = $_SESSION["flash"]['success_new_user'];
+            $_SESSION['flash']['success_new_user'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+
+        if(!empty($_SESSION["flash"]['error_login_page']))
+        {
+            $message = $_SESSION["flash"]['error_login_page'];
+            $_SESSION['flash']['error_login_page'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        ?>
+
         <?php if(isset($_GET['forbidden'])) :?>
-            <div class="alert alert-danger">
+            <div class="alert alert-success">
                 Vous devez être connecté pour accéder à cette page.
-            </div>
-        <?php endif; ?>
-        <?php if(isset($_GET['logout'])) :?>
-            <div class="alert alert-success">
-                Vous avez bien été déconnecté.
-            </div>
-        <?php endif; ?>
-        <?php if(isset($_GET['success_new_registration'])) :?>
-            <div class="alert alert-success">
-                Votre inscription a bien été pris en compte, un administrateur va vérifier votre inscription avant sa validation. Vous serrez informer par email.
             </div>
         <?php endif; ?>
 
@@ -33,7 +48,7 @@
         <form action="<?= $router->generate('login') ?>" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="<?= $user->getEmail()?>" placeholder="Votre email">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="<?php if(isset($user)) {$user->getEmail();}?>" placeholder="Votre email">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
@@ -48,14 +63,6 @@
     </div>
 </section>
 
-
-
-
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-</div>
 
 
 <?php $content = ob_get_clean(); ?>
