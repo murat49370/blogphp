@@ -30,6 +30,7 @@ class ComposerStaticInit560c4aa38e47acb64eb891fd58b45ef5
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'F' => 
         array (
@@ -65,6 +66,10 @@ class ComposerStaticInit560c4aa38e47acb64eb891fd58b45ef5
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Faker\\' => 
         array (

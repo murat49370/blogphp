@@ -27,7 +27,8 @@ if(isset($_GET['page']) && $_GET['page'] === '1')
 $router = new AltoRouter();
 $router->setBasePath('');
 // Frontend
-$router->map('GET', '/', 'App\Controller\HomeController#home', 'home');
+$router->map('POST|GET', '/', 'App\Controller\HomeController#home', 'home');
+$router->map('POST|GET', '/mail', 'App\Controller\HomeController#mail', 'mail');
 $router->map('GET', '/blog', 'App\Controller\postController#home', 'blog_home');
 $router->map('GET|POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController#post', 'post');
 $router->map('GET|POST', '/login', 'App\Controller\authController#login', 'login');

@@ -17,4 +17,9 @@ class Connection
         ]);
     }
 
+    public static function getGmailPassword(): string
+    {
+        return 'mzsymvbrcxtvihqn';
+    }
+
 }
