@@ -1,6 +1,4 @@
-toto
-
-<?php $title= $post->getTitle(); ?>
+<?php $title= $post->getTitle() ; ?>
 
 <?php ob_start(); ?>
 
@@ -46,7 +44,7 @@ toto
             </p>
             <hr>
             <!-- Date/Time -->
-            <p><?php echo $post->getCreateDate()->format('d F Y');?></p>
+            <p>Le <?php echo $post->getCreateDate()->format('d/m/Y');?></p>
             <hr>
             <!-- Preview Image -->
             <img class="img-fluid rounded" src="<?= $post->getMainImage() ?>" alt="">

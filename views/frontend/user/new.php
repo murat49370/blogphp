@@ -12,7 +12,6 @@
 </header>
 <div class="container">
 
-
     <!-- Posts Section-->
     <section class="page-section posts" id="posts">
         <?php
@@ -25,7 +24,7 @@
         ?>
 
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Inscription utilisateur </h2>
+
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -35,15 +34,15 @@
                 <input type="text" class="form-control" name="email" required value=""><br>
             </div>
             <div class="form-group">
-                <label for="title">Password : </label>
+                <label for="title">Mot de passe : </label>
                 <input type="password" class="form-control" name="password" value="" required><br>
             </div>
             <div class="form-group">
-                <label for="title">First name :</label><br>
+                <label for="title">Nom :</label><br>
                 <input type="text" class="form-control" name="first_name" value="" required><br>
             </div>
             <div class="form-group">
-                <label for="title">Last name :</label><br>
+                <label for="title">Prénom :</label><br>
                 <input type="text" class="form-control" name="last_name" value="" required><br>
             </div>
             <div class="form-group">
@@ -51,19 +50,12 @@
                 <input type="text" class="form-control" name="pseudo" value="" required><br>
             </div>
 
-            <button class="btn-primary">Inscription</button>
+            <button class="btn btn-primary">Inscription</button>
 
         </form>
 
 </div>
-</section>
 
-
-
-<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
-<div class="scroll-to-top d-lg-none position-fixed">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
-</div>
 
 
 <?php $content = ob_get_clean(); ?>

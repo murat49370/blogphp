@@ -12,21 +12,27 @@
         <?php
         if(!empty($_SESSION['flash']['success_logout']))
         {
-            $message = $_SESSION["flash"]['success_logout'];
+            $message = $_SESSION['flash']['success_logout'];
             $_SESSION['flash']['success_logout'] = [];
             echo '<div class="alert alert-success">' . $message . '</div>';
         }
-        if(!empty($_SESSION["flash"]['success_new_user']))
+        if(!empty($_SESSION['flash']['success_new_user']))
         {
-            $message = $_SESSION["flash"]['success_new_user'];
+            $message = $_SESSION['flash']['success_new_user'];
             $_SESSION['flash']['success_new_user'] = [];
             echo '<div class="alert alert-success">' . $message . '</div>';
         }
 
-        if(!empty($_SESSION["flash"]['error_login_page']))
+        if(!empty($_SESSION['flash']['error_login_page']))
         {
-            $message = $_SESSION["flash"]['error_login_page'];
+            $message = $_SESSION['flash']['error_login_page'];
             $_SESSION['flash']['error_login_page'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION['flash']['email_passe_incorrect']))
+        {
+            $message = $_SESSION['flash']['email_passe_incorrect'];
+            $_SESSION['flash']['email_passe_incorrect'] = [];
             echo '<div class="alert alert-success">' . $message . '</div>';
         }
         ?>

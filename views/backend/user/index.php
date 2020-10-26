@@ -1,5 +1,4 @@
-
-<?php $title= 'Administration utilisateur'; ?>
+<?php $title= 'Administration des utilisateures'; ?>
 
 <?php ob_start(); ?>
 
@@ -11,26 +10,32 @@
 <section class="page-section posts" id="posts">
     <div class="container">
         <?php
-        if(!empty($_SESSION["flash"]['passmodif'] ))
+        if(!empty($_SESSION['flash']['passmodif']))
         {
-            $message = $_SESSION["flash"]['passmodif'];
-            $_SESSION["flash"]['passmodif'] = [];
+            $message = $_SESSION['flash']['passmodif'];
+            $_SESSION['flash']['passmodif'] = [];
             echo '<div class="alert alert-success">' . $message . '</div>';
         }
-        if(!empty($_SESSION["flash"]['newUser'] ))
+        if(!empty($_SESSION['flash']['newUser']))
         {
-            $message = $_SESSION["flash"]['newUser'];
-            $_SESSION["flash"]['newUser'] = [];
+            $message = $_SESSION['flash']['newUser'];
+            $_SESSION['flash']['newUser'] = [];
             echo '<div class="alert alert-success">' . $message . '</div>';
         }
-        if(!empty($_SESSION["flash"]['deleteUser'] ))
+        if(!empty($_SESSION['flash']['deleteUser']))
         {
-            $message = $_SESSION["flash"]['deleteUser'];
-            $_SESSION["flash"]['deleteUser'] = [];
+            $message = $_SESSION['flash']['deleteUser'];
+            $_SESSION['flash']['deleteUser'] = [];
+            echo '<div class="alert alert-success">' . $message . '</div>';
+        }
+        if(!empty($_SESSION['flash']['editUser']))
+        {
+            $message = $_SESSION['flash']['editUser'];
+            $_SESSION['flash']['editUser'] = [];
             echo '<div class="alert alert-success">' . $message . '</div>';
         }
         ?>
-        <h2 class="page-section-heading text-center text-secondary mb-0">Utilisateurs inscrits</h2>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Utilisateurs inscris</h2>
         <a href="<?= $router->generate('admin_new_user') ?>" class="btn btn-primary" style="display:inline">Ajouter un utilisateur</a>
         <br>
         <br>

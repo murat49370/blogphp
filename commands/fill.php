@@ -17,10 +17,10 @@ $pdo->exec('TRUNCATE TABLE user');
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 
 $password = password_hash('admin', PASSWORD_DEFAULT);
-$pdo->exec("INSERT INTO user VALUES (NULL, 'murat@boostclic.org', '{$password}', 'Can', 'Murat', 'Toto', '{$faker->date} {$faker->time}', 'admin')");
+$pdo->exec("INSERT INTO user VALUES (NULL, 'admin@admin.com', '{$password}', 'Jhon', 'Doe', 'Super Man', '{$faker->date} {$faker->time}', 'admin')");
 $pdo->exec("INSERT INTO user VALUES (NULL, 'louis@gmail.org', '{$password}', 'Louis', 'Michel', 'Michou', '{$faker->date} {$faker->time}', 'waiting')");
-$pdo->exec("INSERT INTO category VALUES (NULL, 'defaut', 'defaut')");
-$pdo->exec("INSERT INTO category VALUES (NULL, 'news', 'news')");
+$pdo->exec("INSERT INTO category VALUES (NULL, 'Defaut', 'defaut')");
+$pdo->exec("INSERT INTO category VALUES (NULL, 'News', 'news')");
 
 
 for ($i = 0; $i < 25; $i ++)
@@ -45,8 +45,11 @@ for ($i = 0; $i < 25; $i ++)
 }
 
 $pdo->exec('INSERT INTO post_category SET post_id=1, category_id=1');
-$pdo->exec('INSERT INTO post_category SET post_id=2, category_id=1');
 $pdo->exec('INSERT INTO post_category SET post_id=2, category_id=2');
+$pdo->exec('INSERT INTO post_category SET post_id=3, category_id=1');
+$pdo->exec('INSERT INTO post_category SET post_id=4, category_id=2');
+$pdo->exec('INSERT INTO post_category SET post_id=2, category_id=1');
+$pdo->exec('INSERT INTO post_category SET post_id=3, category_id=2');
 
 
 for ($i = 0; $i < 25; $i ++)

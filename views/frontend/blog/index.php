@@ -1,4 +1,4 @@
-<?php $title= 'Blog'; ?>
+<?php $title= 'Le Blog - Murat CAN'; ?>
 
 <?php ob_start(); ?>
 
@@ -42,7 +42,7 @@
                                 <p><?php echo $post->getShortContent();?></p>
                                 <a href="<?= $router->generate('post', ['id' => $post->getId(), 'slug' => $post->getSlug()]) ?>" class="more-btn">En savoir plus</a>
                             </div>
-                            <span class="blog-date">Publié le <?php echo $post->getCreateDate()->format('j M Y');?></span>
+                            <span class="blog-date">Publié le <?php echo $post->getCreateDate()->format('d/m/Y');?></span>
                         </div>
                     </div>
                     <?php } ?>

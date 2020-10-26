@@ -1,5 +1,5 @@
 
-<?php $title= 'Accueil Murat Blog'; ?>
+<?php $title= 'Développeur PHP / Symfony - Murat CAN'; ?>
 
 <?php ob_start(); ?>
 
