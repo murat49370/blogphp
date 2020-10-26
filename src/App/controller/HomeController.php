@@ -50,8 +50,6 @@ class HomeController
     {
         $router = $this->router;
 
-
-
         //Envoie de l'email
         if (!empty($_POST))
         {
@@ -71,12 +69,12 @@ class HomeController
             $mail->Port = 587;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->SMTPAuth = true;
-            $mail->Username = 'murat49370@gmail.com';
-            $mail->Password = 'mzsymvbrcxtvihqn';
-            $mail->setFrom('murat49370@gmail.com', 'Blog Murat CAN');
+            $mail->Username = GMAIL_USERNAME;
+            $mail->Password = GMAIL_PASSWORD;
+            $mail->setFrom('murat49370@gmail.com', 'Blog Website');
             $mail->addReplyTo('no-replyto@muratcan.fr', 'No-reply');
             $mail->addAddress('murat@boostclic.org', 'Murat');
-            $mail->Subject = 'PHPMailer GMail SMTP test';
+            $mail->Subject = 'Vous avez recu une nouvelle demande';
 
             $mail->msgHTML($message);
             $mail->AltBody = 'This is a plain-text message body';
