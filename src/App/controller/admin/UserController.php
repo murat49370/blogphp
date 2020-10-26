@@ -34,14 +34,11 @@ class UserController
         {
             $this->id = (int)$params['id'];
         }
-
-
     }
 
     public function listUser()
     {
         $q = new UserManager($this->pdo);
-
 
         $users = $q->getList();
         $router = $this->router;
@@ -61,18 +58,15 @@ class UserController
         if (!empty($_POST))
         {
             $user->setEmail($_POST['email']);
-            $user->setPassword($_POST['password']);
             $user->setFirstName($_POST['first_name']);
             $user->setLastName($_POST['last_name']);
             $user->setPseudo($_POST['pseudo']);
             $user->setRole($_POST['role']);
 
             $q->update($user);
-            $_SESSION['flash']['editeUser'] = "L'utilisateur a bien été modifié";
+            $_SESSION['flash']['editUser'] = "L'utilisateur a bien été modifié";
             header('Location: ' . $router->generate('admin_list_user'));
-
         }
-
         require('../views/backend/user/edit.php');
     }
 
@@ -84,7 +78,6 @@ class UserController
         $user = $q->get($id);
         $router = $this->router;
         $errors = [];
-
 
         if (!empty($_POST))
         {
@@ -116,13 +109,8 @@ class UserController
             }
         }
 
-
-
-
         require('../views/backend/user/password_edit.php');
     }
-
-
 
     public function newUser()
     {
@@ -147,8 +135,6 @@ class UserController
             $_SESSION['flash']['success_new_user'] = "L'utilisateur a bien été crée";
             header('Location: ' . $router->generate('admin_list_user'));
         }
-
-
         require('../views/backend/user/new.php');
     }
 
@@ -161,11 +147,8 @@ class UserController
         $user = $q->get($id);
 
         $q->delete($user);
-        $_SESSION['flash']['deleteUser'] = "L'utilisateur a bien été crée";
+        $_SESSION['flash']['deleteUser'] = "L'utilisateur a bien été supprimé";
         header('Location: ' . $router->generate('admin_list_user'));
-
     }
-
-
 
 }

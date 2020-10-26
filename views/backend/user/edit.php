@@ -1,5 +1,5 @@
 
-<?php $title= 'Post Manager'; ?>
+<?php $title= 'Edition d\'un utilisateur'; ?>
 
 <?php ob_start(); ?>
 
@@ -8,14 +8,10 @@
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
-    <h1>Modification d'un post</h1>
+    <h1>Modification d'un utilisateur</h1>
 </header>
 <div class="container">
-    <?php if ($success):  ?>
-        <div class="alert alert-success">
-            L'utilisateur a bien été modifié
-        </div>
-    <?php endif ?>
+
 
 <!-- Posts Section-->
 <section class="page-section posts" id="posts">
@@ -28,10 +24,6 @@
             <div class="form-group">
                 <label for="title">Email : </label>
                 <input type="text" class="form-control" name="email" required value="<?= $user->getEmail() ?>"><br>
-            </div>
-            <div class="form-group">
-                <label for="title">Password : </label>
-                <input type="password" class="form-control" name="password" value="" required><br>
             </div>
             <div class="form-group">
                 <label for="title">First name :</label><br>

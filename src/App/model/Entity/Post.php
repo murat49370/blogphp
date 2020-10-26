@@ -46,7 +46,10 @@ class Post
      */
     public function getCreateDate(): DateTime
     {
-        return new DateTime($this->_createDate);
+        //setlocale(LC_TIME, "fr_FR"); //only necessary if the locale isn't already set
+        return new DateTime($this->_createDate, new \DateTimeZone('Europe/Paris'));
+        //setlocale(LC_TIME, "fr_FR"); //only necessary if the locale isn't already set
+        //$formatted_time = strftime("%a %e.%l.%Y", $mytime->getTimestamp())
     }
 
     /**
