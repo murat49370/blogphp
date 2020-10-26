@@ -24,15 +24,6 @@ class CommentManager
         $this->setDb($db);
     }
 
-//    public function getAuthorName(Comment $comment)
-//    {
-//        $id = (int) $comment->getId();
-//
-//        $authorName = $this->_db->query('SELECT user_pseudo FROM user WHERE id =' . $id);
-//
-//        return $authorName;
-//    }
-
     public function add(Comment $comment)
     {
         $q = $this->_db->prepare('INSERT INTO comment(comment_author_name, comment_author_email, comment_content, comment_create, comment_status, post_id)
@@ -156,28 +147,6 @@ class CommentManager
     public function count(): int
     {
         return (int)$this->_db->query('SELECT COUNT(id) FROM comment')->fetch(PDO::FETCH_NUM)[0];
-    }
-
-    public function getPostCategory(Post $post)
-    {
-        $query = $this->_db->prepare('
-        SELECT c.id, c.category_slug, c.category_title 
-        FROM post_category pc 
-        JOIN category c ON pc.category_id = c.id
-        WHERE pc.post_id = :id');
-        $query->execute(['id' => $post->getId()]);
-        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
-        /** @var Category[] */
-        $categories = [];
-
-        while ($donnees = $query->fetch(PDO::FETCH_ASSOC))
-        {
-            $categories[] = new Category($donnees);
-        }
-
-        return $categories;
-        //dd($categories);
-
     }
 
 
