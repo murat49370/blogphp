@@ -16,24 +16,9 @@ use App\Validator;
 
 Auth::check();
 
-class PostController
+class PostController extends Controller
 {
 
-    private $router;
-    private $pdo;
-    private $id;
-    private $slug;
-
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = Connection::get_pdo();
-
-        if (isset($params['id']))
-        {
-            $this->id = (int)$params['id'];
-        }
-    }
 
     public function listPost()
     {

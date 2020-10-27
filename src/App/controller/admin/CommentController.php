@@ -11,51 +11,27 @@ use App\model\CategoryManager;
 use App\Model\CommentManager;
 use App\Model\Entity\post;
 use App\model\PostManager;
+use App\PaginatedQuery;
 use App\URL;
 use App\Validator;
 use Exception;
 
 Auth::check();
 
-class CommentController
+class CommentController extends Controller
 
 {
-    private $router;
-    private $pdo;
-    private $id;
-    private $status;
-
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = Connection::get_pdo();
-
-        if (isset($params['id']))
-        {
-            $this->id = (int)$params['id'];
-        }
-        if (isset($params['status']))
-        {
-            $this->status = $params['status'];
-        }
-    }
 
     public function listComment()
     {
+        $router = $this->router;
         $q = new CommentManager($this->pdo);
 
-        $countComment = $q->count();
+        $pagination = new PaginatedQuery($q);
+        $donnees = $pagination->getPaginatedItemes();
+        $comments = $donnees['items'];
+        $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
-        $perPage = 12;
-        $pages = ceil($countComment / $perPage);
-        if ($currentPage > $pages)
-        {
-            throw new Exception('Cette page n\'existe pas');
-        }
-        $offset = $perPage * ($currentPage - 1);
-
-        $comments = $q->getList($perPage, $offset);
-        $router = $this->router;
 
         require('../views/backend/comment/index.php');
     }

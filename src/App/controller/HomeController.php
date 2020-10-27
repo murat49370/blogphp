@@ -53,7 +53,9 @@ class HomeController
         //Envoie de l'email
         if (!empty($_POST))
         {
-            $message = 'vous avez recu un message de : ' . $_POST['name'] . ' - ' . $_POST['email'] . ' - ' . $_POST['phone'] . ' - Voici son message : ' . $_POST['message'];
+            $messages = '<p>vous avez recu un message de : ' . $_POST['name'] . ' - ' . $_POST['email'] . ' - ' . $_POST['phone'] . ' - Voici son message : ' . $_POST['message'] . '</p>';
+
+            $name = $_POST['name'];
 
             $mail = new PHPMailer();
             $mail->SMTPOptions = array(
@@ -69,31 +71,35 @@ class HomeController
             $mail->Port = 587;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->SMTPAuth = true;
-            $mail->Username = GMAIL_USERNAME;
-            $mail->Password = GMAIL_PASSWORD;
-            $mail->setFrom('murat49370@gmail.com', 'Blog Website');
+            $mail->Username = 'murat49370@gmail.com';
+            $mail->Password = 'vhuqllzpzamhdcll';
+            $mail->setFrom($_POST['email'], $_POST['name']);
             $mail->addReplyTo('no-replyto@muratcan.fr', 'No-reply');
             $mail->addAddress('murat@boostclic.org', 'Murat');
             $mail->Subject = 'Vous avez recu une nouvelle demande';
 
-            $mail->msgHTML($message);
+            $mail->isHTML(true);
+            $mail->msgHTML('tel : ' . $_POST['phone'] . ', message : ' . $_POST['message']);
             $mail->AltBody = 'This is a plain-text message body';
 
             $response = null;
             if (!$mail->send())
             {
                 $response = 'errors';
-                //$_SESSION['flash']['error_mail'] = "Il y a ue un probléme sur l'envoie de du messsage. Merci de contacter un administrateur.";
-                //echo 'Mailer Error: ' . $mail->ErrorInfo;
+                $_SESSION['flash']['error_mail'] = "Il y a ue un probléme sur l'envoie de du messsage. Merci de contacter un administrateur.";
+
             } else {
                 $response = 'success';
+                $_SESSION['flash']['success_mail'] = "Le message a bien été envoyer.";
+                //dd($_SESSION['flash']['error_mail']);
             }
 
-        }
-        //exit(header('Location:/?response=' . $response));
-        //echo("<script>location.href = '/?response=$response';</script>");
-        ?><script><?php echo("location.href = '/?response=$response';");?></script><?php
+            $url = $router->generate('home') . '?response=' . $response;
 
+            header('Location: ' . $url);
+
+
+        }
 
 
     }

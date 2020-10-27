@@ -15,24 +15,9 @@ use App\Validator;
 
 Auth::check();
 
-class CategoryController
+class CategoryController extends Controller
 {
-    private $router;
-    private $pdo;
-    private $id;
-    private $slug;
 
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = Connection::get_pdo();
-
-        if ($params)
-        {
-            $this->id = (int)$params['id'];
-            $this->slug = $params['slug'];
-        }
-    }
 
     public function listCategory()
     {

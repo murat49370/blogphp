@@ -19,24 +19,8 @@ use PDO;
 Auth::check();
 
 
-class HomeController
+class HomeController extends Controller
 {
-    private $router;
-    private $pdo;
-    private $id;
-    private $slug;
-
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = Connection::get_pdo();
-
-        if (isset($params['id']))
-        {
-            $this->id = (int)$params['id'];
-        }
-
-    }
 
     function home()
 
