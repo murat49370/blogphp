@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\controller\admin;
+namespace App\controller;
 
 
 use AltoRouter;

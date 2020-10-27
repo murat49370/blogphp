@@ -10,14 +10,20 @@ class PaginatedQuery
     private $manager;
 
 
+    /**
+     * @param $manager
+     */
     public function __construct($manager)
     {
         $this->manager = $manager;
 
-
     }
 
-    public function getPaginatedItemes()
+    /**
+     * @return array [items, NbPages]
+     * @throws \Exception
+     */
+    public function getPaginatedItems()
     {
         $countPost = $this->manager->count();
         $currentPage = URL::getPositiveInt('page', 1);
@@ -35,8 +41,5 @@ class PaginatedQuery
             ) ;
 
     }
-
-
-
 
 }

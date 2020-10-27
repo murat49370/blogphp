@@ -9,42 +9,22 @@ use App\Connection;
 use App\model\CategoryManager;
 use App\Model\CommentManager;
 use App\Model\Entity\Comment;
-use App\Model\Entity\Post;
 use App\model\PostManager;
 use App\PaginatedQuery;
 use App\URL;
 use App\Validator;
-use Exception;
-use PDO;
 
 
-class postController
+
+class postController extends Controller
 {
-    private $router;
-    private $pdo;
-    private $id;
-    private $slug;
-
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = Connection::get_pdo();
-
-        if ($params)
-        {
-            $this->id = (int)$params['id'];
-            $this->slug = $params['slug'];
-        }
-
-    }
 
     public function home()
     {
         $router = $this->router;
         $q = new PostManager($this->pdo);
-
         $pagination = new PaginatedQuery($q);
-        $donnees = $pagination->getPaginatedItemes();
+        $donnees = $pagination->getPaginatedItems();
         $posts = $donnees['items'];
         $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
@@ -62,7 +42,7 @@ class postController
         $post = $q->get($id);
         $router = $this->router;
 
-        // Redirection si le slug dans l'url ne correspond pas a l'id
+        // Redirection if the slug in the url does not match the id
         if ($post->getSlug() !== $slug)
         {
             $url = $router->generate('post', ['slug' => $post->getSlug(), 'id' => $id]);
@@ -70,13 +50,12 @@ class postController
             header('Location: ' . $url);
         }
 
-        // Je recupere les categorie lier a l'article, retourn un tableaux d'objet
+        //retrieve the category related to the article, returned an object array
         $categories = $q->getPostCategory($post);
 
         $c = new CategoryManager($this->pdo);
         $categoriesListing = $c->getList();
 
-        //Recuper Commentaire
         $donnees = new CommentManager($this->pdo);
         $comments = $donnees->getValideListByPost($post->getId());
 
@@ -106,7 +85,5 @@ class postController
 
         require('../views/frontend/post/index.php');
     }
-
-    
 
 }

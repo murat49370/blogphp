@@ -3,24 +3,12 @@
 
 namespace App\Controller;
 
-
-use AltoRouter;
-use App\Connection;
 use App\Model\Entity\User;
 use App\model\UserManager;
 use Exception;
 
-class AuthController
+class AuthController extends Controller
 {
-    private $pdo;
-    private $router;
-
-    public function __construct(AltoRouter $router)
-    {
-        $this->pdo = Connection::get_pdo();
-        $this->router = $router;
-
-    }
 
     public function login()
     {
@@ -34,7 +22,6 @@ class AuthController
             $user->setEmail(htmlspecialchars($_POST['email']));
             if (empty($_POST['email']) || empty($_POST['password']))
             {
-                //$errors['passwords'] = 'Email ou mots de passe incorrect';
                 throw new Exception('Email ou mots de passe incorrect');
             }
             $table = new UserManager($this->pdo);
@@ -49,15 +36,10 @@ class AuthController
                     header('Location: ' . $router->generate('admin_home'));
                     exit();
                     }else{
-                        //throw new Exception('Email ou mots de passe incorrect');
                         $_SESSION['flash']['email_passe_incorrect'] = 'Email ou mots de passe incorrect.';
-//
-//                        header('Location: ' . $router->generate('login'));
                     }
             } catch (Exception $e) {
                 $_SESSION['flash']['email_passe_incorrect'] = "Email ou mots de passe incorrect.";
-
-              //  throw new Exception('Email ou mots de passe incorrect');
             }
         }
 
@@ -71,7 +53,6 @@ class AuthController
         session_destroy();
 
         $_SESSION['flash']['success_logout'] = "Vous avez bien été déconnecté.";
-
 
         require('../views/frontend/login.php');
     }

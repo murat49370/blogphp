@@ -3,18 +3,14 @@
 
 namespace App\Controller\Admin;
 
-use AltoRouter;
 use App\Auth;
-use App\Connection;
-use App\model\CategoryManager;
-use App\Model\Entity\Category;
 use App\Model\Entity\post;
 use App\Model\Entity\User;
 use App\model\PostManager;
 use App\model\UserManager;
 use App\URL;
 use Exception;
-use PDO;
+use App\controller\Controller;
 
 Auth::check();
 
@@ -36,17 +32,8 @@ class HomeController extends Controller
             $user = $u->get($id);
         }
 
-
-        //dd($_SESSION['auth']);
-
-
-
         require('../views/backend/index.php');
     }
-
-
-
-
 
     public function listComment()
     {
@@ -136,8 +123,6 @@ class HomeController extends Controller
         $q->delete($post);
         header('Location: ' . $router->generate('admin_list_post') . '?delete=1');
     }
-
-
 
 
 }
