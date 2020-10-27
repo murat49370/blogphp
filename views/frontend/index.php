@@ -1,5 +1,4 @@
-
-<?php $title= 'Développeur PHP / Symfony - Murat CAN'; ?>
+<?php $title = 'Développeur PHP / Symfony - Murat CAN'; ?>
 
 <?php ob_start(); ?>
 
@@ -160,8 +159,6 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-
-
         <!-- Contact Section Form-->
         <div class="row">
             <div class="col-lg-8 mx-auto">
@@ -192,11 +189,8 @@
                         </div>
                     </div>
                     <br>
-
                     <button type="submit" class="btn btn-primary btn-xl">Envoyer</button>
                 </form>
-
-
             </div>
         </div>
     </div>

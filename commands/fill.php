@@ -3,6 +3,8 @@
 use App\Connection;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
+require 'config.php';
+
 
 $faker = Faker\Factory::create('fr_FR');
 

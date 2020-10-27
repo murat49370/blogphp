@@ -33,10 +33,8 @@ class CategoryController
     {
         $q = new CategoryManager($this->pdo);
 
-
         $categories = $q->getList();
         $router = $this->router;
-
 
         require('../views/frontend/category/index.php');
 
@@ -58,7 +56,6 @@ class CategoryController
             http_response_code(301);
             header('Location: ' . $url);
         }
-
 
         $categories = $q->getCategoryPost($category);
 

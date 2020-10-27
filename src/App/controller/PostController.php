@@ -11,6 +11,7 @@ use App\Model\CommentManager;
 use App\Model\Entity\Comment;
 use App\Model\Entity\Post;
 use App\model\PostManager;
+use App\PaginatedQuery;
 use App\URL;
 use App\Validator;
 use Exception;
@@ -39,21 +40,14 @@ class postController
 
     public function home()
     {
+        $router = $this->router;
         $q = new PostManager($this->pdo);
 
-        //pagination
-        $countPost = $q->count();
+        $pagination = new PaginatedQuery($q);
+        $donnees = $pagination->getPaginatedItemes();
+        $posts = $donnees['items'];
+        $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
-        $perPage = 12;
-        $pages = ceil($countPost / $perPage);
-        if ($currentPage > $pages)
-        {
-            throw new Exception('Cette page n\'existe pas');
-        }
-        $offset = $perPage * ($currentPage - 1);
-
-        $posts = $q->getList($perPage, $offset);
-        $router = $this->router;
 
         require('../views/frontend/blog/index.php');
     }
@@ -109,7 +103,6 @@ class postController
                 $errors = $v->errors();
             }
         }
-
 
         require('../views/frontend/post/index.php');
     }

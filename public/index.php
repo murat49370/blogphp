@@ -2,8 +2,9 @@
 
 
 require '../vendor/autoload.php';
+require '../config.php';
 
-//define('DEBUG_TIME', microtime(true));
+define('DEBUG_TIME', microtime(true));
 
 $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -17,7 +18,7 @@ if(isset($_GET['page']) && $_GET['page'] === '1')
     $query = http_build_query($get);
     if (!empty($query))
     {
-        $uri =$uri . '?' . $query;
+        $uri = $uri . '?' . $query;
     }
     http_response_code(301);
     header('Location: ' . $uri);
@@ -34,10 +35,6 @@ $router->map('GET|POST', '/post/[*:slug]-[i:id]', 'App\Controller\postController
 $router->map('GET|POST', '/login', 'App\Controller\authController#login', 'login');
 $router->map('POST', '/logout', 'App\Controller\authController#logout', 'logout');
 $router->map('GET|POST', '/registration', 'App\Controller\UserController#userRegistred', 'registration');
-
-//$router->map('GET', '/404', 'App\Controller\HomeController#notFound', '404');
-
-
 
 
 $router->map('GET', '/blog/category/[*:slug]-[i:id]', 'App\Controller\CategoryController#show', 'category');
@@ -75,15 +72,12 @@ $router->map('POST', '/admin/comment/delete/[i:id]', 'App\Controller\Admin\Comme
 $router->map('POST', '/admin/comment/update_status/[i:id]-[*:status]', 'App\Controller\Admin\CommentController#updateStatus', 'admin_update_status_comment');
 
 
-
-
 $match = $router->match();
 
 if (!empty($match['params']))
 {
     $params[] = $match['params'];
 }
-
 
 if ($match === false) {
     require '../views/404.php';

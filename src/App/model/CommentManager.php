@@ -128,7 +128,6 @@ class CommentManager
         $q->bindValue(':comment_status', $comment->getStatus());
         $q->bindValue(':post_id', $comment->getPostId());
 
-
         $q->execute();
 
     }
@@ -149,12 +148,10 @@ class CommentManager
         return (int)$this->_db->query('SELECT COUNT(id) FROM comment')->fetch(PDO::FETCH_NUM)[0];
     }
 
-
     public function setDb($db)
     {
         $this->_db = $db;
     }
-
 
 
 }
