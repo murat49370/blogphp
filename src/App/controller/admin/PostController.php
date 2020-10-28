@@ -37,10 +37,9 @@ class PostController extends Controller
 
     public function editPost()
     {
-        $id = $this->id;
 
         $q = new PostManager($this->pdo);
-        $post = $q->get($id);
+        $post = $q->get($this->id);
         $router = $this->router;
 
 
@@ -142,16 +141,12 @@ class PostController extends Controller
 
     public function deletePost()
     {
-        $router = $this->router;
-        $id = $this->id;
-
         $q = new PostManager($this->pdo);
-        $post = $q->get($id);
+        $post = $q->get($this->id);
 
         $q->delete($post);
         $_SESSION['flash']['deletePostOk'] = "L'article a bien été supprimé.";
-        header('Location: ' . $router->generate('admin_list_post'));
-
+        header('Location: ' . $this->router->generate('admin_list_post'));
     }
 
 }

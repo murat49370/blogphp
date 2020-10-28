@@ -85,21 +85,16 @@ class CategoryController extends Controller
             }
         }
 
-
         require('../views/backend/category/new.php');
     }
 
     public function deleteCategory()
     {
-        $router = $this->router;
-        $id = $this->id;
-
         $q = new CategoryManager($this->pdo);
-        $category = $q->get($id);
+        $category = $q->get($this->id);
 
         $q->delete($category);
         $_SESSION['flash']['success_delete_category'] = "La catégorie a bien été supprimé.";
-        header('Location: ' . $router->generate('admin_list_category'));
-
+        header('Location: ' . $this->router->generate('admin_list_category'));
     }
 }

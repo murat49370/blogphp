@@ -4,8 +4,6 @@
 namespace App\Controller;
 
 
-use AltoRouter;
-use App\Connection;
 use App\model\CategoryManager;
 use App\Model\CommentManager;
 use App\Model\Entity\Comment;

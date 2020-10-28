@@ -61,37 +61,30 @@ class CommentController extends Controller
             }
         }
 
-
         require('../views/backend/comment/edit.php');
     }
 
 
     public function deleteComment()
     {
-        $router = $this->router;
-        $id = $this->id;
-
         $q = new CommentManager($this->pdo);
-        $comment = $q->get($id);
+        $comment = $q->get($this->id);
 
         $q->delete($comment);
 
         $_SESSION['flash']['success_delete_comment'] = "Le commentaire a bien été supprimé.";
-        header('Location: ' . $router->generate('admin_list_comment'));
+        header('Location: ' . $this->router->generate('admin_list_comment'));
     }
 
     public function updateStatus()
     {
-        $router = $this->router;
-        $id = $this->id;
-        $status = $this->status;
 
         $q = new CommentManager($this->pdo);
-        $comment = $q->get($id);
+        $comment = $q->get($this->id);
 
-        $q->updateStatus($status, $id);
+        $q->updateStatus($this->status, $this->id);
         $_SESSION['flash']['success_update_comment_status'] = "Le status du commentaire a bien changer.";
-        header('Location: ' . $router->generate('admin_list_comment'));
+        header('Location: ' . $this->router->generate('admin_list_comment'));
     }
 
 }
