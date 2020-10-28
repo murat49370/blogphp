@@ -8,6 +8,10 @@ use App\Model\Entity\Category;
 use App\Model\Entity\post;
 use PDO;
 
+/**
+ * Class CategoryManager
+ * @package App\model
+ */
 class CategoryManager
 {
     /**
@@ -16,12 +20,19 @@ class CategoryManager
     private $_db;
 
 
+    /**
+     * CategoryManager constructor.
+     * @param $db
+     */
     public function __construct($db)
     {
         $this->setDb($db);
     }
 
 
+    /**
+     * @param Category $category
+     */
     public function add(Category $category)
     {
         $q = $this->_db->prepare('INSERT INTO category(category_title, category_slug)
@@ -33,14 +44,20 @@ class CategoryManager
         $q->execute();
     }
 
+    /**
+     * @param Category $category
+     */
     public function delete(Category $category): void
     {
         $this->_db->exec('DELETE FROM category WHERE id = ' . $category->getId());
     }
 
+    /**
+     * @param $id
+     * @return Category
+     */
     public function get($id)
     {
-        // Execute une requete de type SELECT avec un WHERE et retour un objet Post
         $id = (int) $id;
 
         $q = $this->_db->query('SELECT * FROM category WHERE id =' . $id);
@@ -49,10 +66,12 @@ class CategoryManager
         {
             throw new Exception('La category demander n\'exite pas pour cette ID');
         }
-
         return new Category($donnees);
     }
 
+    /**
+     * @return array
+     */
     public function getList()
     {
         $categories = [];
@@ -65,6 +84,9 @@ class CategoryManager
         return $categories;
     }
 
+    /**
+     * @return array
+     */
     public function getListFormated()
     {
         $categories = $this->getList();
@@ -76,6 +98,10 @@ class CategoryManager
         return $results;
     }
 
+    /**
+     * @param Category $category
+     * @return array
+     */
     public function getCategoryPost(Category $category)
     {
         $query = $this->_db->prepare('
@@ -96,6 +122,9 @@ class CategoryManager
         return $posts;
     }
 
+    /**
+     * @param Category $category
+     */
     public function update(Category $category): void
     {
         $q = $this->_db->prepare('UPDATE category SET category_title = :category_title, category_slug = :category_slug 
@@ -104,13 +133,12 @@ class CategoryManager
         $q->bindValue(':id', $category->getId(), PDO::PARAM_INT);
         $q->bindValue(':category_title', $category->getTitle(), PDO::PARAM_STR);
         $q->bindValue(':category_slug', $category->getSlug(), PDO::PARAM_STR);
-
-
         $q->execute();
-
     }
 
-
+    /**
+     * @param $db
+     */
     public function setDb($db)
     {
         $this->_db = $db;

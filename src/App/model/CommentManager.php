@@ -5,11 +5,13 @@ namespace App\Model;
 
 
 use App\Model\Entity\Comment;
-use App\Model\Entity\Category;
-use App\Model\Entity\post;
 use Exception;
 use PDO;
 
+/**
+ * Class CommentManager
+ * @package App\Model
+ */
 class CommentManager
 {
 
@@ -19,11 +21,18 @@ class CommentManager
     private $_db;
 
 
+    /**
+     * CommentManager constructor.
+     * @param $db
+     */
     public function __construct($db)
     {
         $this->setDb($db);
     }
 
+    /**
+     * @param Comment $comment
+     */
     public function add(Comment $comment)
     {
         $q = $this->_db->prepare('INSERT INTO comment(comment_author_name, comment_author_email, comment_content, comment_create, comment_status, post_id)
@@ -39,11 +48,19 @@ class CommentManager
         $q->execute();
     }
 
+    /**
+     * @param Comment $comment
+     */
     public function delete(Comment $comment): void
     {
         $this->_db->exec('DELETE FROM comment WHERE id = ' . $comment->getId());
     }
 
+    /**
+     * @param $id
+     * @return Comment
+     * @throws Exception
+     */
     public function get($id)
     {
 
@@ -59,6 +76,11 @@ class CommentManager
         return new Comment($donnees);
     }
 
+    /**
+     * @param int|null $perPage
+     * @param int|null $offset
+     * @return array
+     */
     public function getList(?int $perPage, ?int $offset)
     {
         $comments = [];
@@ -72,6 +94,11 @@ class CommentManager
         return $comments;
     }
 
+    /**
+     * @param int|null $perPage
+     * @param int|null $offset
+     * @return array
+     */
     public function getListValide(?int $perPage, ?int $offset)
     {
         $comments = [];
@@ -85,6 +112,10 @@ class CommentManager
         return $comments;
     }
 
+    /**
+     * @param int $postId
+     * @return array
+     */
     public function getListByPost(int $postId)
     {
         $comments = [];
@@ -99,6 +130,10 @@ class CommentManager
         return $comments;
     }
 
+    /**
+     * @param int $postId
+     * @return array
+     */
     public function getValideListByPost(int $postId)
     {
         $comments = [];
@@ -112,6 +147,9 @@ class CommentManager
         return $comments;
     }
 
+    /**
+     * @param Comment $comment
+     */
     public function update(Comment $comment): void
     {
 
@@ -132,6 +170,10 @@ class CommentManager
 
     }
 
+    /**
+     * @param string $status
+     * @param $id
+     */
     public function updateStatus(string $status, $id)
     {
         $q = $this->_db->prepare("UPDATE comment SET comment_status = :status WHERE id = :id LIMIT 1 ");
@@ -143,11 +185,17 @@ class CommentManager
 
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return (int)$this->_db->query('SELECT COUNT(id) FROM comment')->fetch(PDO::FETCH_NUM)[0];
     }
 
+    /**
+     * @param $db
+     */
     public function setDb($db)
     {
         $this->_db = $db;

@@ -4,42 +4,22 @@
 namespace App\Controller;
 
 
-use AltoRouter;
-use App\Connection;
-use App\Model\Entity\User;
-use PDO;
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 
 require '../vendor/autoload.php';
 
-class HomeController
+
+class HomeController extends Controller
 {
-    private $router;
-    private $pdo;
-    private $id;
-    private $slug;
-
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
-
-        if ($params)
-        {
-            $this->id = (int)$params['id'];
-            $this->slug = $params['slug'];
-        }
-
-    }
 
     function home()
     {
         $router = $this->router;
-
-
         require('../views/frontend/index.php');
     }
+
 
     function notFound()
     {
@@ -50,7 +30,7 @@ class HomeController
     {
         $router = $this->router;
 
-        //Envoie de l'email
+        //Send Email
         if (!empty($_POST))
         {
             $messages = '<p>vous avez recu un message de : ' . $_POST['name'] . ' - ' . $_POST['email'] . ' - ' . $_POST['phone'] . ' - Voici son message : ' . $_POST['message'] . '</p>';
@@ -91,18 +71,14 @@ class HomeController
             } else {
                 $response = 'success';
                 $_SESSION['flash']['success_mail'] = "Le message a bien été envoyer.";
-                //dd($_SESSION['flash']['error_mail']);
             }
 
             $url = $router->generate('home') . '?response=' . $response;
 
             header('Location: ' . $url);
 
-
         }
 
-
     }
-
 
 }

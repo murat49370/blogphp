@@ -4,16 +4,12 @@
 namespace App\Controller\Admin;
 
 
-use AltoRouter;
+
 use App\Auth;
-use App\Connection;
-use App\model\CategoryManager;
-use App\Model\Entity\post;
 use App\Model\Entity\User;
-use App\model\PostManager;
 use App\model\UserManager;
-use App\URL;
 use Exception;
+use App\controller\Controller;
 
 Auth::check();
 

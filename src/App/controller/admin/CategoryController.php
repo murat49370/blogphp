@@ -4,13 +4,11 @@
 namespace App\Controller\Admin;
 
 
-use AltoRouter;
 use App\Auth;
-use App\Connection;
+use App\controller\Controller;
 use App\model\CategoryManager;
 use App\Model\Entity\Category;
-use App\Model\Entity\Post;
-use App\model\PostManager;
+
 use App\Validator;
 
 Auth::check();
@@ -22,7 +20,6 @@ class CategoryController extends Controller
     public function listCategory()
     {
         $q = new CategoryManager($this->pdo);
-
         $categories = $q->getList();
         $router = $this->router;
 
@@ -56,7 +53,6 @@ class CategoryController extends Controller
                 $errors = $v->errors();
             }
         }
-
 
         require('../views/backend/category/edit.php');
     }

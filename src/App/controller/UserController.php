@@ -4,37 +4,13 @@
 namespace App\Controller;
 
 
-use AltoRouter;
-use App\Auth;
-use App\Connection;
-use App\model\CategoryManager;
-use App\Model\Entity\post;
 use App\Model\Entity\User;
-use App\model\PostManager;
 use App\model\UserManager;
-use App\URL;
-use Exception;
 
 
-class UserController
+
+class UserController extends Controller
 {
-
-    private $router;
-    private $pdo;
-    private $id;
-    private $slug;
-
-    public function __construct(AltoRouter $router, ?array $params = [])
-    {
-        $this->router = $router;
-        $this->pdo = Connection::get_pdo();
-
-        if (isset($params['id']))
-        {
-            $this->id = (int)$params['id'];
-        }
-
-    }
 
     public function userRegistred()
     {
@@ -58,8 +34,6 @@ class UserController
         }
         require('../views/frontend/user/new.php');
     }
-
-
 
 
 }

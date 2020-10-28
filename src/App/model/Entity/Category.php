@@ -4,17 +4,37 @@
 namespace App\Model\Entity;
 
 
+/**
+ * Class Category
+ * @package App\Model\Entity
+ */
 class Category
 {
+    /**
+     * @var
+     */
     private $_id;
+    /**
+     * @var
+     */
     private $_title;
+    /**
+     * @var
+     */
     private $_slug;
 
+    /**
+     * Category constructor.
+     * @param array $donnees
+     */
     Public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
 
+    /**
+     * @param array $donnees
+     */
     public function hydrate(array $donnees)
     {
         if (isset($donnees['id'])){ $this->setId($donnees['id']); }
@@ -76,7 +96,5 @@ class Category
         $this->_id = $id;
         return $this;
     }
-
-
 
 }

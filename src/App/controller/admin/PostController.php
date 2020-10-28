@@ -4,15 +4,15 @@
 namespace App\Controller\Admin;
 
 
-use AltoRouter;
 use App\Auth;
-use App\Connection;
 use App\model\CategoryManager;
 use App\Model\Entity\post;
 use App\model\PostManager;
+use App\PaginatedQuery;
 use App\URL;
 use Exception;
 use App\Validator;
+use App\controller\Controller;
 
 Auth::check();
 
@@ -22,20 +22,15 @@ class PostController extends Controller
 
     public function listPost()
     {
+        $router = $this->router;
         $q = new PostManager($this->pdo);
 
-        $countPost = $q->count();
+        $pagination = new PaginatedQuery($q);
+        $donnees = $pagination->getPaginatedItems();
+        $posts = $donnees['items'];
+        $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
-        $perPage = 12;
-        $pages = ceil($countPost / $perPage);
-        if ($currentPage > $pages)
-        {
-            throw new Exception('Cette page n\'existe pas');
-        }
-        $offset = $perPage * ($currentPage - 1);
 
-        $posts = $q->getList($perPage, $offset);
-        $router = $this->router;
 
         require('../views/backend/post/index.php');
     }

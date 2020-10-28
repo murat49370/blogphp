@@ -4,31 +4,25 @@
 namespace App\Controller\Admin;
 
 
-use AltoRouter;
 use App\Auth;
-use App\Connection;
-use App\model\CategoryManager;
 use App\Model\CommentManager;
-use App\Model\Entity\post;
-use App\model\PostManager;
 use App\PaginatedQuery;
 use App\URL;
 use App\Validator;
-use Exception;
+use App\controller\Controller;
 
 Auth::check();
 
 class CommentController extends Controller
 
 {
-
     public function listComment()
     {
         $router = $this->router;
         $q = new CommentManager($this->pdo);
 
         $pagination = new PaginatedQuery($q);
-        $donnees = $pagination->getPaginatedItemes();
+        $donnees = $pagination->getPaginatedItems();
         $comments = $donnees['items'];
         $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);

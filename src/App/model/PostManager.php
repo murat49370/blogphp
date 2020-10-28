@@ -7,6 +7,10 @@ use App\Model\Entity\Post;
 use Exception;
 use PDO;
 
+/**
+ * Class PostManager
+ * @package App\model
+ */
 class PostManager
 {
     /**
@@ -15,11 +19,19 @@ class PostManager
     private $_db;
 
 
+    /**
+     * PostManager constructor.
+     * @param $db
+     */
     public function __construct($db)
     {
         $this->setDb($db);
     }
 
+    /**
+     * @param Post $post
+     * @return false|\PDOStatement
+     */
     public function getAuthorName(Post $post)
     {
         $id = (int) $post->getId();
@@ -29,6 +41,10 @@ class PostManager
         return $authorName;
     }
 
+    /**
+     * @param Post $post
+     * @param array $categories
+     */
     public function add(Post $post, array $categories)
     {
         $q = $this->_db->prepare('INSERT INTO post(post_create, post_modified, post_title, post_slug, post_short_content, post_content, post_status, post_main_image, post_small_image, user_id)
@@ -55,16 +71,22 @@ class PostManager
 
     }
 
+    /**
+     * @param Post $post
+     */
     public function delete(Post $post): void
     {
         $this->_db->exec('DELETE FROM post WHERE id = ' . $post->getId());
     }
 
+    /**
+     * @param $id
+     * @return Post
+     * @throws Exception
+     */
     public function get($id)
     {
-       // Execute une requete de type SELECT avec un WHERE et retour un objet Post
         $id = (int) $id;
-
         $q = $this->_db->query('SELECT * FROM post WHERE id =' . $id);
         $donnees = $q->fetch(PDO::FETCH_ASSOC);
         if ($donnees === false)
@@ -75,9 +97,14 @@ class PostManager
         return new Post($donnees);
     }
 
+    /**
+     * @param int|null $perPage
+     * @param int|null $offset
+     * @return array
+     */
     public function getList(?int $perPage, ?int $offset)
     {
-        // Retourne la liste de tpous les postes
+        // Return all posts
         $posts = [];
 
         $q = $this->_db->query("SELECT * FROM post ORDER BY post_create DESC LIMIT $perPage OFFSET $offset");
@@ -90,6 +117,10 @@ class PostManager
         return $posts;
     }
 
+    /**
+     * @param Post $post
+     * @param array $categories
+     */
     public function update(post $post, array $categories): void
     {
         $this->_db->beginTransaction();
@@ -108,7 +139,7 @@ class PostManager
         $q->bindValue(':user_id', 1, PDO::PARAM_INT);
         $q->execute();
 
-        //MISE A JOUR POST_CATEGORY 
+        //UPDATE POST_CATEGORY
         $this->_db->exec("DELETE FROM post_category WHERE post_id = " . $post->getId());
 
         $query = $this->_db->prepare('INSERT INTO post_category SET post_id = ?, category_id = ?');
@@ -119,14 +150,20 @@ class PostManager
 
         $this->_db->commit();
 
-
     }
 
+    /**
+     * @return int
+     */
     public function count(): int
     {
         return (int)$this->_db->query('SELECT COUNT(id) FROM post')->fetch(PDO::FETCH_NUM)[0];
     }
 
+    /**
+     * @param Post $post
+     * @return array
+     */
     public function getPostCategory(Post $post)
     {
         $query = $this->_db->prepare('
@@ -145,10 +182,12 @@ class PostManager
         }
 
         return $categories;
-        //dd($categories);
-
     }
 
+    /**
+     * @param Post $post
+     * @return array
+     */
     public function getCategoryPost(Post $post)
     {
         $query = $this->_db->prepare('
@@ -170,6 +209,9 @@ class PostManager
     }
 
 
+    /**
+     * @param $db
+     */
     public function setDb($db)
     {
         $this->_db = $db;
