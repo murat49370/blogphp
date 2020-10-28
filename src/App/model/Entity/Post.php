@@ -6,25 +6,69 @@ namespace App\Model\Entity;
 
 use DateTime;
 
+/**
+ * Class Post
+ * @package App\Model\Entity
+ */
 class Post
 {
+    /**
+     * @var
+     */
     private $_id;
+    /**
+     * @var
+     */
     private $_createDate;
+    /**
+     * @var
+     */
     private $_modifiedDate;
+    /**
+     * @var
+     */
     private $_title;
+    /**
+     * @var
+     */
     private $_slug;
+    /**
+     * @var
+     */
     private $_shortContent;
+    /**
+     * @var
+     */
     private $_content;
+    /**
+     * @var
+     */
     private $_status;
+    /**
+     * @var
+     */
     private $_mainImage;
+    /**
+     * @var
+     */
     private $_smallImage;
+    /**
+     * @var
+     */
     private $_userId;
 
+    /**
+     * Post constructor.
+     * @param array $donnees
+     */
     Public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
 
+    /**
+     * @param array $donnees
+     */
     public function hydrate(array $donnees)
     {
         if (isset($donnees['id'])){ $this->setId($donnees['id']); }
@@ -43,13 +87,11 @@ class Post
 
     /**
      * @return mixed
+     *
      */
     public function getCreateDate(): DateTime
     {
-        //setlocale(LC_TIME, "fr_FR"); //only necessary if the locale isn't already set
         return new DateTime($this->_createDate, new \DateTimeZone('Europe/Paris'));
-        //setlocale(LC_TIME, "fr_FR"); //only necessary if the locale isn't already set
-        //$formatted_time = strftime("%a %e.%l.%Y", $mytime->getTimestamp())
     }
 
     /**
@@ -207,7 +249,7 @@ class Post
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getUserId()
     {
@@ -225,7 +267,7 @@ class Post
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -233,7 +275,7 @@ class Post
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      * @return post
      */
     public function setId($id)
@@ -241,7 +283,5 @@ class Post
         $this->_id = $id;
         return $this;
     }
-
-
 
 }

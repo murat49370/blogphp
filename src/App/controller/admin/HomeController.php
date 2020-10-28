@@ -4,20 +4,22 @@
 namespace App\Controller\Admin;
 
 use App\Auth;
-use App\Model\Entity\post;
 use App\Model\Entity\User;
-use App\model\PostManager;
 use App\model\UserManager;
-use App\URL;
-use Exception;
 use App\controller\Controller;
 
 Auth::check();
 
 
+/**
+ * Class HomeController
+ * @package App\Controller\Admin
+ */
 class HomeController extends Controller
 {
-
+    /**
+     * @throws \Exception
+     */
     function home()
 
     {
@@ -33,95 +35,6 @@ class HomeController extends Controller
         }
 
         require('../views/backend/index.php');
-    }
-
-    public function listComment()
-    {
-        $q = new PostManager($this->pdo);
-
-        $countPost = $q->count();
-        $currentPage = URL::getPositiveInt('page', 1);
-        $perPage = 12;
-        $pages = ceil($countPost / $perPage);
-        if ($currentPage > $pages)
-        {
-            throw new Exception('Cette page n\'existe pas');
-        }
-        $offset = $perPage * ($currentPage - 1);
-
-        $posts = $q->getList($perPage, $offset);
-        $router = $this->router;
-
-        require('../views/backend/post/index.php');
-    }
-
-    public function editComment()
-    {
-        $id = $this->id;
-
-        $q = new PostManager($this->pdo);
-        $post = $q->get($id);
-        $router = $this->router;
-
-        $success = false;
-        if (!empty($_POST))
-        {
-            $post->setTitle($_POST['title']);
-            $post->setSlug($_POST['slug']);
-            $post->setShortContent($_POST['short_content']);
-            $post->setContent($_POST['content']);
-            $post->setMainImage($_POST['main_image']);
-            $post->setSmallImage($_POST['small_image']);
-            $post->setUserId($_POST['user_id']);
-            $post->setStatus($_POST['status']);
-
-            $q->update($post);
-            $success = true;
-
-        }
-
-        require('../views/backend/post/edit.php');
-    }
-
-    public function newComment()
-    {
-        $q = new PostManager($this->pdo);
-        $router = $this->router;
-
-        $success = false;
-        if (!empty($_POST))
-        {
-
-            $post = [];
-            $post['post_title'] = $_POST['title'];
-            $post['post_slug'] = $_POST['slug'];
-            $post['post_short_content'] = $_POST['short_content'];
-            $post['post_content'] = $_POST['content'];
-            $post['post_status'] = $_POST['status'];
-            $post['post_main_image'] = $_POST['main_image'];
-            $post['post_small_image'] = $_POST['small_image'];
-            $post['user_id'] = $_POST['user_id'];
-            $newPost = new Post($post);
-
-            $q->add($newPost);
-
-            $success = true;
-
-        }
-
-        require('../views/backend/post/new.php');
-    }
-
-    public function deleteComment()
-    {
-        $router = $this->router;
-        $id = $this->id;
-
-        $q = new PostManager($this->pdo);
-        $post = $q->get($id);
-
-        $q->delete($post);
-        header('Location: ' . $router->generate('admin_list_post') . '?delete=1');
     }
 
 

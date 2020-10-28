@@ -82,7 +82,6 @@ class postController extends Controller
                 $errors = $v->errors();
             }
         }
-
         require('../views/frontend/post/index.php');
     }
 

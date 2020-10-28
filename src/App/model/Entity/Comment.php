@@ -6,21 +6,53 @@ namespace App\Model\Entity;
 
 use DateTime;
 
+/**
+ * Class Comment
+ * @package App\Model\Entity
+ */
 class Comment
 {
+    /**
+     * @var
+     */
     private $_id;
+    /**
+     * @var
+     */
     private $_authorName;
+    /**
+     * @var
+     */
     private $_authorEmail;
+    /**
+     * @var
+     */
     private $_content;
+    /**
+     * @var
+     */
     private $_createDate;
+    /**
+     * @var
+     */
     private $_status;
+    /**
+     * @var
+     */
     private $_postId;
 
+    /**
+     * Comment constructor.
+     * @param array $donnees
+     */
     Public function __construct(array $donnees)
     {
         $this->hydrate($donnees);
     }
 
+    /**
+     * @param array $donnees
+     */
     public function hydrate(array $donnees)
     {
         if (isset($donnees['id'])){ $this->setId($donnees['id']); }
@@ -32,13 +64,6 @@ class Comment
         if (isset($donnees['post_id'])){ $this->setPostId($donnees['post_id']); }
     }
 
-
-//    public function getCreateDate(): DateTime
-//    {
-//        return new DateTime($this->_createDate);
-//    }
-
-
     /**
      * @return mixed
      */
@@ -48,7 +73,7 @@ class Comment
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      * @return Comment
      */
     public function setId($id)
@@ -156,7 +181,7 @@ class Comment
     }
 
     /**
-     * @param mixed $postId
+     * @param int $postId
      * @return Comment
      */
     public function setPostId($postId)
@@ -164,11 +189,5 @@ class Comment
         $this->_postId = $postId;
         return $this;
     }
-
-
-
-
-
-
 
 }

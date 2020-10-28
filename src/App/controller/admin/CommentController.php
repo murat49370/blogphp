@@ -16,7 +16,6 @@ Auth::check();
 class CommentController extends Controller
 
 {
-
     public function listComment()
     {
         $router = $this->router;

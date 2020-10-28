@@ -20,7 +20,6 @@ class CategoryController extends Controller
     public function listCategory()
     {
         $q = new CategoryManager($this->pdo);
-
         $categories = $q->getList();
         $router = $this->router;
 
@@ -54,7 +53,6 @@ class CategoryController extends Controller
                 $errors = $v->errors();
             }
         }
-
 
         require('../views/backend/category/edit.php');
     }
