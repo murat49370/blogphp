@@ -19,7 +19,14 @@ class CategoryController extends Controller
         $categories = $q->getList();
         $router = $this->router;
 
-        require('../views/frontend/category/index.php');
+        //require('../views/frontend/category/index.php');
+
+        $title= 'Liste des catégories';
+
+        return $this->view->render($title,'frontend/category/index.php', [
+            'categories' =>  $categories,
+            'router' => $router
+        ]);
     }
 
     public function show()
@@ -40,8 +47,16 @@ class CategoryController extends Controller
 
         $categories = $q->getCategoryPost($category);
 
+        $title= 'Liste des catégories';
 
-        require('../views/frontend/category/show.php');
+        return $this->view->render($title,'frontend/category/show.php', [
+            'categories' =>  $categories,
+            'category' =>  $category,
+            'router' => $router
+        ]);
+
+
+        //require('../views/frontend/category/show.php');
     }
 
 }

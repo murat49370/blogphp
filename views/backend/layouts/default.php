@@ -31,22 +31,22 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?= $router->generate('admin_list_user') ?>">Utilisateures</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/user">Utilisateures</a>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?= $router->generate('admin_list_post') ?>">Articles</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/post">Articles</a>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?= $router->generate('admin_list_category') ?>">Catégories</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/category">Catégories</a>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?= $router->generate('admin_list_comment') ?>">Commentaires</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/admin/comment">Commentaires</a>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
                     <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/">Retour sur le site</a>
                 </li>
                 <li class="nav-item">
-                    <form action="<?= $router->generate('logout') ?>" method="post" style="display: inline" >
+                    <form action="/logout" method="post" style="display: inline" >
                         <button type="submit" class="nav-link rounded btn btn-primary">Se déconneté</button>
                     </form>
                 </li>

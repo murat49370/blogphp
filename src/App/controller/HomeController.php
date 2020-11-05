@@ -17,7 +17,11 @@ class HomeController extends Controller
     function home()
     {
         $router = $this->router;
-        require('../views/frontend/index.php');
+
+        $title = 'Développeur PHP / Symfony - Murat CAN';
+        return $this->view->render($title,'frontend/index.php', [
+            'router' => $router
+        ]);
     }
 
 
@@ -51,8 +55,8 @@ class HomeController extends Controller
             $mail->Port = 587;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->SMTPAuth = true;
-            $mail->Username = 'murat49370@gmail.com';
-            $mail->Password = 'vhuqllzpzamhdcll';
+            $mail->Username = GMAIL_USERNAME;
+            $mail->Password = GMAIL_PASSWORD;
             $mail->setFrom($_POST['email'], $_POST['name']);
             $mail->addReplyTo('no-replyto@muratcan.fr', 'No-reply');
             $mail->addAddress('murat@boostclic.org', 'Murat');

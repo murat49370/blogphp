@@ -1,10 +1,4 @@
 
-<?php $title= 'Création d\'un article'; ?>
-
-<?php ob_start(); ?>
-
-
-
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
@@ -62,9 +56,3 @@
 
 </div>
 </section>
-
-
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
-

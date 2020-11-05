@@ -34,7 +34,12 @@ class HomeController extends Controller
             $user = $u->get($id);
         }
 
-        require('../views/backend/index.php');
+        $title = 'Administration du site';
+        return $this->view->render($title,'backend/index.php', [
+            'router' => $router,
+            'user' => $user
+        ]);
+
     }
 
 

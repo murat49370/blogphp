@@ -1,9 +1,4 @@
 
-<?php $title= 'Administration des articles'; ?>
-
-<?php ob_start(); ?>
-
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Administration des articles</h1>
 
@@ -76,6 +71,4 @@
         </table>
 </section>
 
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

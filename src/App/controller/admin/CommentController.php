@@ -27,7 +27,14 @@ class CommentController extends Controller
         $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
 
-        require('../views/backend/comment/index.php');
+        $title = 'Administration des commentaires';
+        return $this->view->render($title,'backend/comment/index.php', [
+            'router' => $router,
+            'comments' => $comments,
+            'pages' => $pages,
+            'currentPage' => $currentPage
+        ]);
+
     }
 
     public function editComment()
@@ -37,6 +44,8 @@ class CommentController extends Controller
         $q = new CommentManager($this->pdo);
         $comment = $q->get($id);
         $router = $this->router;
+
+        $_SESSION['flash']['success_edit_comment'] = null;
 
         if (!empty($_POST))
         {
@@ -61,7 +70,13 @@ class CommentController extends Controller
             }
         }
 
-        require('../views/backend/comment/edit.php');
+        $title = 'Edition d\'un commentaire';
+        return $this->view->render($title,'backend/comment/edit.php', [
+            'router' => $router,
+            'comment' => $comment,
+            'message' => $_SESSION['flash']['success_edit_comment']
+        ]);
+
     }
 
 

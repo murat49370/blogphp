@@ -1,7 +1,3 @@
-<?php $title= 'Administration des utilisateures'; ?>
-
-<?php ob_start(); ?>
-
 
 <header class="masthead bg-primary text-white text-center">
     <h1>Liste des utilisateurs</h1>
@@ -68,6 +64,4 @@
         </table>
 </section>
 
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

@@ -23,7 +23,12 @@ class UserController extends Controller
         $users = $q->getList();
         $router = $this->router;
 
-        require('../views/backend/user/index.php');
+        $title= 'Administration des utilisateures';
+        return $this->view->render($title,'backend/user/index.php', [
+            'users' => $users,
+            'router' => $router
+        ]);
+
     }
 
     public function editUser()
@@ -35,6 +40,7 @@ class UserController extends Controller
         $router = $this->router;
 
 
+        $_SESSION['flash']['editUser'] = null;
         if (!empty($_POST))
         {
             $user->setEmail($_POST['email']);
@@ -47,7 +53,13 @@ class UserController extends Controller
             $_SESSION['flash']['editUser'] = "L'utilisateur a bien été modifié";
             header('Location: ' . $router->generate('admin_list_user'));
         }
-        require('../views/backend/user/edit.php');
+
+        $title= 'Edition d\'un utilisateur';
+        return $this->view->render($title,'backend/user/edit.php', [
+            'user' => $user,
+            'router' => $router,
+            'message' => $_SESSION['flash']['editUser']
+        ]);
     }
 
     public function editUserPassword()
@@ -58,6 +70,8 @@ class UserController extends Controller
         $user = $q->get($id);
         $router = $this->router;
         $errors = [];
+
+        $_SESSION['flash']['passmodif'] =null;
 
         if (!empty($_POST))
         {
@@ -89,7 +103,14 @@ class UserController extends Controller
             }
         }
 
-        require('../views/backend/user/password_edit.php');
+        $title= 'Edition du mot de passe';
+        return $this->view->render($title,'backend/user/password_edit.php', [
+            'user' => $user,
+            'router' => $router,
+            'message' => $_SESSION['flash']['passmodif'],
+            'error' => $errors
+        ]);
+
     }
 
     public function newUser()
@@ -98,6 +119,7 @@ class UserController extends Controller
         $router = $this->router;
 
         $success = false;
+        $_SESSION['flash']['success_new_user'] = null;
         if (!empty($_POST))
         {
             $user = [];
@@ -115,7 +137,13 @@ class UserController extends Controller
             $_SESSION['flash']['success_new_user'] = "L'utilisateur a bien été crée";
             header('Location: ' . $router->generate('admin_list_user'));
         }
-        require('../views/backend/user/new.php');
+
+        $title= 'Nouvelle utilisateur';
+        return $this->view->render($title,'backend/user/new.php', [
+            'router' => $router,
+            'message' => $_SESSION['flash']['success_new_user']
+        ]);
+
     }
 
     public function deleteUser()

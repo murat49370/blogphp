@@ -23,7 +23,12 @@ class CategoryController extends Controller
         $categories = $q->getList();
         $router = $this->router;
 
-        require('../views/backend/category/index.php');
+        $title = 'Administration des categories';
+        return $this->view->render($title,'backend/category/index.php', [
+            'router' => $router,
+            'categories' => $categories
+        ]);
+
     }
 
     public function editCategory()
@@ -33,6 +38,8 @@ class CategoryController extends Controller
         $q = new CategoryManager($this->pdo);
         $category = $q->get($id);
         $router = $this->router;
+
+        $_SESSION['flash']['success_edit_category'] = null;
 
         if (!empty($_POST))
         {
@@ -54,13 +61,21 @@ class CategoryController extends Controller
             }
         }
 
-        require('../views/backend/category/edit.php');
+        $title = 'Edition d\'une categorie';
+        return $this->view->render($title,'backend/category/edit.php', [
+            'router' => $router,
+            'category' => $category,
+            'message' => $_SESSION['flash']['success_edit_category']
+        ]);
+
     }
 
     public function newCategory()
     {
         $q = new CategoryManager($this->pdo);
         $router = $this->router;
+
+        $_SESSION['flash']['success_new_category'] = null;
 
         if (!empty($_POST))
         {
@@ -85,7 +100,12 @@ class CategoryController extends Controller
             }
         }
 
-        require('../views/backend/category/new.php');
+        $title= 'Nouvelle categorie';
+        return $this->view->render($title,'backend/post/new.php', [
+            'router' => $router,
+            'message' => $_SESSION['flash']['success_new_category']
+        ]);
+
     }
 
     public function deleteCategory()

@@ -1,11 +1,6 @@
 
-<?php $title= 'Liste des utilisateurs'; ?>
-
-<?php ob_start(); ?>
-
-
 <header class="masthead bg-primary text-white text-center">
-    <h1>Modification d'un post</h1>
+    <h1>Modification du mot de passe</h1>
 </header>
 <div class="container">
 
@@ -38,8 +33,4 @@
 </div>
 </section>
 
-
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

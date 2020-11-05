@@ -31,8 +31,14 @@ class PostController extends Controller
         $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
 
+        $title = 'Administration des articles';
+        return $this->view->render($title,'backend/post/index.php', [
+            'router' => $router,
+            'posts' => $posts,
+            'pages' => $pages,
+            'currentPage' => $currentPage
+        ]);
 
-        require('../views/backend/post/index.php');
     }
 
     public function editPost()
@@ -42,6 +48,7 @@ class PostController extends Controller
         $post = $q->get($this->id);
         $router = $this->router;
 
+        $_SESSION['flash']['success_edit_post'] = null;
 
         if (!empty($_POST))
         {
@@ -82,7 +89,15 @@ class PostController extends Controller
         }
         $idsCategoriesPost = $ids;
 
-        require('../views/backend/post/edit.php');
+        $title = 'Edition d\'un article';
+        return $this->view->render($title,'backend/post/edit.php', [
+            'router' => $router,
+            'post' => $post,
+            'message' => $_SESSION['flash']['success_edit_post'],
+            'options' => $options,
+            'idsCategoriesPost' => $idsCategoriesPost
+        ]);
+
     }
 
     public function newPost()
@@ -91,6 +106,7 @@ class PostController extends Controller
         $router = $this->router;
         $errors = [];
 
+        $_SESSION['flash']['success_new_post'] = null;
         if (!empty($_POST))
         {
             Validator::lang('fr');
@@ -136,7 +152,13 @@ class PostController extends Controller
         }
         $idsCategoriesPost = $ids;
 
-        require('../views/backend/post/new.php');
+        $title= 'Nouvelle Article';
+        return $this->view->render($title,'backend/post/new.php', [
+            'router' => $router,
+            'error' => $errors,
+            'message' => $_SESSION['flash']['success_new_post']
+        ]);
+
     }
 
     public function deletePost()
