@@ -1,10 +1,4 @@
 
-<?php $title= 'Inscription utilisateur'; ?>
-
-<?php ob_start(); ?>
-
-
-
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
@@ -24,7 +18,6 @@
         ?>
 
         <!-- Posts Section Heading-->
-
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -57,7 +50,4 @@
 </div>
 
 
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/frontend/layouts/default.php'); ?>
 
