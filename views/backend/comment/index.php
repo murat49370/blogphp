@@ -1,10 +1,4 @@
 
-<?php $title= 'List des commentaires'; ?>
-
-<?php ob_start(); ?>
-
-
-
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
@@ -87,7 +81,4 @@
         </table>
 </section>
 
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

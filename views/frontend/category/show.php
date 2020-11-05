@@ -1,6 +1,3 @@
-<?php $title= 'Catégorie: ' .  htmlentities($category->getTitle()) ?>
-
-<?php ob_start(); ?>
 
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
@@ -33,6 +30,4 @@
     </div>
 </div> <!-- /container -->
 
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/frontend/layouts/default.php'); ?>
 

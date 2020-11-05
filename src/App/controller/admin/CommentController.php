@@ -27,7 +27,14 @@ class CommentController extends Controller
         $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
 
-        require('../views/backend/comment/index.php');
+        $title = 'Administration des commentaires';
+        return $this->view->render($title,'backend/comment/index.php', [
+            'router' => $router,
+            'comments' => $comments,
+            'pages' => $pages,
+            'currentPage' => $currentPage
+        ]);
+
     }
 
     public function editComment()
@@ -37,6 +44,8 @@ class CommentController extends Controller
         $q = new CommentManager($this->pdo);
         $comment = $q->get($id);
         $router = $this->router;
+
+        $_SESSION['flash']['success_edit_comment'] = null;
 
         if (!empty($_POST))
         {
@@ -61,37 +70,36 @@ class CommentController extends Controller
             }
         }
 
+        $title = 'Edition d\'un commentaire';
+        return $this->view->render($title,'backend/comment/edit.php', [
+            'router' => $router,
+            'comment' => $comment,
+            'message' => $_SESSION['flash']['success_edit_comment']
+        ]);
 
-        require('../views/backend/comment/edit.php');
     }
 
 
     public function deleteComment()
     {
-        $router = $this->router;
-        $id = $this->id;
-
         $q = new CommentManager($this->pdo);
-        $comment = $q->get($id);
+        $comment = $q->get($this->id);
 
         $q->delete($comment);
 
         $_SESSION['flash']['success_delete_comment'] = "Le commentaire a bien été supprimé.";
-        header('Location: ' . $router->generate('admin_list_comment'));
+        header('Location: ' . $this->router->generate('admin_list_comment'));
     }
 
     public function updateStatus()
     {
-        $router = $this->router;
-        $id = $this->id;
-        $status = $this->status;
 
         $q = new CommentManager($this->pdo);
-        $comment = $q->get($id);
+        $comment = $q->get($this->id);
 
-        $q->updateStatus($status, $id);
+        $q->updateStatus($this->status, $this->id);
         $_SESSION['flash']['success_update_comment_status'] = "Le status du commentaire a bien changer.";
-        header('Location: ' . $router->generate('admin_list_comment'));
+        header('Location: ' . $this->router->generate('admin_list_comment'));
     }
 
 }

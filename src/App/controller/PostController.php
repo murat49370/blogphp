@@ -4,8 +4,6 @@
 namespace App\Controller;
 
 
-use AltoRouter;
-use App\Connection;
 use App\model\CategoryManager;
 use App\Model\CommentManager;
 use App\Model\Entity\Comment;
@@ -29,7 +27,15 @@ class postController extends Controller
         $pages = $donnees['pages'];
         $currentPage = URL::getPositiveInt('page', 1);
 
-        require('../views/frontend/blog/index.php');
+        $title= 'Le Blog - Murat CAN';
+
+        return $this->view->render($title,'frontend/blog/index.php', [
+            'posts' =>  $posts,
+            'pages' => $pages,
+            'currentPage' => $currentPage,
+            'router' => $router
+        ]);
+
     }
 
 
@@ -37,10 +43,11 @@ class postController extends Controller
     {
         $id = $this->id;
         $slug = $this->slug;
+        $router = $this->router;
+
 
         $q = new postManager($this->pdo);
         $post = $q->get($id);
-        $router = $this->router;
 
         // Redirection if the slug in the url does not match the id
         if ($post->getSlug() !== $slug)
@@ -60,6 +67,8 @@ class postController extends Controller
         $comments = $donnees->getValideListByPost($post->getId());
 
         $a = new CommentManager($this->pdo);
+
+        $_SESSION['flash']['commentOk'] = null;
 
         if (!empty($_POST))
         {
@@ -82,7 +91,19 @@ class postController extends Controller
                 $errors = $v->errors();
             }
         }
-        require('../views/frontend/post/index.php');
+
+        $title = $post->getTitle();
+
+        return $this->view->render($title,'frontend/post/index.php', [
+            'post' => $post,
+            'comments' => $comments,
+            'categories' => $categories,
+            'categoriesListing' => $categoriesListing,
+            'router' => $router,
+            'message' => $_SESSION['flash']['commentOk']
+        ]);
+
+
     }
 
 }

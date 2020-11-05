@@ -1,10 +1,4 @@
 
-<?php $title= 'Edition d\'un article'; ?>
-
-<?php ob_start(); ?>
-
-
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Modification d'un post</h1>
 </header>
@@ -112,7 +106,4 @@
 </div>
 </section>
 
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

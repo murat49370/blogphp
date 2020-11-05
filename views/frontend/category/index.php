@@ -1,6 +1,4 @@
-<?php $title= 'Category'; ?>
 
-<?php ob_start(); ?>
 
 <!-- Masthead-->
 
@@ -47,7 +45,4 @@
     <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
 </div>
 
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/frontend/layouts/default.php'); ?>
 

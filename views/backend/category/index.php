@@ -1,10 +1,3 @@
-
-<?php $title= 'Post Manager'; ?>
-
-<?php ob_start(); ?>
-
-
-
 <!-- Masthead-->
 
 <header class="masthead bg-primary text-white text-center">
@@ -71,7 +64,4 @@
     <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a>
 </div>
 
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

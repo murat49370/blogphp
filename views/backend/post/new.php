@@ -1,10 +1,4 @@
 
-<?php $title= 'Création d\'un article'; ?>
-
-<?php ob_start(); ?>
-
-
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Création d'un article</h1>
 </header>
@@ -104,8 +98,4 @@
 
 </div>
 
-
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

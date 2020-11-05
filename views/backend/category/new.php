@@ -1,8 +1,4 @@
 
-<?php $title= 'Création d\'une catégorie'; ?>
-
-<?php ob_start(); ?>
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Ajout d'une category</h1>
 </header>
@@ -39,7 +35,4 @@
 </div>
 </section>
 
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 

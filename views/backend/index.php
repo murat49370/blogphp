@@ -1,8 +1,3 @@
-
-<?php $title= 'Accueil Murat Blog'; ?>
-
-<?php ob_start(); ?>
-
 <!-- Masthead-->
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -18,5 +13,3 @@
 
 
 
-<?php $content = ob_get_clean(); ?>
-<?php require('layouts/default.php'); ?>

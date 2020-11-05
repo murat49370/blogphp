@@ -1,7 +1,3 @@
-<?php $title= 'Le Blog - Murat CAN'; ?>
-
-<?php ob_start(); ?>
-
 
 <header class="masthead bg-primary text-white text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -51,8 +47,4 @@
     </div>
 </section>
 
-
-
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/frontend/layouts/default.php'); ?>
 

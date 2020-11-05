@@ -1,9 +1,4 @@
 
-<?php $title= 'Modification d\'un commentaire'; ?>
-
-<?php ob_start(); ?>
-
-
 <header class="masthead bg-primary text-white text-center">
     <h1>Modification d'un commentaire</h1>
 </header>
@@ -62,6 +57,4 @@
         </form>
 </div>
 
-<?php $content = ob_get_clean(); ?>
-<?php require('../views/backend/layouts/default.php'); ?>
 
