@@ -16,6 +16,7 @@ class UserController extends Controller
     {
         $q = new UserManager($this->pdo);
         $router = $this->router;
+        $_SESSION['flash']['success_new_user'] = null;
 
         if (!empty($_POST))
         {
@@ -32,7 +33,11 @@ class UserController extends Controller
             $_SESSION['flash']['success_new_user'] = "Votre inscription a été pris en compte. Votre inscription est en attente de validation par un administrateur.";
 
         }
-        require('../views/frontend/user/new.php');
+        $title= 'Connexion au site';
+        return $this->view->render($title,'frontend/user/new.php', [
+            'router' => $router,
+            'message' => $_SESSION['flash']['success_new_user']
+        ]);
     }
 
 

@@ -1,9 +1,3 @@
-
-<?php ob_start(); ?>
-
-<!-- Masthead-->
-
-<!-- Portfolio Section-->
 <section class="page-section admin" >
     <br>
     <br>
@@ -46,9 +40,6 @@
         <h2 class="page-section-heading text-center  text-secondary mb-0">Se connecter</h2>
 
 
-
-
-
         <form action="<?= $router->generate('login') ?>" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
@@ -66,12 +57,6 @@
 
     </div>
 </section>
-
-
-
-<?php $content = ob_get_clean(); ?>
-<?php require('layouts/default.php'); ?>
-
 
 
 

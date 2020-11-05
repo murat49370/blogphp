@@ -15,7 +15,7 @@ class AuthController extends Controller
         $router = $this->router;
         $u = [];
         $user = new User($u);
-        $errors =[];
+        $_SESSION['flash']['email_passe_incorrect'] = null;
 
         if (!empty($_POST))
         {
@@ -43,7 +43,11 @@ class AuthController extends Controller
             }
         }
 
-        require('../views/frontend/login.php');
+        $title= 'Connexion au site';
+        return $this->view->render($title,'frontend/login.php', [
+            'router' => $router,
+            'messageEmail' => $_SESSION['flash']['email_passe_incorrect']
+        ]);
     }
 
     public function logout()
@@ -51,10 +55,14 @@ class AuthController extends Controller
         $router = $this->router;
         session_start();
         session_destroy();
-
         $_SESSION['flash']['success_logout'] = "Vous avez bien été déconnecté.";
 
-        require('../views/frontend/login.php');
+        $title= 'Déconnexion';
+        return $this->view->render($title,'frontend/login.php', [
+            'router' => $router,
+            'message' => $_SESSION['flash']['success_logout']
+        ]);
+
     }
 
 }
