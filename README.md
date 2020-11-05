@@ -20,7 +20,7 @@ Création d'un blog en PHP dans la cadre de ma formation "développeur d'applica
 
 ### Instalation des données d'exemple et création de la BDD
 
-6.  lancer la commande  `composer prepare` 
+7.  lancer la commande  `composer prepare` 
 
 ### Remarques
 
