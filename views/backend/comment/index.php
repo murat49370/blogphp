@@ -29,7 +29,7 @@
         }
         ?>
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">List des commentaires</h2>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Liste des commentaires</h2>
 
         <br>
         <br>

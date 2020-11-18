@@ -88,7 +88,7 @@
             <div class="media mb-4">
                 <img class="w-25 p-3 rounded-circle" src="https://www.agem-bordeaux.fr/images/sampledata/icons/avatar-big.png" alt="">
                 <div class="media-body">
-                    <h5 class="mt-0"><?= $comment->getAuthorName() ?></h5>
+                    <h5 class="mt-0"><?= htmlentities($comment->getAuthorName()) ?></h5>
                     <p>Publié le <?= $comment->getCreateDate()->format('d F Y') ?></p>
                     <?= nl2br(htmlentities($comment->getContent())) ?>
                 </div>

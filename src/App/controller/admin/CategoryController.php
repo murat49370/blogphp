@@ -101,7 +101,7 @@ class CategoryController extends Controller
         }
 
         $title= 'Nouvelle categorie';
-        return $this->view->render($title,'backend/post/new.php', [
+        return $this->view->render($title,'backend/category/new.php', [
             'router' => $router,
             'message' => $_SESSION['flash']['success_new_category']
         ]);
