@@ -47,7 +47,7 @@
                 </li>
                 <li class="nav-item">
                     <form action="/logout" method="post" style="display: inline" >
-                        <button type="submit" class="nav-link rounded btn btn-primary">Se déconneté</button>
+                        <button type="submit" class="nav-link rounded btn btn-primary">Se déconnecter</button>
                     </form>
                 </li>
             </ul>

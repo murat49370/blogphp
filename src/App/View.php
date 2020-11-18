@@ -41,4 +41,9 @@ class View
         }
         require '../views/404.php';
     }
+
+    public function redirectHome()
+    {
+
+    }
 }

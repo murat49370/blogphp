@@ -19,11 +19,11 @@
                 <input type="text" class="form-control" name="email" required value="<?= $user->getEmail() ?>"><br>
             </div>
             <div class="form-group">
-                <label for="title">First name :</label><br>
+                <label for="title">Nom :</label><br>
                 <input type="text" class="form-control" name="first_name" value="<?= $user->getFirstName() ?>" required><br>
             </div>
             <div class="form-group">
-                <label for="title">Last name :</label><br>
+                <label for="title">Prénom :</label><br>
                 <input type="text" class="form-control" name="last_name" value="<?= $user->getLastName() ?>" required><br>
             </div>
             <div class="form-group">

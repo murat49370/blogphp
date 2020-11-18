@@ -27,15 +27,15 @@
                 <input type="text" class="form-control" name="email" required value=""><br>
             </div>
             <div class="form-group">
-                <label for="title">Password : </label>
+                <label for="title">Mot de passe : </label>
                 <input type="password" class="form-control" name="password" value="" required><br>
             </div>
             <div class="form-group">
-                <label for="title">First name :</label><br>
+                <label for="title">Nom :</label><br>
                 <input type="text" class="form-control" name="first_name" value="" required><br>
             </div>
             <div class="form-group">
-                <label for="title">Last name :</label><br>
+                <label for="title">Prénom :</label><br>
                 <input type="text" class="form-control" name="last_name" value="" required><br>
             </div>
             <div class="form-group">

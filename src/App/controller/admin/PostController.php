@@ -156,6 +156,8 @@ class PostController extends Controller
         return $this->view->render($title,'backend/post/new.php', [
             'router' => $router,
             'error' => $errors,
+            'options' => $options,
+            'idsCategoriesPost' => $idsCategoriesPost,
             'message' => $_SESSION['flash']['success_new_post']
         ]);
 

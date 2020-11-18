@@ -50,7 +50,7 @@ class HomeController extends Controller
                 )
             );
             $mail->isSMTP();
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->SMTPDebug = 0;
             $mail->Host = 'smtp.gmail.com';
             $mail->Port = 587;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -79,7 +79,8 @@ class HomeController extends Controller
 
             $url = $router->generate('home') . '?response=' . $response;
 
-            header('Location: ' . $url);
+            //header('Location: ' . $url);
+            echo '<script language="javascript" type="text/javascript"> window.location.href = \'/?response=success\';</script>';
 
         }
 

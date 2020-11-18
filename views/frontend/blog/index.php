@@ -34,8 +34,8 @@
                                 <a href=""><img src="<?php echo $post->getSmallImage();?>" alt="blog-img"></a>
                             </div>
                             <div class="blog-content">
-                                <h4><a href="#"><?php echo $post->getTitle();?></a></h4>
-                                <p><?php echo $post->getShortContent();?></p>
+                                <h4><a href="#"><?= htmlentities($post->getTitle()) ?></a></h4>
+                                <p><?= nl2br(htmlentities($post->getShortContent())) ?></p>
                                 <a href="<?= $router->generate('post', ['id' => $post->getId(), 'slug' => $post->getSlug()]) ?>" class="more-btn">En savoir plus</a>
                             </div>
                             <span class="blog-date">Publié le <?php echo $post->getCreateDate()->format('d/m/Y');?></span>

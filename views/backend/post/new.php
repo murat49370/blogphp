@@ -11,7 +11,7 @@
             <div class="alert alert-danger">L'article n'a pas pue être modifié, merci de corriger vos erreurs.</div>
         <?php endif; ?>
         <!-- Posts Section Heading-->
-        <h2 class="page-section-heading text-center text-secondary mb-0">Formualire création d'un article </h2>
+        <h2 class="page-section-heading text-center text-secondary mb-0">Formulaire création d'un article </h2>
         <br>
         <br>
         <!-- Posts Grid Items-->
@@ -53,10 +53,6 @@
                         <div class="invalid-feedback"><?= implode('<br>', $errors['title']) ?></div>
                     <?php endif; ?>
                 </div>
-                <div class="col">
-                    <label for="title">Apercu de l'image : </label><br>
-                    <img src="" alt="Main image"><br>
-                </div>
             </div>
             <br>
             <div class="row">
@@ -66,10 +62,6 @@
                     <?php if(isset($errors['title'])) : ?>
                         <div class="invalid-feedback"><?= implode('<br>', $errors['title']) ?></div>
                     <?php endif; ?>
-                </div>
-                <div class="col">
-                    <label for="title">Apercu de l'image : </label><br>
-                    <img src="" alt="Small image"><br>
                 </div>
             </div>
             <br>
